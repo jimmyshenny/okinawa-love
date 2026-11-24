@@ -152,14 +152,37 @@
   }
 
   /* ---------- 行李清單 ---------- */
+  /* 預設行李清單。之後要新增，直接加在最後面即可：
+     手機打開時只會補上「還沒加過」的新項目，不會動到在 App 上新增、勾選或刪除的東西。
+     格式：[誰的 ('shared' / 'jimmy' / 'shenny'), 分類, 名稱] */
   var PACK_SEED = [
     ['shared', '證件', '護照（兩本）'], ['shared', '證件', '台灣駕照正本 + 日文譯本'], ['shared', '證件', '信用卡・少量日幣現金'],
     ['shared', '電子用品', '行動電源'], ['shared', '電子用品', '網卡／eSIM'], ['shared', '旅行用品', '防曬乳'],
     ['jimmy', '衣物', '換洗衣物'], ['shenny', '衣物', '換洗衣物']
   ];
+  var PACK_SEED_V1 = 8; // 舊版就有的前 8 項（舊手機已經複製過，不再重複補）
+  function seedKey(x) { return x[0] + '|' + x[2]; }
   function packList() {
-    var list = S.get('packing', null);
-    if (!list) { list = PACK_SEED.map(function (x) { return { id: S.uid('p'), owner: x[0], cat: x[1], name: x[2], done: false }; }); S.set('packing', list); }
+    var list = S.get('packing', null), seeded = S.get('packing.seeded', null);
+    if (!list) { list = []; seeded = []; }
+    else if (!seeded) {
+      // 從舊版升級：舊的預設項目與手機裡已經有的同名項目都視為已加過
+      var have = {};
+      list.forEach(function (i) { have[i.owner + '|' + i.name] = true; });
+      seeded = PACK_SEED.filter(function (x, n) { return n < PACK_SEED_V1 || have[seedKey(x)]; }).map(seedKey);
+    }
+    var mark = {}, exists = {}, changed = false;
+    seeded.forEach(function (k) { mark[k] = true; });
+    list.forEach(function (i) { exists[i.owner + '|' + i.name] = true; });
+    PACK_SEED.forEach(function (x) {
+      var k = seedKey(x);
+      if (mark[k]) return;
+      seeded.push(k); mark[k] = true; changed = true;
+      if (exists[k]) return; // 自己已經加過同名項目，就不重複
+      list.push({ id: S.uid('p'), owner: x[0], cat: x[1], name: x[2], done: false });
+    });
+    if (changed || !S.get('packing', null)) S.set('packing', list);
+    if (changed || !S.get('packing.seeded', null)) S.set('packing.seeded', seeded);
     return list;
   }
   function packing() {
