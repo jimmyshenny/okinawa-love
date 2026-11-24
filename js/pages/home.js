@@ -114,7 +114,7 @@
             (url ? '<a class="btn btn-sm btn-outline" href="' + esc(url) + '" target="_blank" rel="noopener">' + ic('nav', 14) + '導航</a>' : '') +
           '</div>' +
         '</article>' +
-        (has(it.driveTime) || has(it.driveDistance) ? '<div class="tl-drive">' + ic('car', 14) + '到下一站 ' + esc([it.driveTime, it.driveDistance].filter(has).join(' · ')) + '</div>' : '') +
+        (i < day.itinerary.length - 1 && has(it.driveTime) ? '<div class="tl-drive" aria-label="到下一站車程 ' + esc(it.driveTime) + '">' + ic('car', 11) + '<span>' + esc(it.driveTime) + '</span></div>' : '') +
         '</div></li>';
     }).join('') + '</ol>';
   }

@@ -169,7 +169,8 @@ h1, h2, h3 { font-family: var(--serif); margin: 0; line-height: 1.35; }
 .tl-actions .left { display: flex; align-items: center; gap: 6px; }
 .done-btn[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: var(--cream); }
 .more-btn { border: 0; background: none; font-size: 12px; color: var(--ocean); min-height: 36px; padding: 0 4px; display: inline-flex; align-items: center; gap: 2px; }
-.tl-drive { margin: -6px 0 10px; padding-left: 2px; font-size: 12px; color: var(--ink-3); display: flex; gap: 6px; align-items: center; }
+.tl-drive { margin: -6px 0 8px 4px; font-size: 11px; line-height: 1; color: #A9B0B2; display: flex; gap: 4px; align-items: center; }
+.tl-drive .icon { stroke-width: 1.6; }
 
 /* 住宿 */
 .stay-photo { height: 130px; background: repeating-linear-gradient(135deg, #E7EEF1 0 10px, #DFE8EC 10px 20px); display: flex; align-items: center; justify-content: center; position: relative; color: var(--ocean); font-size: 13px; border-radius: var(--r) var(--r) 0 0; overflow: hidden; }

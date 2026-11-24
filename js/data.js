@@ -36,7 +36,7 @@ window.TRIP = (function () {
       navigationUrl: '',   // 若有固定連結可直接貼上（優先使用）
       photos: [],          // 圖片路徑，例如 'images/sesoko.jpg'
       restaurantId: '',    // 對應下方 restaurants 的 id
-      driveTime: '',       // 到下一站的車程，例如 '25 分鐘'
+      driveTime: '',       // 到下一站的車程，例如 '約 25 分'（留空就不顯示）
       driveDistance: '',   // 到下一站的距離，例如 '12 km'
       navigable: true      // false = 不需要導航（例如：上飛機）
     }, opts || {});
@@ -65,8 +65,8 @@ window.TRIP = (function () {
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-naha-1',
       itinerary: [
-        item('d2-1', '午餐：系滿魚市場', 'food', '海鮮午餐', { restaurantId: 'r-itoman' }),
-        item('d2-2', '瀨長島', 'sight', '海邊白色小鎮，看飛機起降', { mapQuery: '瀬長島ウミカジテラス' }),
+        item('d2-1', '午餐：系滿魚市場', 'food', '海鮮午餐', { restaurantId: 'r-itoman', driveTime: '約 15 分' }),
+        item('d2-2', '瀨長島', 'sight', '海邊白色小鎮，看飛機起降', { mapQuery: '瀬長島ウミカジテラス', driveTime: '約 30 分' }),
         item('d2-3', '玉泉洞', 'sight', '沖繩世界・鐘乳石洞', { mapQuery: '玉泉洞 おきなわワールド' }),
         item('d2-4', '晚餐：Buchi 燒肉', 'food', '燒肉晚餐（需訂位）', { restaurantId: 'r-buchi' })
       ]
@@ -99,7 +99,7 @@ window.TRIP = (function () {
       accommodationId: 'stay-north',
       itinerary: [
         item('d5-1', '旅館 Check out', 'stay', '恩納村住宿退房', { navigable: false }),
-        item('d5-2', '許田休息站', 'shopping', '道之驛，沿途小歇', { mapQuery: '道の駅 許田' }),
+        item('d5-2', '許田休息站', 'shopping', '道之驛，沿途小歇', { mapQuery: '道の駅 許田', driveTime: '約 50 分' }),
         item('d5-3', '美麗海水族館', 'sight', '黑潮之海與鯨鯊', { mapQuery: '沖縄美ら海水族館' }),
         item('d5-4', '旅館 Check in', 'stay', '入住北部住宿', { mapQuery: '' })
       ]
@@ -113,7 +113,7 @@ window.TRIP = (function () {
         item('d6-1', '古宇利大橋', 'sight', '開車跨海兜風', { mapQuery: '古宇利大橋' }),
         item('d6-2', '土產休息站', 'shopping', '買伴手禮', { mapQuery: '' }),
         item('d6-3', '洞窟沙灘', 'sight', '海邊洞窟拍照', { mapQuery: '' }),
-        item('d6-4', '午餐：沖繩蝦蝦飯', 'food', '古宇利島蝦蝦飯', { restaurantId: 'r-shrimp' }),
+        item('d6-4', '午餐：沖繩蝦蝦飯', 'food', '古宇利島蝦蝦飯', { restaurantId: 'r-shrimp', driveTime: '約 10 分' }),
         item('d6-5', '心型岩 & 渡海沙灘', 'sight', '看心型岩、渡海沙灘', { mapQuery: 'ティーヌ浜 古宇利島' })
       ]
     },
@@ -137,7 +137,7 @@ window.TRIP = (function () {
       accommodationId: 'stay-naha-2',
       itinerary: [
         item('d8-1', '午餐：Paca Café', 'food', '午餐', { restaurantId: 'r-paca' }),
-        item('d8-2', '豐崎百貨', 'shopping', 'iias 沖繩豐崎', { mapQuery: 'iias沖縄豊崎' }),
+        item('d8-2', '豐崎百貨', 'shopping', 'iias 沖繩豐崎', { mapQuery: 'iias沖縄豊崎', driveTime: '約 10 分' }),
         item('d8-3', 'Ashibinaa Outlet', 'shopping', '沖繩 Outlet 購物', { mapQuery: '沖縄アウトレットモール あしびなー' })
       ]
     },
