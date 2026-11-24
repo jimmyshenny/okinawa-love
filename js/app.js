@@ -105,6 +105,20 @@ window.App = (function () {
   }
 
   /* ---------- 餐廳（資料檔 + 自己新增 / 修改 / 刪除） ---------- */
+  // 只記錄「跟程式碼不一樣」的欄位，之後程式碼更新其他欄位（例如營業時間）手機也會看到
+  function diffFromBase(base, r) {
+    var d = {};
+    Object.keys(r).forEach(function (k) { if (JSON.stringify(r[k]) !== JSON.stringify(base[k])) d[k] = r[k]; });
+    return d;
+  }
+  function baseRestaurant(id) { return T.restaurants.filter(function (b) { return b.id === id; })[0]; }
+  (function migrateFoodEdits() {
+    if (S.get('food.edits.v2', false)) return;
+    S.update('food.edits', {}, function (e) {
+      Object.keys(e).forEach(function (id) { var b = baseRestaurant(id); if (b) e[id] = diffFromBase(b, e[id]); });
+    });
+    S.set('food.edits.v2', true);
+  })();
   function restaurants() {
     var edits = S.get('food.edits', {}), deleted = S.get('food.deleted', []), custom = S.get('food.custom', []);
     return T.restaurants.concat(custom)
@@ -114,7 +128,7 @@ window.App = (function () {
   function restaurant(id) { return restaurants().filter(function (r) { return r.id === id; })[0] || null; }
   function saveRestaurant(r) {
     var isBase = T.restaurants.some(function (b) { return b.id === r.id; });
-    if (isBase) S.update('food.edits', {}, function (e) { e[r.id] = r; });
+    if (isBase) S.update('food.edits', {}, function (e) { e[r.id] = diffFromBase(baseRestaurant(r.id), r); });
     else S.update('food.custom', [], function (list) {
       var i = list.findIndex(function (x) { return x.id === r.id; });
       if (i >= 0) list[i] = r; else list.push(r);

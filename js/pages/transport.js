@@ -40,12 +40,18 @@
   }
 
   function checklist(name, list, title) {
-    var st = S.get('car.check', {}), done = list.filter(function (x, i) { return st[name + i]; }).length;
+    // 勾選狀態用「項目文字」記錄，程式碼裡新增或調整順序時，已勾的不會跑掉
+    var st = S.get('car.check', {}), moved = false;
+    list.forEach(function (label, i) {
+      if (st[name + i] !== undefined) { if (st[name + ':' + label] === undefined) st[name + ':' + label] = st[name + i]; delete st[name + i]; moved = true; }
+    });
+    if (moved) S.set('car.check', st);
+    var done = list.filter(function (x) { return st[name + ':' + x]; }).length;
     return '<div class="section-title" style="margin-top:4px"><h3 style="font-size:17px">' + title + '</h3><span class="small" style="color:var(--ocean)">' + done + ' / ' + list.length + '</span></div>' +
       '<div class="progress" style="margin-bottom:6px"><i style="width:' + Math.round(done / list.length * 100) + '%"></i></div>' +
       '<ul class="check-list">' + list.map(function (label, i) {
-        var on = !!st[name + i];
-        return '<li><button class="check-item" data-check="' + name + i + '" aria-pressed="' + on + '"><span class="check-box">' + (on ? ic('check', 14) : '') + '</span><span class="txt">' + esc(label) + '</span></button></li>';
+        var on = !!st[name + ':' + label];
+        return '<li><button class="check-item" data-check="' + esc(name + ':' + label) + '" aria-pressed="' + on + '"><span class="check-box">' + (on ? ic('check', 14) : '') + '</span><span class="txt">' + esc(label) + '</span></button></li>';
       }).join('') + '</ul>';
   }
 
