@@ -1,0 +1,238 @@
+/* =========================================================
+   沖繩蜜月旅行 · 旅程資料
+   ---------------------------------------------------------
+   ✏️ 要修改行程、餐廳、住宿、航班，只要改這個檔案。
+   - 空字串 '' 代表「還沒有資料」，畫面會自動顯示「待補」。
+   - mapQuery：Google Maps 搜尋用的關鍵字（日文名稱最準）。
+   - time 格式為 'HH:MM'（24 小時制），填了之後「下一站」會依時間推算。
+   ⚠️ 這個檔案會公開在 GitHub 上：
+     訂位代號、預約編號、電話等私人資訊，請在網站裡的
+     「編輯私人資訊」填寫（只存在你的手機裡），不要寫在這裡。
+   ========================================================= */
+
+window.TRIP = (function () {
+  'use strict';
+
+  // 行程項目的完整欄位（沒填的就是空白）
+  function item(id, name, category, description, opts) {
+    return Object.assign({
+      id: id,
+      time: '',            // 例如 '14:00'
+      name: name,
+      category: category,  // transport | sight | food | stay | shopping | rest
+      description: description,
+      duration: '',        // 建議停留時間，例如 '1.5 小時'
+      address: '',         // 日文地址
+      addressEn: '',       // 英文地址
+      latitude: null,
+      longitude: null,
+      parking: '',
+      parkingFee: '',
+      hours: '',           // 營業時間
+      ticket: '',          // 門票
+      reservation: '',     // 預約方式
+      notes: '',
+      mapQuery: '',        // Google Maps 搜尋字
+      navigationUrl: '',   // 若有固定連結可直接貼上（優先使用）
+      photos: [],          // 圖片路徑，例如 'images/sesoko.jpg'
+      restaurantId: '',    // 對應下方 restaurants 的 id
+      driveTime: '',       // 到下一站的車程，例如 '25 分鐘'
+      driveDistance: '',   // 到下一站的距離，例如 '12 km'
+      navigable: true      // false = 不需要導航（例如：上飛機）
+    }, opts || {});
+  }
+
+  var days = [
+    {
+      id: 'd1', day: 1, date: '2027-03-02', weekday: '星期二', area: '那霸',
+      theme: '啟程，飛向那霸',
+      weather: { icon: '', status: '', temp: '', rain: '' },
+      accommodationId: 'stay-naha-1',
+      itinerary: [
+        item('d1-1', '出發去機場', 'transport', '從家裡出發，提早抵達桃園機場', { navigable: false }),
+        item('d1-2', '機場 Check in', 'transport', '辦理報到、托運行李', { navigable: false }),
+        item('d1-3', '上飛機', 'transport', '航班資訊請見「交通」頁', { navigable: false }),
+        item('d1-4', '抵達沖繩', 'transport', '那霸機場入境', { mapQuery: '那覇空港' }),
+        item('d1-5', '租車', 'transport', '取車並確認保險、ETC、油種', { mapQuery: '' , notes: '取車檢查清單在「交通 › 租車」' }),
+        item('d1-6', '旅館 Check in', 'stay', '入住那霸住宿', { mapQuery: '' }),
+        item('d1-7', '國際通 逛街', 'shopping', '第一晚散步、逛唐吉訶德、買伴手禮', { mapQuery: '国際通り 那覇' }),
+        item('d1-8', '晚餐：Shima Shabushabu Nakama 島', 'food', '涮涮鍋晚餐', { restaurantId: 'r-nakama' })
+      ]
+    },
+    {
+      id: 'd2', day: 2, date: '2027-03-03', weekday: '星期三', area: '那霸',
+      theme: '魚市場與瀨長島的海風',
+      weather: { icon: '', status: '', temp: '', rain: '' },
+      accommodationId: 'stay-naha-1',
+      itinerary: [
+        item('d2-1', '午餐：系滿魚市場', 'food', '海鮮午餐', { restaurantId: 'r-itoman' }),
+        item('d2-2', '瀨長島', 'sight', '海邊白色小鎮，看飛機起降', { mapQuery: '瀬長島ウミカジテラス' }),
+        item('d2-3', '玉泉洞', 'sight', '沖繩世界・鐘乳石洞', { mapQuery: '玉泉洞 おきなわワールド' }),
+        item('d2-4', '晚餐：Buchi 燒肉', 'food', '燒肉晚餐（需訂位）', { restaurantId: 'r-buchi' })
+      ]
+    },
+    {
+      id: 'd3', day: 3, date: '2027-03-04', weekday: '星期四', area: '恩納村',
+      theme: '北上恩納村，美國村散步',
+      weather: { icon: '', status: '', temp: '', rain: '' },
+      accommodationId: 'stay-onna',
+      itinerary: [
+        item('d3-1', '旅館 Check out', 'stay', '那霸住宿退房', { navigable: false }),
+        item('d3-2', '美國村', 'sight', '北谷海邊街區散步', { mapQuery: '美浜アメリカンビレッジ' }),
+        item('d3-3', '午餐', 'food', '餐廳待決定', { navigable: false }),
+        item('d3-4', '旅館 Check in', 'stay', '入住恩納村住宿', { mapQuery: '' })
+      ]
+    },
+    {
+      id: 'd4', day: 4, date: '2027-03-05', weekday: '星期五', area: '恩納村',
+      theme: '什麼都不做的耍廢日',
+      weather: { icon: '', status: '', temp: '', rain: '' },
+      accommodationId: 'stay-onna',
+      itinerary: [
+        item('d4-1', '耍廢日', 'rest', '在飯店好好休息，享受海景', { navigable: false })
+      ]
+    },
+    {
+      id: 'd5', day: 5, date: '2027-03-06', weekday: '星期六', area: '北部',
+      theme: '美麗海水族館浪漫天',
+      weather: { icon: '', status: '', temp: '', rain: '' },
+      accommodationId: 'stay-north',
+      itinerary: [
+        item('d5-1', '旅館 Check out', 'stay', '恩納村住宿退房', { navigable: false }),
+        item('d5-2', '許田休息站', 'shopping', '道之驛，沿途小歇', { mapQuery: '道の駅 許田' }),
+        item('d5-3', '美麗海水族館', 'sight', '黑潮之海與鯨鯊', { mapQuery: '沖縄美ら海水族館' }),
+        item('d5-4', '旅館 Check in', 'stay', '入住北部住宿', { mapQuery: '' })
+      ]
+    },
+    {
+      id: 'd6', day: 6, date: '2027-03-07', weekday: '星期日', area: '北部',
+      theme: '古宇利島與心型岩',
+      weather: { icon: '', status: '', temp: '', rain: '' },
+      accommodationId: 'stay-north',
+      itinerary: [
+        item('d6-1', '古宇利大橋', 'sight', '開車跨海兜風', { mapQuery: '古宇利大橋' }),
+        item('d6-2', '土產休息站', 'shopping', '買伴手禮', { mapQuery: '' }),
+        item('d6-3', '洞窟沙灘', 'sight', '海邊洞窟拍照', { mapQuery: '' }),
+        item('d6-4', '午餐：沖繩蝦蝦飯', 'food', '古宇利島蝦蝦飯', { restaurantId: 'r-shrimp' }),
+        item('d6-5', '心型岩 & 渡海沙灘', 'sight', '看心型岩、渡海沙灘', { mapQuery: 'ティーヌ浜 古宇利島' })
+      ]
+    },
+    {
+      id: 'd7', day: 7, date: '2027-03-08', weekday: '星期一', area: '北部 → 那霸',
+      theme: '回到那霸，兔船早午餐與壽喜燒',
+      weather: { icon: '', status: '', temp: '', rain: '' },
+      accommodationId: 'stay-naha-2',
+      itinerary: [
+        item('d7-1', '早午餐：兔船咖啡廳', 'food', '早午餐', { restaurantId: 'r-usagi' }),
+        item('d7-2', '旅館 Check out', 'stay', '北部住宿退房', { navigable: false }),
+        item('d7-3', '逛街：PARCO CITY', 'shopping', '浦添的購物中心', { mapQuery: 'サンエー浦添西海岸 PARCO CITY' }),
+        item('d7-4', '旅館 Check in', 'stay', '入住那霸住宿', { mapQuery: '' }),
+        item('d7-5', '晚餐：一心壽喜燒', 'food', '壽喜燒晚餐（需訂位）', { restaurantId: 'r-isshin' })
+      ]
+    },
+    {
+      id: 'd8', day: 8, date: '2027-03-09', weekday: '星期二', area: '那霸',
+      theme: '那霸購物日',
+      weather: { icon: '', status: '', temp: '', rain: '' },
+      accommodationId: 'stay-naha-2',
+      itinerary: [
+        item('d8-1', '午餐：Paca Café', 'food', '午餐', { restaurantId: 'r-paca' }),
+        item('d8-2', '豐崎百貨', 'shopping', 'iias 沖繩豐崎', { mapQuery: 'iias沖縄豊崎' }),
+        item('d8-3', 'Ashibinaa Outlet', 'shopping', '沖繩 Outlet 購物', { mapQuery: '沖縄アウトレットモール あしびなー' })
+      ]
+    },
+    {
+      id: 'd9', day: 9, date: '2027-03-10', weekday: '星期三', area: '那霸',
+      theme: '最後的早午餐，準備回家',
+      weather: { icon: '', status: '', temp: '', rain: '' },
+      accommodationId: '',
+      itinerary: [
+        item('d9-1', '早午餐', 'food', '餐廳待決定', { navigable: false }),
+        item('d9-2', '還車', 'transport', '加滿油、檢查個人物品', { mapQuery: '' , notes: '還車檢查清單在「交通 › 租車」' }),
+        item('d9-3', '出發去機場', 'transport', '那霸機場', { mapQuery: '那覇空港' })
+      ]
+    }
+  ];
+
+  var accommodations = [
+    { id: 'stay-naha-1', name: '', area: '那霸', checkIn: '', checkOut: '', address: '', addressEn: '', parking: '', notes: '', phone: '', website: '', photo: '', mapQuery: '' },
+    { id: 'stay-onna', name: '', area: '恩納村', checkIn: '', checkOut: '', address: '', addressEn: '', parking: '', notes: '', phone: '', website: '', photo: '', mapQuery: '' },
+    { id: 'stay-north', name: '', area: '北部', checkIn: '', checkOut: '', address: '', addressEn: '', parking: '', notes: '', phone: '', website: '', photo: '', mapQuery: '' },
+    { id: 'stay-naha-2', name: '', area: '那霸', checkIn: '', checkOut: '', address: '', addressEn: '', parking: '', notes: '', phone: '', website: '', photo: '', mapQuery: '' }
+  ];
+
+  // status：reserved 已預約 | planned 已安排 | mustEat 必吃 | wishlist 想去 | visited 已造訪
+  // group：meal 正餐 | cafe 咖啡甜點
+  function rest(id, name, opts) {
+    return Object.assign({
+      id: id, name: name, nameJa: '', type: '', area: '', price: '', recommend: '',
+      status: 'wishlist', needReservation: false, hours: '', day: null, group: 'meal',
+      description: '', address: '', phone: '', menu: '', reservationInfo: '', parking: '',
+      notes: '', website: '', photo: '', mapQuery: '', addedBy: ''
+    }, opts || {});
+  }
+
+  var restaurants = [
+    rest('r-nakama', 'Shima Shabushabu Nakama 島', { type: '涮涮鍋', area: '國際通', status: 'planned', day: 1 }),
+    rest('r-itoman', '系滿魚市場', { nameJa: '糸満漁業協同組合 お魚センター', type: '海鮮', area: '系滿', status: 'planned', day: 2, mapQuery: '糸満漁業協同組合 お魚センター' }),
+    rest('r-buchi', 'Buchi 燒肉', { type: '燒肉', area: '那霸', status: 'planned', needReservation: true, day: 2 }),
+    rest('r-shrimp', '沖繩蝦蝦飯', { type: '蝦飯', area: '古宇利島', status: 'planned', day: 6 }),
+    rest('r-usagi', '兔船咖啡廳', { type: '早午餐', area: '', status: 'planned', day: 7, group: 'cafe' }),
+    rest('r-isshin', '一心壽喜燒', { type: '壽喜燒', area: '那霸', status: 'planned', needReservation: true, day: 7 }),
+    rest('r-paca', 'Paca Café', { type: '咖啡廳', area: '', status: 'planned', day: 8, group: 'cafe' }),
+    rest('r-zhyvago', 'Zhyvago Coffee Roastery', { type: '咖啡', area: '美國村', group: 'cafe', addedBy: '心萱' }),
+    rest('r-applepie', '蘋果派', { type: '甜點', area: '機場', group: 'cafe', addedBy: '心萱' }),
+    rest('r-aw', 'A&W 漢堡', { type: '漢堡', area: '機場', addedBy: '心萱' }),
+    rest('r-hama', 'Hama 壽司', { type: '壽司', area: '', addedBy: '心萱' }),
+    rest('r-kokuto', '黑糖飲料店', { type: '飲料', area: '沖繩北部', group: 'cafe', addedBy: '心萱' }),
+    rest('r-pork', 'Pork Tamago 飯糰', { type: '飯糰', area: '那霸', addedBy: '心萱' })
+  ];
+
+  // 航班：bookingRef、ticketUrl 屬於私人資訊，請在網站內填寫
+  var flights = {
+    outbound: { airline: '', flightNo: '', date: '2027-03-02', depTime: '', arrTime: '', from: 'TPE', fromName: '桃園國際機場', fromTerminal: '', to: 'OKA', toName: '那霸機場', toTerminal: '', baggage: '', checkinNote: '' },
+    'return': { airline: '', flightNo: '', date: '2027-03-10', depTime: '', arrTime: '', from: 'OKA', fromName: '那霸機場', fromTerminal: '', to: 'TPE', toName: '桃園國際機場', toTerminal: '', baggage: '', checkinNote: '' }
+  };
+
+  var rentalCar = {
+    company: '', pickupDate: '2027-03-02', pickupTime: '', pickupPlace: '那霸', returnDate: '2027-03-10', returnTime: '', returnPlace: '那霸',
+    carModel: '', insurance: '', fuel: '', etc: '', address: '', mapQuery: '', notes: '',
+    pickupFlow: '', returnFlow: '', fuelRule: ''
+  };
+
+  var emergency = {
+    numbers: [
+      { label: '警察', number: '110' },
+      { label: '救護車・消防', number: '119' }
+    ],
+    taiwanOffice: { name: '台北駐日經濟文化代表處 那霸分處', phone: '', address: '', emergencyPhone: '' },
+    insurance: { company: '', policyNote: '', phone: '' }
+  };
+
+  // 日本自駕提醒（一般常識，可自行增修）
+  var drivingTips = [
+    '日本靠左行駛，駕駛座在右邊',
+    '看到「止まれ」標誌必須完全停車',
+    '加油時告訴店員「レギュラー、満タン」＝一般汽油加滿（以租車公司規定為準）',
+    '發生事故：先確認安全 → 報警 110 → 聯絡租車公司'
+  ];
+
+  var stamps = ['飛機', '海洋', '海灘', '夕陽', '鯨魚', '古宇利大橋', '海龜', '沖繩花朵', '蜜月'];
+
+  return {
+    title: '沖繩蜜月旅行',
+    subtitle: 'Okinawa, with Love',
+    couple: { a: 'Jimmy', b: 'Shenny' },
+    startDate: '2027-03-02',
+    endDate: '2027-03-10',
+    weatherLocation: { name: '那霸', latitude: 26.2124, longitude: 127.6809 },
+    days: days,
+    accommodations: accommodations,
+    restaurants: restaurants,
+    flights: flights,
+    rentalCar: rentalCar,
+    emergency: emergency,
+    drivingTips: drivingTips,
+    stamps: stamps
+  };
+})();
