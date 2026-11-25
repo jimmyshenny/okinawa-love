@@ -85,7 +85,7 @@
       ['推薦', isFood ? R.recommend : ''],
       ['門票', it.ticket],
       ['停車', park ? park + (has(it.parkingFee) ? '（' + it.parkingFee + '）' : '') : ''],
-      ['預約', pick(it.reservation, R.reservationInfo)],
+      [it.needTicket ? '購票' : '預約', pick(it.reservation, R.reservationInfo)],
       ['電話', pick(it.phone, R.phone)],
       ['建議停留', it.duration],
       ['介紹', isFood ? R.description : '']
@@ -117,6 +117,7 @@
               '<span class="pill ' + cat[1] + '">' + cat[0] + '</span>' +
               (has(it.duration) ? '<span>停留 ' + esc(it.duration) + '</span>' : '') +
               (needRes ? '<span class="pill peach">需訂位</span>' : '') +
+              (it.needTicket ? '<span class="pill blue">需買票</span>' : '') +
               (r && r.status === 'reserved' ? '<span class="pill green">已預約</span>' : '') + '</span>' +
             '<span class="tl-name">' + esc(it.name) + '</span>' +
             (has(it.description) ? '<span class="tl-desc">' + esc(it.description) + '</span>' : '') +
