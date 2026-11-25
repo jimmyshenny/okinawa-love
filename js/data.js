@@ -80,14 +80,15 @@ window.TRIP = (function () {
     },
     {
       id: 'd3', day: 3, date: '2027-03-04', weekday: '星期四', area: '恩納村',
-      theme: 'A&W 午餐、美國村散步，北上恩納村',
+      theme: 'A&W 午餐、美國村散步，jam 鐵板燒晚餐',
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-onna',
       itinerary: [
         item('d3-1', '旅館 Check out', 'stay', '那霸住宿退房', { navigable: false, driveTime: '約 20 分' }),
         item('d3-3', '午餐：A&W 牧港店', 'food', '復古得來速漢堡，麥根沙士漂浮', { restaurantId: 'r-aw', driveTime: '約 20 分' }),
         item('d3-2', '美國村', 'sight', '北谷海邊街區散步', { mapQuery: '美浜アメリカンビレッジ', placeId: 'ChIJzZoVCAUT5TQRzIueHYt83hs', addressEn: 'Mihama, Chatan, Nakagami District, Okinawa 904-0115', hours: '店家多 10:00–22:00', duration: '2–3 小時', parking: '大型免費町營停車場（約 1,500 台）', parkingFee: '免費', notes: 'ZHYVAGO 咖啡在這裡；傍晚到海邊看夕陽，摩天輪 11:00–22:00、一圈約 15 分鐘', driveTime: '約 40 分', nearby: [{ name: 'ZHYVAGO COFFEE ROASTERY', q: 'ZHYVAGO COFFEE ROASTERY', placeId: 'ChIJh4EKsv4T5TQRU-h2svXc5tk', note: '就在美國村海邊，冷萃咖啡和提拉米蘇；2F 陽台看海' }] }),
-        item('d3-4', '旅館 Check in', 'stay', '入住 BLISSTIA SUITES & RESORT', { stayId: 'stay-onna' })
+        item('d3-4', '旅館 Check in', 'stay', '入住 BLISSTIA SUITES & RESORT', { stayId: 'stay-onna', driveTime: '約 10 分' }),
+        item('d3-5', '晚餐：STEAK HOUSE jam', 'food', '鐵板燒牛排套餐，份量很大', { restaurantId: 'r-jam', time: '18:30' })
       ]
     },
     {
@@ -206,7 +207,8 @@ window.TRIP = (function () {
     rest('r-kokuto', '黑糖飲料店', { type: '飲料', area: '沖繩北部', group: 'cafe', addedBy: '心萱' }),
     rest('r-pork', 'Pork Tamago 飯糰', { type: '飯糰', area: '那霸 牧志', addedBy: '心萱', mapQuery: 'ポークたまごおにぎり 牧志市場本店', placeId: 'ChIJRX9edXpp5TQRRGYawVc2Jmk', price: '約 ¥400–800／個', recommend: '炸蝦塔塔醬飯糰、苦瓜天婦羅、油味噌', hours: '7:00–20:00', address: '那霸市松尾 2-8-35', phone: '098-867-9550', description: '現點現做的沖繩國民飯糰', notes: '早上常大排長龍；內用座位在隔壁另一間；那霸機場國內線、國際線也有分店' }),
     rest('r-rise', 'Grill&Pancake RISE', { type: '早午餐・鬆餅', area: '那霸 鏡原', status: 'planned', day: 9, group: 'cafe', mapQuery: 'Grill&Pancake RISE', placeId: 'ChIJ9_PYOABp5TQRlynY01fe_6k', price: '¥1,000–2,000', recommend: '香草風味鬆餅、厚切培根和香腸、阿古豬墨西哥餅配太陽蛋', hours: '8:00–15:00（週一、週二公休）', address: '那霸市鏡原町 3-7 101', phone: '080-2573-0322', description: '叢林風小店的美式早餐，份量大，評分 4.9', notes: '3/10 是星期三，有營業；在往機場的方向，吃完去還車很順', reservationInfo: '不用預約' }),
-    rest('r-yanbaru', 'Yanbaru Meat', { type: '牛排・西式小菜', area: '恩納村 前兼久', status: 'planned', day: 4, mapQuery: 'Yanbaru Meat 恩納', placeId: 'ChIJ0wPjcMoa5TQROmbpLullsko', price: '約 ¥3,000–5,000', recommend: '夏多布里昂、沙朗牛排、蒸豬肉、蒜香炒飯、凱薩沙拉', hours: '17:00–24:00（週三、週日公休）', address: '恩納村前兼久 858-1 2F', phone: '098-923-3915', description: '氣氛熱鬧的牛排小酒館，評分 4.7，店員親切', notes: '跟 BLISSTIA 同一區，可以走路或開車幾分鐘', reservationInfo: '晚餐熱門，建議前幾天打電話訂位' }),
+    rest('r-jam', 'STEAK HOUSE jam', { nameJa: '鉄板焼ステーキハウス jam', type: '鐵板燒牛排', area: '恩納村 富着', status: 'planned', day: 3, mapQuery: '鉄板焼ステーキハウス jam 恩納', placeId: 'ChIJRXd-q8sa5TQRoWgWK5sNhII', price: '套餐約 ¥3,300–9,500', recommend: '牛排＆大蝦套餐 ¥4,500、菲力套餐 ¥3,300、牛排＆龍蝦 ¥6,000、石垣牛沙朗套餐 ¥9,500', hours: '17:00–22:00（週六日中午也有營業）', address: '恩納村富着 1518', phone: '098-965-2626', description: '南洋海盜風的鐵板燒店，師傅在面前現煎，有 50 種以上套餐', notes: '份量很大（套餐一人約 300g），胃口小可以選小份量的套餐；開頭有咖哩湯，最後有扶桑花果凍；從 BLISSTIA 開車約 10 分', reservationInfo: '可以用 TableCheck 網路訂位，或打電話 098-965-2626' }),
+    rest('r-yanbaru', 'Yanbaru Meat', { type: '牛排・西式小菜', area: '恩納村 前兼久', status: 'planned', day: 4, mapQuery: 'Yanbaru Meat 恩納', placeId: 'ChIJ0wPjcMoa5TQROmbpLullsko', price: '約 ¥3,000–5,000', recommend: '夏多布里昂、沙朗牛排、蒸豬肉、蒜香炒飯、凱薩沙拉', hours: '17:00–24:00（週三、週日公休）', address: '恩納村前兼久 858-1 2F', phone: '098-923-3915', description: '氣氛熱鬧的牛排小酒館，評分 4.7，店員親切', notes: '跟 BLISSTIA 同一區，可以走路或開車幾分鐘', reservationInfo: '用 TableCheck 網路訂位（和沖繩料理しまぶた屋同一個訂位頁），或打電話 098-923-3915；店家說營業時間電話可能不好打通' }),
     rest('r-yukuruba', 'ゆくるば', { nameJa: 'ゆくるば｜カフェ & あぐー豚しゃぶしゃぶ', type: '阿古豬涮涮鍋・咖啡', area: '本部 備瀬', status: 'planned', day: 5, mapQuery: 'ゆくるば 備瀬', placeId: 'ChIJiSmQpjv65DQR_4gb3c97PIc', price: '約 ¥2,000–4,000', recommend: '阿古豬涮涮鍋、芒果汁', hours: '11:00–16:00、17:00–22:00', address: '本部町備瀬 403', phone: '0980-43-1271', parking: '店門口有停車位', description: '福木林道旁被綠樹包圍的小店，白天是咖啡廳、晚上吃涮涮鍋', notes: '離 Yukurina 開車約 5 分', reservationInfo: '週六晚上建議先打電話訂位' }),
     rest('r-fukugiya', 'ふくぎ屋', { nameJa: 'ふくぎ屋', type: '沖繩麵・定食', area: '本部 備瀬', status: 'planned', day: 6, mapQuery: 'ふくぎ屋 備瀬', placeId: 'ChIJbYkXrjv65DQRMcI12696IAY', price: '約 ¥1,000–1,500', recommend: '限定的海藻（アーサ）沖繩麵、排骨沖繩麵、苦瓜炒、塔可飯、芒果汁', hours: '11:30–14:30（週四公休）', address: '本部町備瀬 388-3', phone: '0980-43-5001', description: '就在福木林道裡，往翡翠海灘的路上，在地人也常來', notes: '14:30 就關門，逛完海灘先來吃再散步林道', reservationInfo: '不用預約' }),
     rest('r-okishabu', 'OKI-SHABU 本部美ら海', { nameJa: 'OKINAWA SHABU-SHABU OKI-SHABU', type: '涮涮鍋・牛排', area: '本部 濱元', status: 'planned', needReservation: true, day: 6, mapQuery: 'OKI-SHABU 本部', placeId: 'ChIJN2RZGsH75DQRXdwFoOCiUTU', price: '較高價位', recommend: '阿古豬涮涮鍋、和牛、夏多布里昂牛排、最後的蕎麥麵', address: '本部町濱元 335-1', phone: '050-1794-8520', description: '露營風的溫馨小店，老闆很熱情，評論說是沖繩最好吃的阿古豬涮涮鍋之一', notes: 'Google Maps 上的營業時間不準，訂位時請確認晚餐時段', reservationInfo: '附近晚上很多店客滿，建議出發前先打電話或用 Google Maps 訂位' })
