@@ -62,7 +62,7 @@ window.TRIP = (function () {
         item('d1-4', '抵達沖繩', 'transport', '那霸機場國際線入境', { time: '14:15',  mapQuery: '那覇空港', placeId: 'ChIJjSyLjsRp5TQRkP5WN6rOTFA', addressEn: '150 Kagamizu, Naha, Okinawa 901-0142', notes: '租車公司多在機場外，入境後到租車櫃台／接駁巴士站搭車去取車；入境大廳就有 Pork Tamago 飯糰' }),
         item('d1-5', '租車', 'transport', '取車並確認保險、ETC、油種', { mapQuery: '' , notes: '取車檢查清單在「交通 › 租車」', driveTime: '約 25 分' }),
         item('d1-6', '旅館 Check in', 'stay', '入住那霸歌町大和 Roynet 飯店 PREMIER', { stayId: 'stay-naha-1', driveTime: '約 10 分（也可搭單軌）' }),
-        item('d1-7', '國際通 逛街', 'shopping', '第一晚散步、逛唐吉訶德、買伴手禮', { mapQuery: '国際通り 那覇', placeId: 'ChIJMS9BUXdp5TQRAl6RXvY5aY0', hours: '店家多 10:00–22:00 左右，唐吉訶德營業到深夜', duration: '2–3 小時', parking: '沿路多為收費停車場；也可搭單軌電車到「牧志」或「縣廳前」站', notes: '約 1.6 km 長的購物大街，旁邊巷子通往第一牧志公設市場與 Pork Tamago 飯糰本店', driveTime: '步行約 5 分' }),
+        item('d1-7', '國際通 逛街', 'shopping', '第一晚散步、逛唐吉訶德、買伴手禮', { mapQuery: '国際通り 那覇', placeId: 'ChIJMS9BUXdp5TQRAl6RXvY5aY0', hours: '店家多 10:00–22:00 左右，唐吉訶德營業到深夜', duration: '2–3 小時', parking: '沿路多為收費停車場；也可搭單軌電車到「牧志」或「縣廳前」站', notes: '約 1.6 km 長的購物大街，旁邊巷子通往第一牧志公設市場與 Pork Tamago 飯糰本店', driveTime: '步行約 5 分', nearby: [{ name: '唐吉訶德 那霸壺川店', q: 'ドン・キホーテ 那覇壺川店', placeId: 'ChIJ34qmQV5p5TQR8a3NXd0fmR0', note: '營業到凌晨 3:00，比國際通店大、人比較少；從國際通開車約 10 分' }] }),
         item('d1-8', '晚餐：Buchi 燒肉', 'food', '燒肉晚餐（2/1 開放訂位，18:40 場，保留 10 分鐘）', { restaurantId: 'r-buchi', time: '18:40' })
       ]
     },
@@ -86,7 +86,7 @@ window.TRIP = (function () {
       itinerary: [
         item('d3-1', '旅館 Check out', 'stay', '那霸住宿退房', { navigable: false, driveTime: '約 20 分' }),
         item('d3-3', '午餐：A&W 牧港店', 'food', '復古得來速漢堡，麥根沙士漂浮', { restaurantId: 'r-aw', driveTime: '約 20 分' }),
-        item('d3-2', '美國村', 'sight', '北谷海邊街區散步', { mapQuery: '美浜アメリカンビレッジ', placeId: 'ChIJzZoVCAUT5TQRzIueHYt83hs', addressEn: 'Mihama, Chatan, Nakagami District, Okinawa 904-0115', hours: '店家多 10:00–22:00', duration: '2–3 小時', parking: '大型免費町營停車場（約 1,500 台）', parkingFee: '免費', notes: 'ZHYVAGO 咖啡在這裡；傍晚到海邊看夕陽，摩天輪 11:00–22:00、一圈約 15 分鐘', driveTime: '約 40 分' }),
+        item('d3-2', '美國村', 'sight', '北谷海邊街區散步', { mapQuery: '美浜アメリカンビレッジ', placeId: 'ChIJzZoVCAUT5TQRzIueHYt83hs', addressEn: 'Mihama, Chatan, Nakagami District, Okinawa 904-0115', hours: '店家多 10:00–22:00', duration: '2–3 小時', parking: '大型免費町營停車場（約 1,500 台）', parkingFee: '免費', notes: 'ZHYVAGO 咖啡在這裡；傍晚到海邊看夕陽，摩天輪 11:00–22:00、一圈約 15 分鐘', driveTime: '約 40 分', nearby: [{ name: 'ZHYVAGO COFFEE ROASTERY', q: 'ZHYVAGO COFFEE ROASTERY', placeId: 'ChIJh4EKsv4T5TQRU-h2svXc5tk', note: '就在美國村海邊，冷萃咖啡和提拉米蘇；2F 陽台看海' }] }),
         item('d3-4', '旅館 Check in', 'stay', '入住 BLISSTIA SUITES & RESORT', { stayId: 'stay-onna' })
       ]
     },
@@ -96,7 +96,7 @@ window.TRIP = (function () {
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-onna',
       itinerary: [
-        item('d4-1', '耍廢日', 'rest', '在飯店好好休息，享受海景', { navigable: false })
+        item('d4-1', '耍廢日', 'rest', '在飯店好好休息，享受海景', { navigable: false, nearby: [{ name: '青之洞窟', q: '青の洞窟 真栄田岬', placeId: 'ChIJFSBnObgb5TQRQA1ByAocZog', note: '離飯店開車約 10 分；要浮潛或潛水需參加付費行程，不下水的話可以在真榮田岬步道看海' }, { name: '永旺夢樂城沖繩來客夢', q: 'イオンモール沖縄ライカム', placeId: 'ChIJJ_TSFGIS5TQRa_HkdjGALss', note: '離飯店開車約 35 分；有寶可夢中心、LOFT、大水族箱，10:00–22:00' }] })
       ]
     },
     {
@@ -147,8 +147,8 @@ window.TRIP = (function () {
       accommodationId: 'stay-naha-2',
       itinerary: [
         item('d8-1', '午餐：POCO CAFE', 'food', '沖繩家常菜午餐（塔可飯、沖繩麵）', { restaurantId: 'r-poco', driveTime: '約 25 分' }),
-        item('d8-2', '豐崎百貨', 'shopping', 'iias 沖繩豐崎', { mapQuery: 'iias沖縄豊崎', placeId: 'ChIJj-bxt39p5TQRVVi5ETcWlRM', addressEn: '3-35 Toyosaki, Tomigusuku, Okinawa 901-0225', hours: '10:00–21:00', duration: '2–3 小時', parking: '室內停車場', parkingFee: '免費', notes: '豐崎 LOFT 在 3F；有 UNIQLO、GU、超市可買伴手禮；旁邊就是 Ashibinaa Outlet', driveTime: '步行約 5 分' }),
-        item('d8-3', 'Ashibinaa Outlet', 'shopping', '沖繩 Outlet 購物', { mapQuery: '沖縄アウトレットモール あしびなー', placeId: 'ChIJ98yehgto5TQRJj4hYbNQH9U', addressEn: '1-188 Toyosaki, Tomigusuku, Okinawa 901-0225', hours: '10:00–20:00', duration: '2–3 小時', parking: '大型停車場', parkingFee: '免費', notes: '開放式 Outlet，離機場約 15 分鐘；有投幣置物櫃；逛完可走去隔壁 iias' })
+        item('d8-2', '豐崎百貨', 'shopping', 'iias 沖繩豐崎', { mapQuery: 'iias沖縄豊崎', placeId: 'ChIJj-bxt39p5TQRVVi5ETcWlRM', addressEn: '3-35 Toyosaki, Tomigusuku, Okinawa 901-0225', hours: '10:00–21:00', duration: '2–3 小時', parking: '室內停車場', parkingFee: '免費', notes: '豐崎 LOFT 在 3F；有 UNIQLO、GU、超市可買伴手禮；旁邊就是 Ashibinaa Outlet', driveTime: '步行約 5 分', nearby: [{ name: '豐崎 LOFT', q: '豊崎ロフト', placeId: 'ChIJH8VZ7Ilp5TQRVKVM97AdiUA', note: '就在 iias 3F，文具、雜貨、美妝' }] }),
+        item('d8-3', 'Ashibinaa Outlet', 'shopping', '沖繩 Outlet 購物', { mapQuery: '沖縄アウトレットモール あしびなー', placeId: 'ChIJ98yehgto5TQRJj4hYbNQH9U', addressEn: '1-188 Toyosaki, Tomigusuku, Okinawa 901-0225', hours: '10:00–20:00', duration: '2–3 小時', parking: '大型停車場', parkingFee: '免費', notes: '開放式 Outlet，離機場約 15 分鐘；有投幣置物櫃；逛完可走去隔壁 iias', nearby: [{ name: 'HAMA 壽司 那霸古島店', q: 'はま寿司 那覇古島店', placeId: 'ChIJ0bDIk-hr5TQRtvrRQOAyur0', note: 'Day 8 晚餐還沒排，可以來吃迴轉壽司；營業到凌晨 5:00，從 Outlet 開車約 25 分' }] })
       ]
     },
     {

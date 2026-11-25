@@ -99,6 +99,9 @@
       rows.push(['要放托運', li(BR.checkedOnly) + '<br><span class="muted">' + esc(BR.carryOnLiquids) + '</span>']);
       if (it.baggageTips === 'return') rows.push(['不能帶回台灣', li(BR.bringBackBanned)]);
     }
+    if (it.nearby && it.nearby.length) rows.push(['附近也想去', it.nearby.map(function (n) {
+      return '<div style="margin-bottom:8px"><a href="' + esc(U.mapsUrl(n.q || n.name, n.placeId)) + '" target="_blank" rel="noopener"><b>' + esc(n.name) + '</b></a>' + (has(n.note) ? '<br><span class="muted small">' + esc(n.note) + '</span>' : '') + '</div>';
+    }).join('')]);
     var notes = [it.notes, R.notes].filter(has);
     if (notes.length) rows.push(['注意事項', notes.map(esc).join('<br>')]);
     return (rows.length ? '<dl class="kv">' + rows.map(function (x) { return '<dt>' + x[0] + '</dt><dd>' + x[1] + '</dd>'; }).join('') + '</dl>'
