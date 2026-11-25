@@ -100,25 +100,25 @@ window.TRIP = (function () {
     },
     {
       id: 'd5', day: 5, date: '2027-03-06', weekday: '星期六', area: '北部',
-      theme: '美麗海水族館與古宇利海洋塔',
+      theme: '美麗海水族館浪漫天',
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-north',
       itinerary: [
         item('d5-1', '旅館 Check out', 'stay', '恩納村住宿退房', { navigable: false, driveTime: '約 35 分' }),
         item('d5-2', '許田休息站', 'shopping', '道之驛，沿途小歇', { mapQuery: '道の駅 許田', placeId: 'ChIJFfz3q_H_5DQRttsFg7-7wLE', addressEn: '17-1 Kyoda, Nago, Okinawa 905-0024', hours: '8:30–19:00', duration: '30–40 分鐘', parking: '道路兩側都有停車場，北上時停左側再走天橋過去', parkingFee: '免費', notes: '可買美麗海水族館優惠票；有天婦羅、沙翁、芒果冰；部分攤位只收現金', driveTime: '約 50 分' }),
-        item('d5-3', '美麗海水族館', 'sight', '黑潮之海與鯨鯊', { mapQuery: '沖縄美ら海水族館', placeId: 'ChIJPZ5hUjH65DQR_p_dD3CmCOo', address: '沖縄県国頭郡本部町石川424（海洋博公園內）', hours: '8:30–18:30（最後入館 17:30）', ticket: '大人 ¥2,180；網路買電子票可掃 QR 直接入館', parking: '海洋博公園停車場', parkingFee: '免費', duration: '2–3 小時', notes: '重點是「黑潮之海」鯨鯊與鬼蝠魟；園區內海豚表演、海牛館、海龜館免費；人多時建議一開門就進場', driveTime: '約 25 分', needTicket: true, reservation: '【何時買】出發前 1–2 週網路買就好（不會賣完，主要省排隊）。【怎麼買】KKday、Klook、VELTRA 買「電子入館票」，入口直接掃 QR 碼進場，不用排售票口；大人 ¥2,180。也可以在當天經過的許田休息站買優惠票。買了不能退票。' }),
-        item('d5-3b', '古宇利海洋塔', 'sight', '海拔 82m 的觀景塔，看古宇利大橋全景', { mapQuery: '古宇利オーシャンタワー', placeId: 'ChIJEx3cOjJY5DQRJM-BcuwWU-g', address: '沖縄県国頭郡今帰仁村古宇利538', hours: '10:00–18:00（最後入館 17:30）', ticket: '大人 ¥1,000（含自動駕駛遊園車、貝殼博物館、觀景台）', parking: '停車場約 200 台', parkingFee: '免費', duration: '1 小時', notes: '從美麗海過來約 25 分鐘，記得 17:30 前入館；餐廳有南瓜愛心鬆餅、拿坡里披薩', needTicket: true, reservation: '【何時買】出發前 1–2 週網路買就好。【怎麼買】古宇利海洋塔官網、VELTRA 或 KKday 事前購票，大人約 ¥900–1,000，現場出示憑證換票；也可以現場買。', driveTime: '約 30 分' }),
+        item('d5-3', '美麗海水族館', 'sight', '黑潮之海與鯨鯊', { mapQuery: '沖縄美ら海水族館', placeId: 'ChIJPZ5hUjH65DQR_p_dD3CmCOo', address: '沖縄県国頭郡本部町石川424（海洋博公園內）', hours: '8:30–18:30（最後入館 17:30）', ticket: '大人 ¥2,180；網路買電子票可掃 QR 直接入館', parking: '海洋博公園停車場', parkingFee: '免費', duration: '2–3 小時', notes: '重點是「黑潮之海」鯨鯊與鬼蝠魟；園區內海豚表演、海牛館、海龜館免費；人多時建議一開門就進場', driveTime: '約 5 分', needTicket: true, reservation: '【何時買】出發前 1–2 週網路買就好（不會賣完，主要省排隊）。【怎麼買】KKday、Klook、VELTRA 買「電子入館票」，入口直接掃 QR 碼進場，不用排售票口；大人 ¥2,180。也可以在當天經過的許田休息站買優惠票。買了不能退票。' }),
         item('d5-4', '旅館 Check in', 'stay', '入住 Yukurina Resort Lemon House', { stayId: 'stay-north' })
       ]
     },
     {
       id: 'd6', day: 6, date: '2027-03-07', weekday: '星期日', area: '北部',
-      theme: '天の船早午餐、古宇利島與心型岩',
+      theme: '古宇利環島：海洋塔、蝦蝦飯與心型岩',
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-north',
       itinerary: [
         item('d6-0', '早午餐：天の船', 'food', '洞窟造型咖啡廳的法式可麗餅（要預約）', { restaurantId: 'r-usagi', time: '10:30', driveTime: '約 25 分' }),
-        item('d6-1', '古宇利大橋', 'sight', '開車跨海兜風', { mapQuery: '古宇利大橋', placeId: 'ChIJyy0FRAhZ5DQRIfztLp8vdWc', addressEn: 'Kouri, Nakijin, Okinawa 905-0406', duration: '20–30 分鐘', parking: '過橋前右側「古宇利大橋南展望所」有停車場，可拍大橋全景', notes: '全長約 2 km，晴天中午海最藍；過橋右轉約 1 km 是古宇利海洋塔（大人 ¥1,000，10:00–18:00）' }),
+        item('d6-1', '古宇利大橋', 'sight', '開車跨海兜風', { mapQuery: '古宇利大橋', placeId: 'ChIJyy0FRAhZ5DQRIfztLp8vdWc', addressEn: 'Kouri, Nakijin, Okinawa 905-0406', duration: '20–30 分鐘', parking: '過橋前右側「古宇利大橋南展望所」有停車場，可拍大橋全景', notes: '全長約 2 km，晴天中午海最藍；過橋右轉約 1 km 就是古宇利海洋塔', driveTime: '約 3 分' }),
+        item('d6-1b', '古宇利海洋塔', 'sight', '海拔 82m 的觀景塔，看古宇利大橋全景', { mapQuery: '古宇利オーシャンタワー', placeId: 'ChIJEx3cOjJY5DQRJM-BcuwWU-g', address: '沖縄県国頭郡今帰仁村古宇利538', hours: '10:00–18:00（最後入館 17:30）', ticket: '大人 ¥1,000（含自動駕駛遊園車、貝殼博物館、觀景台）', parking: '停車場約 200 台', parkingFee: '免費', duration: '1 小時', notes: '過古宇利大橋右轉約 1 km 就到；搭自動駕駛遊園車上觀景台，餐廳有南瓜愛心鬆餅、拿坡里披薩', needTicket: true, reservation: '【何時買】出發前 1–2 週網路買就好。【怎麼買】古宇利海洋塔官網、VELTRA 或 KKday 事前購票，大人約 ¥900–1,000，現場出示憑證換票；也可以現場買。' }),
         item('d6-2', '土產休息站', 'shopping', '買伴手禮', { mapQuery: '' }),
         item('d6-3', '洞窟沙灘', 'sight', '海邊洞窟拍照', { mapQuery: '' }),
         item('d6-4', '午餐：沖繩蝦蝦飯', 'food', '古宇利島蝦蝦飯', { restaurantId: 'r-shrimp', driveTime: '約 10 分' }),
