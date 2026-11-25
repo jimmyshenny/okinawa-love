@@ -97,7 +97,7 @@
     var ns = App.nextStop(day), nextIdx = ns && App.isToday(day) && ns.item ? ns.index : -1;
     return '<ol class="timeline">' + day.itinerary.map(function (it, i) {
       var done = App.isDone(it.id), isOpen = !!open[it.id], cat = CAT[it.category] || ['行程', 'sand'];
-      var url = it.navigable ? App.navUrl(it) : '';
+      var url = it.navigable ? App.navUrl(it) : '', mapU = it.navigable ? App.mapUrl(it) : '';
       var r = it.restaurantId ? App.restaurant(it.restaurantId) : null;
       var needRes = r && r.needReservation && r.status !== 'reserved';
       return '<li class="tl-item' + (done ? ' is-done' : '') + (i === nextIdx ? ' is-next' : '') + '">' +
@@ -117,7 +117,9 @@
           '<div class="tl-actions"><div class="left">' +
             '<button class="btn btn-sm done-btn" data-done="' + esc(it.id) + '" aria-pressed="' + done + '">' + (done ? ic('check', 14) + '已完成' : '完成') + '</button>' +
             '<button class="more-btn" data-open="' + esc(it.id) + '" aria-expanded="' + isOpen + '">' + (isOpen ? '收合' : '詳細') + ic(isOpen ? 'up' : 'chevron', 14) + '</button></div>' +
-            (url ? '<a class="btn btn-sm btn-outline" href="' + esc(url) + '" target="_blank" rel="noopener">' + ic('nav', 14) + '導航</a>' : '') +
+            (mapU || url ? '<div class="left">' +
+              (mapU ? '<a class="btn btn-sm btn-outline" href="' + esc(mapU) + '" target="_blank" rel="noopener">' + ic('map', 14) + '地圖</a>' : '') +
+              (url ? '<a class="btn btn-sm btn-outline" href="' + esc(url) + '" target="_blank" rel="noopener">' + ic('nav', 14) + '導航</a>' : '') + '</div>' : '') +
           '</div>' +
         '</article>' +
         (i < day.itinerary.length - 1 && has(it.driveTime) ? '<div class="tl-drive" aria-label="到下一站車程 ' + esc(it.driveTime) + '">' + ic('car', 11) + '<span>' + esc(it.driveTime) + '</span></div>' : '') +
