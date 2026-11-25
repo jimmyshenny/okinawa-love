@@ -134,11 +134,12 @@ window.TRIP = (function () {
     },
     {
       id: 'd7', day: 7, date: '2027-03-08', weekday: '星期一', area: '北部 → 那霸',
-      theme: '回到那霸，PARCO 與壽喜燒',
+      theme: '回到那霸，PARCO 海景午餐與壽喜燒',
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-naha-2',
       itinerary: [
         item('d7-2', '旅館 Check out', 'stay', '北部住宿退房', { navigable: false, driveTime: '約 1 小時 20 分（走高速）' }),
+        item('d7-3l', '午餐：PARCO CITY 美食街', 'food', '到 PARCO 先吃午餐，美食街看得到海', { mapQuery: 'サンエー浦添西海岸 PARCO CITY', placeId: 'ChIJxZQf9gpr5TQRwLWyT5Osigc', hours: '10:00–22:00', duration: '約 1 小時', notes: '美食街在館內，靠窗座位可以看海；選擇很多，不用預約。評論提到館內也有 A&W', driveTime: '館內步行' }),
         item('d7-3', '逛街：PARCO CITY', 'shopping', '浦添的購物中心', { mapQuery: 'サンエー浦添西海岸 PARCO CITY', placeId: 'ChIJxZQf9gpr5TQRwLWyT5Osigc', addressEn: '3-1-1 Irijima, Urasoe, Okinawa 901-2123', hours: '10:00–22:00', duration: '3 小時以上', parking: '大型停車場（假日找車位要等一下）', notes: '三層樓，有 UNIQLO、GU、無印、Daiso、ABC-Mart、LEGO 等；美食街看得到海景；退稅櫃台在 1F', driveTime: '約 20 分' }),
         item('d7-4', '旅館 Check in', 'stay', '入住 THE NEST 那霸', { stayId: 'stay-naha-2', driveTime: '步行約 10 分' }),
         item('d7-5', '晚餐：一心壽喜燒', 'food', '壽喜燒晚餐（2/1 開放訂位，18:00 場）', { restaurantId: 'r-isshin', time: '18:00' })
