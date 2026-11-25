@@ -167,6 +167,12 @@ h1, h2, h3 { font-family: var(--serif); margin: 0; line-height: 1.35; }
 .tl-photos img { width: 96px; height: 72px; object-fit: cover; border-radius: 8px; }
 .tl-actions { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 4px 10px 10px 14px; }
 .tl-actions .left { display: flex; align-items: center; gap: 6px; }
+/* 行程卡右下角的圓形按鈕：地圖（店家頁）・導航（路線） */
+.round-btn { width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--mist); background: #fff; color: var(--ocean);
+  display: inline-flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; text-decoration: none; flex: none; }
+.round-btn span { font-size: 10px; line-height: 1; font-weight: 600; }
+.round-btn.primary { background: var(--ocean); border-color: var(--ocean); color: #fff; }
+.round-btn:active { transform: scale(.94); }
 .done-btn[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: var(--cream); }
 .more-btn { border: 0; background: none; font-size: 12px; color: var(--ocean); min-height: 36px; padding: 0 4px; display: inline-flex; align-items: center; gap: 2px; }
 .tl-drive { margin: -6px 0 8px 4px; font-size: 11px; line-height: 1; color: #A9B0B2; display: flex; gap: 4px; align-items: center; }

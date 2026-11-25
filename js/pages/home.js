@@ -118,8 +118,8 @@
             '<button class="btn btn-sm done-btn" data-done="' + esc(it.id) + '" aria-pressed="' + done + '">' + (done ? ic('check', 14) + '已完成' : '完成') + '</button>' +
             '<button class="more-btn" data-open="' + esc(it.id) + '" aria-expanded="' + isOpen + '">' + (isOpen ? '收合' : '詳細') + ic(isOpen ? 'up' : 'chevron', 14) + '</button></div>' +
             (mapU || url ? '<div class="left">' +
-              (mapU ? '<a class="btn btn-sm btn-outline" href="' + esc(mapU) + '" target="_blank" rel="noopener">' + ic('map', 14) + '地圖</a>' : '') +
-              (url ? '<a class="btn btn-sm btn-outline" href="' + esc(url) + '" target="_blank" rel="noopener">' + ic('nav', 14) + '導航</a>' : '') + '</div>' : '') +
+              (mapU ? '<a class="round-btn" href="' + esc(mapU) + '" target="_blank" rel="noopener" aria-label="在 Google Maps 查看 ' + esc(it.name) + '">' + ic('map', 18) + '<span>地圖</span></a>' : '') +
+              (url ? '<a class="round-btn primary" href="' + esc(url) + '" target="_blank" rel="noopener" aria-label="導航到 ' + esc(it.name) + '">' + ic('nav', 18) + '<span>導航</span></a>' : '') + '</div>' : '') +
           '</div>' +
         '</article>' +
         (i < day.itinerary.length - 1 && has(it.driveTime) ? '<div class="tl-drive" aria-label="到下一站車程 ' + esc(it.driveTime) + '">' + ic('car', 11) + '<span>' + esc(it.driveTime) + '</span></div>' : '') +
