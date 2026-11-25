@@ -57,14 +57,21 @@ window.UI = (function () {
     return '<svg class="icon ' + (cls || '') + '" width="' + (size || 20) + '" height="' + (size || 20) + '" viewBox="0 0 24 24" ' + P + ' aria-hidden="true">' + (paths[name] || '') + '</svg>';
   }
 
-  function mapsUrl(query) { return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query); }
-  function dirUrl(dest) { return 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(dest) + '&travelmode=driving'; }
+  // placeId（Google 地點 ID）：有的話 Google Maps 會直接打開那一家，不會跳出搜尋清單
+  function pid(name, id) { return id ? '&' + name + '=' + encodeURIComponent(id) : ''; }
+  function mapsUrl(query, placeId) { return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query) + pid('query_place_id', placeId); }
+  function dirUrl(dest, placeId) { return 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(dest) + pid('destination_place_id', placeId) + '&travelmode=driving'; }
+  // points：字串，或 { q: 搜尋字, id: placeId }
   function routeUrl(points) {
+    points = points.map(function (p) { return typeof p === 'string' ? { q: p, id: '' } : p; });
     if (!points.length) return '';
-    if (points.length === 1) return dirUrl(points[0]);
+    if (points.length === 1) return dirUrl(points[0].q, points[0].id);
     var dest = points[points.length - 1], origin = points[0], mid = points.slice(1, -1);
-    return 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin) + '&destination=' + encodeURIComponent(dest) +
-      (mid.length ? '&waypoints=' + mid.map(encodeURIComponent).join('%7C') : '') + '&travelmode=driving';
+    var midIds = mid.every(function (p) { return p.id; });
+    return 'https://www.google.com/maps/dir/?api=1&origin=' + encodeURIComponent(origin.q) + pid('origin_place_id', origin.id) +
+      '&destination=' + encodeURIComponent(dest.q) + pid('destination_place_id', dest.id) +
+      (mid.length ? '&waypoints=' + mid.map(function (p) { return encodeURIComponent(p.q); }).join('%7C') +
+        (midIds ? '&waypoint_place_ids=' + mid.map(function (p) { return encodeURIComponent(p.id); }).join('%7C') : '') : '') + '&travelmode=driving';
   }
 
   function money(n, cur) {

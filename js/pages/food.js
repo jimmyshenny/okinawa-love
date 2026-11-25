@@ -85,7 +85,7 @@
   function detail(id, fromLink) {
     var r = App.restaurant(id); if (!r) { U.toast('找不到這間餐廳'); return; }
     var st = STATUS[r.status] || STATUS.wishlist;
-    var q = r.mapQuery || r.address || r.nameJa || r.name;
+    var navU = App.navUrl(r), mapU = App.mapUrl(r);
     var rows = [['日文名稱', v(r.nameJa)], ['分類', v(r.type)], ['區域', v(r.area)], ['價格', v(r.price)], ['推薦餐點', v(r.recommend)],
       ['營業時間', v(r.hours)], ['地址', v(r.address)], ['電話', has(r.phone) ? '<a href="tel:' + esc(r.phone) + '">' + esc(r.phone) + '</a>' : v('')],
       ['菜單', v(r.menu)], ['預約資訊', v(r.reservationInfo)], ['停車', v(r.parking)], ['注意事項', v(r.notes, '—')]];
@@ -97,8 +97,8 @@
       '<label class="field" style="margin-top:14px"><span>快速修改狀態</span><select id="quick-status">' + Object.keys(STATUS).map(function (k) {
         return '<option value="' + k + '"' + (k === r.status ? ' selected' : '') + '>' + STATUS[k][0] + '</option>'; }).join('') + '</select></label>' +
       '<div class="btn-row" style="margin-top:14px">' +
-        '<a class="btn btn-primary" href="' + esc(U.dirUrl(q)) + '" target="_blank" rel="noopener">' + ic('nav', 16) + '導航</a>' +
-        '<a class="btn" href="' + esc(U.mapsUrl(q)) + '" target="_blank" rel="noopener">' + ic('map', 16) + '地圖</a>' +
+        '<a class="btn btn-primary" href="' + esc(navU) + '" target="_blank" rel="noopener">' + ic('nav', 16) + '導航</a>' +
+        '<a class="btn" href="' + esc(mapU) + '" target="_blank" rel="noopener">' + ic('map', 16) + '地圖</a>' +
         (has(r.website) ? '<a class="btn" href="' + esc(r.website) + '" target="_blank" rel="noopener">' + ic('globe', 16) + '官網</a>' : '') +
       '</div>' +
       '<div class="btn-row" style="margin-top:8px"><button class="btn" id="edit-r">' + ic('edit', 16) + '編輯餐廳</button>' +
@@ -130,7 +130,8 @@
         { name: 'recommend', label: '推薦餐點', value: r.recommend },
         { name: 'hours', label: '營業時間', value: r.hours },
         { name: 'address', label: '地址', value: r.address },
-        { name: 'mapQuery', label: 'Google Maps 搜尋字', value: r.mapQuery, help: '填日文店名最準，留白會用名稱搜尋' },
+        { name: 'mapUrl', label: 'Google Maps 分享連結', type: 'url', value: r.mapUrl, help: '在 Google Maps 店家頁按「分享 → 複製連結」貼上，按「地圖」就會直接打開這家店' },
+        { name: 'mapQuery', label: 'Google Maps 搜尋字', value: r.mapQuery, help: '沒有分享連結時使用，填日文店名最準；留白會用名稱搜尋' },
         { name: 'phone', label: '電話', type: 'tel', value: r.phone },
         { name: 'website', label: '官方網站', type: 'url', value: r.website },
         { name: 'menu', label: '菜單', type: 'textarea', value: r.menu },
@@ -141,6 +142,8 @@
       ],
       onSave: function (o) {
         o.day = o.day === '' ? null : Number(o.day);
+        // 換了搜尋字或地址，就不再用原本綁定的 Google 地點
+        if ((o.mapQuery || '') !== (r.mapQuery || '') || (o.address || '') !== (r.address || '')) { o.placeId = ''; o.parkingPlaceId = ''; }
         App.saveRestaurant(Object.assign({}, r, o)); U.toast(isNew ? '已新增餐廳' : '已儲存'); App.rerender();
       },
       onDelete: isNew ? null : function () { App.deleteRestaurant(r.id); U.toast('已刪除'); App.rerender(); },

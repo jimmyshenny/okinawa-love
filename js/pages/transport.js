@@ -56,7 +56,7 @@
   }
 
   function car() {
-    var c = T.rentalCar, q = c.mapQuery || c.address;
+    var c = T.rentalCar, q = App.navUrl(c);
     var rows = [['車型', v(c.carModel)], ['車牌', privVal('car:plate') + ' ' + privBtn('car:plate', '車牌')], ['保險', v(c.insurance)], ['油種', v(c.fuel)], ['ETC', v(c.etc)], ['地址', v(c.address)]];
     if (has(c.fuelRule)) rows.push(['加油規定', esc(c.fuelRule)]);
     if (has(c.notes)) rows.push(['注意事項', esc(c.notes)]);
@@ -70,7 +70,7 @@
         '</div>' +
         '<dl class="kv">' + rows.map(function (r) { return '<dt>' + r[0] + '</dt><dd>' + r[1] + '</dd>'; }).join('') + '</dl>' +
         '<div class="btn-row">' +
-          (q ? '<a class="btn btn-primary" href="' + esc(U.dirUrl(q)) + '" target="_blank" rel="noopener">' + ic('nav', 16) + '導航至租車店</a>' : '<span class="btn disabled">' + ic('nav', 16) + '導航（地址待補）</span>') +
+          (q ? '<a class="btn btn-primary" href="' + esc(q) + '" target="_blank" rel="noopener">' + ic('nav', 16) + '導航至租車店</a>' : '<span class="btn disabled">' + ic('nav', 16) + '導航（地址待補）</span>') +
           (App.priv('car:phone') ? '<a class="btn" href="tel:' + esc(App.priv('car:phone')) + '">' + ic('phone', 16) + '撥打電話</a>' : '') +
         '</div>' +
         '<div class="btn-row">' +
@@ -92,7 +92,7 @@
     var idx = routeDayIndex(), day = T.days[idx];
     var stops = day.itinerary.filter(function (it) { return it.navigable; });
     var a = App.accommodation(day.accommodationId);
-    var points = stops.map(App.placeQuery).filter(Boolean);
+    var points = stops.map(App.routePoint).filter(Boolean);
     var full = points.length ? U.routeUrl(points) : '';
     var n = Math.max(stops.length, 1);
     var dots = stops.map(function (s, i) {
@@ -132,15 +132,17 @@
       seen[d.accommodationId].dates.push(d.date);
     });
     return '<div style="display:flex;flex-direction:column;gap:12px">' + list.map(function (x) {
-      var a = x.a, q = a.mapQuery || a.address || a.name;
+      var a = x.a, q = App.navUrl(a), m = App.mapUrl(a);
       return '<article class="card card-pad" style="display:flex;flex-direction:column;gap:8px">' +
         '<div style="display:flex;justify-content:space-between;gap:8px"><h3 style="font-size:17px">' + (has(a.name) ? esc(a.name) : esc(a.area) + '住宿 <span class="tbd small">名稱待補</span>') + '</h3>' +
         '<span class="pill blue">' + x.dates.length + ' 晚</span></div>' +
         '<span class="small muted">' + U.md(x.dates[0]) + ' 入住 · ' + x.dates.map(U.md).join('、') + '</span>' +
         '<dl class="kv small"><dt>Check-in</dt><dd>' + v(a.checkIn) + '</dd><dt>Check-out</dt><dd>' + v(a.checkOut) + '</dd><dt>地址</dt><dd>' + v(a.address) + '</dd>' +
         '<dt>訂房編號</dt><dd>' + privVal('stay:' + a.id) + ' ' + privBtn('stay:' + a.id, (a.name || a.area + '住宿') + ' 訂房編號') + '</dd></dl>' +
-        (q ? '<a class="btn btn-sm btn-outline" href="' + esc(U.dirUrl(q)) + '" target="_blank" rel="noopener">' + ic('nav', 14) + '導航</a>' : '') +
-        '</article>';
+        '<div class="btn-row">' +
+          (q ? '<a class="btn btn-sm btn-outline" href="' + esc(q) + '" target="_blank" rel="noopener">' + ic('nav', 14) + '導航</a>' : '') +
+          (m ? '<a class="btn btn-sm btn-outline" href="' + esc(m) + '" target="_blank" rel="noopener">' + ic('map', 14) + '地圖</a>' : '') +
+        '</div></article>';
     }).join('') + '</div>';
   }
 
@@ -172,10 +174,11 @@
   function showStop(id) {
     var it = null; T.days.forEach(function (d) { d.itinerary.forEach(function (x) { if (x.id === id) it = x; }); });
     if (!it) return;
-    var u = App.navUrl(it);
+    var u = App.navUrl(it), m = App.mapUrl(it);
     U.openSheet(it.name, '<p class="muted small" style="margin-top:0">' + esc(it.description) + '</p>' +
       '<dl class="kv"><dt>地址</dt><dd>' + v(it.address) + '</dd><dt>停車場</dt><dd>' + v(it.parking) + '</dd><dt>停車費</dt><dd>' + v(it.parkingFee) + '</dd>' +
       '<dt>營業時間</dt><dd>' + v(it.hours) + '</dd><dt>建議停留</dt><dd>' + v(it.duration) + '</dd></dl>' +
-      (u ? '<a class="btn btn-primary btn-block" style="margin-top:14px" href="' + esc(u) + '" target="_blank" rel="noopener">' + ic('nav', 16) + '開啟 Google Maps 導航</a>' : ''));
+      (u ? '<a class="btn btn-primary btn-block" style="margin-top:14px" href="' + esc(u) + '" target="_blank" rel="noopener">' + ic('nav', 16) + '開啟 Google Maps 導航</a>' : '') +
+      (m ? '<a class="btn btn-block" style="margin-top:8px" href="' + esc(m) + '" target="_blank" rel="noopener">' + ic('map', 16) + '查看 Google Maps 地點</a>' : ''));
   }
 })();

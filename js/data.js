@@ -4,6 +4,8 @@
    ✏️ 要修改行程、餐廳、住宿、航班，只要改這個檔案。
    - 空字串 '' 代表「還沒有資料」，畫面會自動顯示「待補」。
    - mapQuery：Google Maps 搜尋用的關鍵字（日文名稱最準）。
+   - placeId：Google 地點 ID，有填的話「地圖」會直接打開那一家，「導航」也會導到那一家，
+     不會跳出搜尋清單。parkingPlaceId 有填的話，「導航」會改導到那個停車場。
    - time 格式為 'HH:MM'（24 小時制），填了之後「下一站」會依時間推算。
    ⚠️ 這個檔案會公開在 GitHub 上：
      訂位代號、預約編號、電話等私人資訊，請在網站裡的
@@ -34,6 +36,10 @@ window.TRIP = (function () {
       notes: '',
       mapQuery: '',        // Google Maps 搜尋字
       navigationUrl: '',   // 若有固定連結可直接貼上（優先使用）
+      placeId: '',         // Google 地點 ID（直接打開那一家）
+      parkingPlaceId: '',  // 導航改導到這個停車場
+      parkingName: '',     // 停車場名稱
+      stayId: '',          // 旅館 Check in：對應下方 accommodations 的 id
       photos: [],          // 圖片路徑，例如 'images/sesoko.jpg'
       restaurantId: '',    // 對應下方 restaurants 的 id
       driveTime: '',       // 到下一站的車程，例如 '約 25 分'（留空就不顯示）
@@ -49,13 +55,13 @@ window.TRIP = (function () {
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-naha-1',
       itinerary: [
-        item('d1-1', '出發去機場', 'transport', '從家裡出發，提早抵達桃園機場', { navigable: false }),
+        item('d1-1', '出發去機場', 'transport', '從家裡出發，提早抵達桃園機場，車停第二航廈 P4', { mapQuery: '桃園國際機場 第二航廈 P4停車場', placeId: 'ChIJoXBSF7afQjQRPg2UN7vaX3c', parking: '第二航廈 P4 停車場（地下 1、2 樓）' }),
         item('d1-2', '機場 Check in', 'transport', '辦理報到、托運行李', { navigable: false }),
         item('d1-3', '上飛機', 'transport', '航班資訊請見「交通」頁', { navigable: false }),
-        item('d1-4', '抵達沖繩', 'transport', '那霸機場入境', { mapQuery: '那覇空港' }),
+        item('d1-4', '抵達沖繩', 'transport', '那霸機場入境', { mapQuery: '那覇空港', placeId: 'ChIJjSyLjsRp5TQRkP5WN6rOTFA' }),
         item('d1-5', '租車', 'transport', '取車並確認保險、ETC、油種', { mapQuery: '' , notes: '取車檢查清單在「交通 › 租車」' }),
-        item('d1-6', '旅館 Check in', 'stay', '入住那霸住宿', { mapQuery: '' }),
-        item('d1-7', '國際通 逛街', 'shopping', '第一晚散步、逛唐吉訶德、買伴手禮', { mapQuery: '国際通り 那覇' }),
+        item('d1-6', '旅館 Check in', 'stay', '入住那霸歌町大和 Roynet 飯店 PREMIER', { stayId: 'stay-naha-1' }),
+        item('d1-7', '國際通 逛街', 'shopping', '第一晚散步、逛唐吉訶德、買伴手禮', { mapQuery: '国際通り 那覇', placeId: 'ChIJMS9BUXdp5TQRAl6RXvY5aY0' }),
         item('d1-8', '晚餐：Shima Shabushabu Nakama 島', 'food', '涮涮鍋晚餐', { restaurantId: 'r-nakama' })
       ]
     },
@@ -66,8 +72,8 @@ window.TRIP = (function () {
       accommodationId: 'stay-naha-1',
       itinerary: [
         item('d2-1', '午餐：系滿魚市場', 'food', '海鮮午餐', { restaurantId: 'r-itoman', driveTime: '約 15 分' }),
-        item('d2-2', '瀨長島', 'sight', '海邊白色小鎮，看飛機起降', { mapQuery: '瀬長島ウミカジテラス', driveTime: '約 30 分' }),
-        item('d2-3', '玉泉洞', 'sight', '沖繩世界・鐘乳石洞', { mapQuery: '玉泉洞 おきなわワールド' }),
+        item('d2-2', '瀨長島', 'sight', '海邊白色小鎮，看飛機起降', { mapQuery: '瀬長島ウミカジテラス', parkingPlaceId: 'ChIJ-TqfJ8Rp5TQRgox-4OQ8hwA', parkingName: '瀬長島 サンセットパーキング', parking: '瀨長島展望台附近停車（免費，車位不多）', driveTime: '約 30 分' }),
+        item('d2-3', '玉泉洞', 'sight', '沖繩世界・鐘乳石洞', { mapQuery: '玉泉洞 おきなわワールド', placeId: 'ChIJa3ifUYVp5TQR3QZD1tyLml4' }),
         item('d2-4', '晚餐：Buchi 燒肉', 'food', '燒肉晚餐（需訂位）', { restaurantId: 'r-buchi' })
       ]
     },
@@ -78,9 +84,9 @@ window.TRIP = (function () {
       accommodationId: 'stay-onna',
       itinerary: [
         item('d3-1', '旅館 Check out', 'stay', '那霸住宿退房', { navigable: false }),
-        item('d3-2', '美國村', 'sight', '北谷海邊街區散步', { mapQuery: '美浜アメリカンビレッジ' }),
+        item('d3-2', '美國村', 'sight', '北谷海邊街區散步', { mapQuery: '美浜アメリカンビレッジ', placeId: 'ChIJzZoVCAUT5TQRzIueHYt83hs' }),
         item('d3-3', '午餐', 'food', '餐廳待決定', { navigable: false }),
-        item('d3-4', '旅館 Check in', 'stay', '入住恩納村住宿', { mapQuery: '' })
+        item('d3-4', '旅館 Check in', 'stay', '入住 BLISSTIA SUITES & RESORT', { stayId: 'stay-onna' })
       ]
     },
     {
@@ -99,9 +105,9 @@ window.TRIP = (function () {
       accommodationId: 'stay-north',
       itinerary: [
         item('d5-1', '旅館 Check out', 'stay', '恩納村住宿退房', { navigable: false }),
-        item('d5-2', '許田休息站', 'shopping', '道之驛，沿途小歇', { mapQuery: '道の駅 許田', driveTime: '約 50 分' }),
-        item('d5-3', '美麗海水族館', 'sight', '黑潮之海與鯨鯊', { mapQuery: '沖縄美ら海水族館' }),
-        item('d5-4', '旅館 Check in', 'stay', '入住北部住宿', { mapQuery: '' })
+        item('d5-2', '許田休息站', 'shopping', '道之驛，沿途小歇', { mapQuery: '道の駅 許田', placeId: 'ChIJFfz3q_H_5DQRttsFg7-7wLE', driveTime: '約 50 分' }),
+        item('d5-3', '美麗海水族館', 'sight', '黑潮之海與鯨鯊', { mapQuery: '沖縄美ら海水族館', placeId: 'ChIJPZ5hUjH65DQR_p_dD3CmCOo' }),
+        item('d5-4', '旅館 Check in', 'stay', '入住 Yukurina Resort Lemon House', { stayId: 'stay-north' })
       ]
     },
     {
@@ -110,11 +116,11 @@ window.TRIP = (function () {
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-north',
       itinerary: [
-        item('d6-1', '古宇利大橋', 'sight', '開車跨海兜風', { mapQuery: '古宇利大橋' }),
+        item('d6-1', '古宇利大橋', 'sight', '開車跨海兜風', { mapQuery: '古宇利大橋', placeId: 'ChIJyy0FRAhZ5DQRIfztLp8vdWc' }),
         item('d6-2', '土產休息站', 'shopping', '買伴手禮', { mapQuery: '' }),
         item('d6-3', '洞窟沙灘', 'sight', '海邊洞窟拍照', { mapQuery: '' }),
         item('d6-4', '午餐：沖繩蝦蝦飯', 'food', '古宇利島蝦蝦飯', { restaurantId: 'r-shrimp', driveTime: '約 10 分' }),
-        item('d6-5', '心型岩 & 渡海沙灘', 'sight', '看心型岩、渡海沙灘', { mapQuery: 'ティーヌ浜 古宇利島' })
+        item('d6-5', '心型岩 & 渡海沙灘', 'sight', '看心型岩、渡海沙灘', { mapQuery: 'ハートロック 古宇利島', placeId: 'ChIJf3Y9SjJY5DQRIZUnKV_U1Hg' })
       ]
     },
     {
@@ -125,8 +131,8 @@ window.TRIP = (function () {
       itinerary: [
         item('d7-1', '早午餐：兔船咖啡廳', 'food', '早午餐', { restaurantId: 'r-usagi' }),
         item('d7-2', '旅館 Check out', 'stay', '北部住宿退房', { navigable: false }),
-        item('d7-3', '逛街：PARCO CITY', 'shopping', '浦添的購物中心', { mapQuery: 'サンエー浦添西海岸 PARCO CITY' }),
-        item('d7-4', '旅館 Check in', 'stay', '入住那霸住宿', { mapQuery: '' }),
+        item('d7-3', '逛街：PARCO CITY', 'shopping', '浦添的購物中心', { mapQuery: 'サンエー浦添西海岸 PARCO CITY', placeId: 'ChIJxZQf9gpr5TQRwLWyT5Osigc' }),
+        item('d7-4', '旅館 Check in', 'stay', '入住 THE NEST 那霸', { stayId: 'stay-naha-2' }),
         item('d7-5', '晚餐：一心壽喜燒', 'food', '壽喜燒晚餐（需訂位）', { restaurantId: 'r-isshin' })
       ]
     },
@@ -137,8 +143,8 @@ window.TRIP = (function () {
       accommodationId: 'stay-naha-2',
       itinerary: [
         item('d8-1', '午餐：Paca Café', 'food', '午餐', { restaurantId: 'r-paca' }),
-        item('d8-2', '豐崎百貨', 'shopping', 'iias 沖繩豐崎', { mapQuery: 'iias沖縄豊崎', driveTime: '約 10 分' }),
-        item('d8-3', 'Ashibinaa Outlet', 'shopping', '沖繩 Outlet 購物', { mapQuery: '沖縄アウトレットモール あしびなー' })
+        item('d8-2', '豐崎百貨', 'shopping', 'iias 沖繩豐崎', { mapQuery: 'iias沖縄豊崎', placeId: 'ChIJj-bxt39p5TQRVVi5ETcWlRM', driveTime: '約 10 分' }),
+        item('d8-3', 'Ashibinaa Outlet', 'shopping', '沖繩 Outlet 購物', { mapQuery: '沖縄アウトレットモール あしびなー', placeId: 'ChIJ98yehgto5TQRJj4hYbNQH9U' })
       ]
     },
     {
@@ -149,16 +155,16 @@ window.TRIP = (function () {
       itinerary: [
         item('d9-1', '早午餐', 'food', '餐廳待決定', { navigable: false }),
         item('d9-2', '還車', 'transport', '加滿油、檢查個人物品', { mapQuery: '' , notes: '還車檢查清單在「交通 › 租車」' }),
-        item('d9-3', '出發去機場', 'transport', '那霸機場', { mapQuery: '那覇空港' })
+        item('d9-3', '出發去機場', 'transport', '那霸機場', { mapQuery: '那覇空港', placeId: 'ChIJjSyLjsRp5TQRkP5WN6rOTFA' })
       ]
     }
   ];
 
   var accommodations = [
-    { id: 'stay-naha-1', name: '', area: '那霸', checkIn: '', checkOut: '', address: '', addressEn: '', parking: '', notes: '', phone: '', website: '', photo: '', mapQuery: '' },
-    { id: 'stay-onna', name: '', area: '恩納村', checkIn: '', checkOut: '', address: '', addressEn: '', parking: '', notes: '', phone: '', website: '', photo: '', mapQuery: '' },
-    { id: 'stay-north', name: '', area: '北部', checkIn: '', checkOut: '', address: '', addressEn: '', parking: '', notes: '', phone: '', website: '', photo: '', mapQuery: '' },
-    { id: 'stay-naha-2', name: '', area: '那霸', checkIn: '', checkOut: '', address: '', addressEn: '', parking: '', notes: '', phone: '', website: '', photo: '', mapQuery: '' }
+    { id: 'stay-naha-1', name: '那霸歌町大和 Roynet 飯店 PREMIER', area: '那霸', checkIn: '', checkOut: '', address: '', addressEn: '4-2-14 Omoromachi, Naha, Okinawa 900-0006', parking: '', notes: '', phone: '', website: '', photo: '', mapQuery: '', placeId: 'ChIJ__Ak3T5r5TQR5GJXTBtBiNE' },
+    { id: 'stay-onna', name: 'BLISSTIA SUITES & RESORT 沖繩恩納村', area: '恩納村', checkIn: '', checkOut: '', address: '', addressEn: '497-6 Maeganeku, Onna, Kunigami District, Okinawa 904-0414', parking: '', notes: '', phone: '', website: '', photo: '', mapQuery: '', placeId: 'ChIJFepf2EIb5TQR6qfIYlX5wKw' },
+    { id: 'stay-north', name: 'Yukurina Resort Okinawa Lemon House', area: '北部（本部町）', checkIn: '', checkOut: '', address: '', addressEn: '75-5 Yamakawa, Motobu, Kunigami District, Okinawa 905-0205', parking: '', notes: '', phone: '', website: '', photo: '', mapQuery: '', placeId: 'ChIJvaDVIdL75DQRBUVjMK-K_0s' },
+    { id: 'stay-naha-2', name: 'THE NEST 那霸', area: '那霸', checkIn: '', checkOut: '', address: '', addressEn: '1-6-1 Nishi, Naha, Okinawa 900-0036', parking: '', notes: '', phone: '', website: '', photo: '', mapQuery: '', placeId: 'ChIJQ_4MyIpp5TQRhiteieLyayA' }
   ];
 
   // status：reserved 已預約 | planned 已安排 | mustEat 必吃 | wishlist 想去 | visited 已造訪
@@ -168,24 +174,25 @@ window.TRIP = (function () {
       id: id, name: name, nameJa: '', type: '', area: '', price: '', recommend: '',
       status: 'wishlist', needReservation: false, hours: '', day: null, group: 'meal',
       description: '', address: '', phone: '', menu: '', reservationInfo: '', parking: '',
-      notes: '', website: '', photo: '', mapQuery: '', addedBy: ''
+      notes: '', website: '', photo: '', mapQuery: '', addedBy: '',
+      mapUrl: '', placeId: '', parkingPlaceId: '', parkingName: ''
     }, opts || {});
   }
 
   var restaurants = [
-    rest('r-nakama', 'Shima Shabushabu Nakama 島', { type: '涮涮鍋', area: '國際通', status: 'planned', day: 1 }),
-    rest('r-itoman', '系滿魚市場', { nameJa: '糸満漁業協同組合 お魚センター', type: '海鮮', area: '系滿', status: 'planned', day: 2, mapQuery: '糸満漁業協同組合 お魚センター' }),
-    rest('r-buchi', 'Buchi 燒肉', { type: '燒肉', area: '那霸', status: 'planned', needReservation: true, day: 2 }),
-    rest('r-shrimp', '沖繩蝦蝦飯', { type: '蝦飯', area: '古宇利島', status: 'planned', day: 6 }),
-    rest('r-usagi', '兔船咖啡廳', { type: '早午餐', area: '', status: 'planned', day: 7, group: 'cafe' }),
-    rest('r-isshin', '一心壽喜燒', { type: '壽喜燒', area: '那霸', status: 'planned', needReservation: true, day: 7 }),
+    rest('r-nakama', 'Shima Shabushabu Nakama 島', { type: '涮涮鍋', area: '國際通', status: 'planned', day: 1, mapQuery: 'Shima Shabu-Shabu NAKAMA', placeId: 'ChIJe1CMMnZp5TQRAdq6Ro0rUwI' }),
+    rest('r-itoman', '系滿魚市場', { nameJa: '糸満漁業協同組合 お魚センター', type: '海鮮', area: '系滿', status: 'planned', day: 2, mapQuery: '糸満漁業協同組合 お魚センター', placeId: 'ChIJnfH0IcJn5TQRFTMsWWcjFlg', parkingPlaceId: 'ChIJieT1IMJn5TQRwD1JYCP82ek', parkingName: '糸満魚市場 駐車場', parking: '魚市場旁免費停車場' }),
+    rest('r-buchi', 'Buchi 燒肉', { nameJa: 'ぶち 久茂地店', type: '燒肉', area: '那霸 久茂地', status: 'planned', needReservation: true, day: 2, mapQuery: 'Buchi Kumojiten', placeId: 'ChIJzcnA2ndp5TQRRkXi5c02uKk', notes: '⚠️ Google Maps 顯示「週三公休」，3/3 剛好是星期三，訂位前請再確認' }),
+    rest('r-shrimp', '沖繩蝦蝦飯', { type: '蝦飯', area: '古宇利島', status: 'planned', day: 6, mapQuery: 'KOURI SHRIMP', placeId: 'ChIJcep34MxZ5DQR5VjNV0a8HWg' }),
+    rest('r-usagi', '兔船咖啡廳', { nameJa: '天の船', type: '早午餐', area: '本部町', status: 'planned', day: 7, group: 'cafe', mapQuery: '天の船 本部', placeId: 'ChIJFST7ErT55DQR__lPMDSAoGE', notes: '⚠️ Google Maps 顯示「週一、週五公休」，3/8 是星期一，請再確認；店家建議先預約' }),
+    rest('r-isshin', '一心壽喜燒', { type: '壽喜燒', area: '那霸 久茂地', status: 'planned', needReservation: true, day: 7, mapQuery: 'Oniku no Isshin', placeId: 'ChIJLcZbI5xp5TQRtD4FrGpXwws' }),
     rest('r-paca', 'Paca Café', { type: '咖啡廳', area: '', status: 'planned', day: 8, group: 'cafe' }),
-    rest('r-zhyvago', 'Zhyvago Coffee Roastery', { type: '咖啡', area: '美國村', group: 'cafe', addedBy: '心萱' }),
+    rest('r-zhyvago', 'Zhyvago Coffee Roastery', { type: '咖啡', area: '美國村', group: 'cafe', addedBy: '心萱', mapQuery: 'ZHYVAGO COFFEE ROASTERY', placeId: 'ChIJh4EKsv4T5TQRU-h2svXc5tk' }),
     rest('r-applepie', '蘋果派', { type: '甜點', area: '機場', group: 'cafe', addedBy: '心萱' }),
-    rest('r-aw', 'A&W 漢堡', { type: '漢堡', area: '機場', addedBy: '心萱' }),
-    rest('r-hama', 'Hama 壽司', { type: '壽司', area: '', addedBy: '心萱' }),
+    rest('r-aw', 'A&W 漢堡', { type: '漢堡', area: '浦添 牧港', addedBy: '心萱', mapQuery: 'A&W 牧港店', placeId: 'ChIJk5jkbZxs5TQR9YajcZ3aWXw' }),
+    rest('r-hama', 'Hama 壽司', { type: '壽司', area: '那霸 古島', addedBy: '心萱', mapQuery: 'はま寿司 那覇古島店', placeId: 'ChIJ0bDIk-hr5TQRtvrRQOAyur0' }),
     rest('r-kokuto', '黑糖飲料店', { type: '飲料', area: '沖繩北部', group: 'cafe', addedBy: '心萱' }),
-    rest('r-pork', 'Pork Tamago 飯糰', { type: '飯糰', area: '那霸', addedBy: '心萱' })
+    rest('r-pork', 'Pork Tamago 飯糰', { type: '飯糰', area: '那霸 牧志', addedBy: '心萱', mapQuery: 'ポークたまごおにぎり 牧志市場本店', placeId: 'ChIJRX9edXpp5TQRRGYawVc2Jmk' })
   ];
 
   // 航班：bookingRef、ticketUrl 屬於私人資訊，請在網站內填寫

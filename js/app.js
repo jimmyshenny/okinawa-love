@@ -85,15 +85,35 @@ window.App = (function () {
     return { item: null, index: -1, label: '今日行程完成', late: false };
   }
 
-  function placeQuery(it) {
-    if (it.mapQuery) return it.mapQuery;
-    if (it.restaurantId) { var r = restaurant(it.restaurantId); if (r) return r.mapQuery || r.nameJa || r.name; }
-    return '';
+  // 一個地點的資訊：行程項目會沿用對應的餐廳（restaurantId）或住宿（stayId）
+  function placeOf(x) {
+    if (!x) return { q: '', id: '', mapUrl: '', parkingId: '', parkingName: '' };
+    var isItem = 'category' in x, src = x;
+    if (!x.placeId && !x.mapQuery) {
+      if (x.restaurantId) src = restaurant(x.restaurantId) || x;
+      else if (x.stayId) src = accommodation(x.stayId) || x;
+    }
+    var q = src.mapQuery || src.address || src.nameJa || (isItem && src === x ? '' : src.name) || '';
+    return { q: q, id: src.placeId || '', mapUrl: src.mapUrl || '',
+      parkingId: x.parkingPlaceId || src.parkingPlaceId || '', parkingName: x.parkingName || src.parkingName || '' };
   }
-  function navUrl(it) {
-    if (it.navigationUrl) return it.navigationUrl;
-    if (it.latitude && it.longitude) return U.dirUrl(it.latitude + ',' + it.longitude);
-    var q = placeQuery(it); return q ? U.dirUrl(q) : '';
+  function placeQuery(it) { return placeOf(it).q; }
+  // 地圖：直接打開 Google Maps 的地點頁（店家資訊、照片、評論）
+  function mapUrl(x) {
+    var p = placeOf(x);
+    if (p.mapUrl) return p.mapUrl;
+    return p.q ? U.mapsUrl(p.q, p.id) : '';
+  }
+  // 導航：有指定停車場就導到停車場
+  function routePoint(x) {
+    var p = placeOf(x);
+    if (p.parkingId) return { q: p.parkingName || p.q, id: p.parkingId };
+    if (x.latitude && x.longitude) return { q: x.latitude + ',' + x.longitude, id: '' };
+    return p.q ? { q: p.q, id: p.id } : null;
+  }
+  function navUrl(x) {
+    if (x.navigationUrl) return x.navigationUrl;
+    var r = routePoint(x); return r ? U.dirUrl(r.q, r.id) : '';
   }
 
   /* ---------- 住宿 ---------- */
@@ -211,7 +231,7 @@ window.App = (function () {
   return {
     register: register, start: start, rerender: rerender, go: go,
     selectedDay: selectedDay, selectDay: selectDay, isToday: isToday, tripStatus: tripStatus, dayIndexByDate: dayIndexByDate,
-    isDone: isDone, toggleDone: toggleDone, dayProgress: dayProgress, nextStop: nextStop, navUrl: navUrl, placeQuery: placeQuery,
+    isDone: isDone, toggleDone: toggleDone, dayProgress: dayProgress, nextStop: nextStop, navUrl: navUrl, placeQuery: placeQuery, placeOf: placeOf, mapUrl: mapUrl, routePoint: routePoint,
     accommodation: accommodation,
     restaurants: restaurants, restaurant: restaurant, saveRestaurant: saveRestaurant, deleteRestaurant: deleteRestaurant, isFav: isFav, toggleFav: toggleFav,
     priv: priv, weather: weather, saveWeather: saveWeather, fetchWeather: fetchWeather, weatherIcon: weatherIcon,

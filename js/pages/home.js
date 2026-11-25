@@ -83,7 +83,13 @@
     if (has(it.notes)) rows.push(['注意事項', esc(it.notes)]);
     return '<dl class="kv">' + rows.map(function (x) { return '<dt>' + x[0] + '</dt><dd>' + x[1] + '</dd>'; }).join('') + '</dl>' +
       (it.photos && it.photos.length ? '<div class="tl-photos">' + it.photos.map(function (p) { return '<img src="' + esc(p) + '" alt="' + esc(it.name) + '" loading="lazy">'; }).join('') + '</div>' : '') +
-      (r ? '<a class="btn btn-sm btn-outline" style="margin-top:10px" href="#/food/r/' + encodeURIComponent(r.id) + '">' + ic('food', 15) + '查看餐廳資訊・菜單</a>' : '');
+      (function () {
+        var m = it.navigable ? App.mapUrl(it) : '';
+        if (!m && !r) return '';
+        return '<div class="btn-row" style="margin-top:10px">' +
+          (m ? '<a class="btn btn-sm btn-outline" href="' + esc(m) + '" target="_blank" rel="noopener">' + ic('map', 15) + 'Google Maps 地點</a>' : '') +
+          (r ? '<a class="btn btn-sm btn-outline" href="#/food/r/' + encodeURIComponent(r.id) + '">' + ic('food', 15) + '餐廳資訊・菜單</a>' : '') + '</div>';
+      })();
   }
 
   function timeline(day) {
@@ -126,7 +132,7 @@
     var cont = prev === a.id, night = 1;
     for (var j = idx - 1; j >= 0 && T.days[j].accommodationId === a.id; j--) night++;
     var name = has(a.name) ? esc(a.name) : esc(a.area) + '住宿 <span class="tbd small">（名稱待補）</span>';
-    var navU = a.mapQuery || a.address || a.name ? U.dirUrl(a.mapQuery || a.address || a.name) : '';
+    var navU = App.navUrl(a), mapU = App.mapUrl(a);
     var booking = App.priv('stay:' + a.id);
     return '<article class="card">' +
       '<div class="stay-photo">' + (has(a.photo) ? '<img src="' + esc(a.photo) + '" alt="' + esc(a.name) + '" loading="lazy">' : '住宿照片') +
@@ -143,6 +149,7 @@
           (has(a.notes) ? '<dt>注意事項</dt><dd>' + esc(a.notes) + '</dd>' : '') + '</dl>') +
         '<div class="btn-row">' +
           (navU ? '<a class="btn btn-primary" href="' + esc(navU) + '" target="_blank" rel="noopener">' + ic('nav', 16) + '導航</a>' : '<span class="btn disabled">' + ic('nav', 16) + '導航</span>') +
+          (mapU ? '<a class="btn" href="' + esc(mapU) + '" target="_blank" rel="noopener">' + ic('map', 16) + '地圖</a>' : '') +
           (has(a.phone) ? '<a class="btn" href="tel:' + esc(a.phone) + '">' + ic('phone', 16) + '電話</a>' : '<span class="btn disabled">' + ic('phone', 16) + '電話</span>') +
           (has(a.website) ? '<a class="btn" href="' + esc(a.website) + '" target="_blank" rel="noopener">' + ic('globe', 16) + '網站</a>' : '<span class="btn disabled">' + ic('globe', 16) + '網站</span>') +
         '</div>' +
