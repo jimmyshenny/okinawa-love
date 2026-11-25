@@ -55,7 +55,7 @@ window.TRIP = (function () {
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-naha-1',
       itinerary: [
-        item('d1-1', '出發去機場', 'transport', '從家裡出發，提早抵達桃園機場，車停第二航廈 P4', { mapQuery: '桃園國際機場 第二航廈 P4停車場', placeId: 'ChIJoXBSF7afQjQRPg2UN7vaX3c', addressEn: 'No. 9, Hangzhan S Rd, Dayuan District, Taoyuan City 337', hours: '24 小時', parkingFee: '每次前 30 分鐘免費（每天 3 次）；之後第 1 小時 NT$30、每半小時 +NT$20，每日上限 NT$490；網路預約約 NT$300／天', notes: '⚠️ 星宇 JX870 是從「第一航廈」出發，P4 是第二航廈的停車場，停好要再走到 T1（或改停 T1 停車場）；建議 9:40 前到機場。車位不大、指標少，記得拍下停車樓層與區域', parking: '第二航廈 P4 停車場（地下 1、2 樓）' }),
+        item('d1-1', '出發去機場', 'transport', '從家裡出發，車停第一航廈 P1 停車場', { mapQuery: '桃園國際機場 第一航廈 P1停車場', placeId: 'ChIJRe0zvkafQjQR1FqaR2m0fA8', parking: '第一航廈 P1 停車場（平面，約 912 位，靠台四線端）', addressEn: 'Terminal 1, Hangzhan S Rd, Dayuan District, Taoyuan City 337', hours: '24 小時', parkingFee: '第 1 小時 NT$30，之後每半小時 +NT$20，每日上限 NT$490（停 9 天約 NT$4,400）', notes: '星宇 JX870 11:40 從第一航廈起飛，建議 9:40 前到機場。P1 不能預約，看現場車位；滿了可改停第一航廈 P2。記得拍下停車區域，回國在停車場自動繳費機付款再出場' }),
         item('d1-2', '機場 Check in', 'transport', '辦理報到、托運行李', { navigable: false }),
         item('d1-3', '上飛機', 'transport', '星宇 JX870 桃園 T1 → 那霸，14:15 抵達（當地時間）', { time: '11:40', navigable: false }),
         item('d1-4', '抵達沖繩', 'transport', '那霸機場國際線入境', { time: '14:15',  mapQuery: '那覇空港', placeId: 'ChIJjSyLjsRp5TQRkP5WN6rOTFA', addressEn: '150 Kagamizu, Naha, Okinawa 901-0142', notes: '租車公司多在機場外，入境後到租車櫃台／接駁巴士站搭車去取車；入境大廳就有 Pork Tamago 飯糰' }),
