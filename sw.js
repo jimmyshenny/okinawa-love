@@ -1,6 +1,6 @@
 /* 離線支援：打開過一次網站後，沒網路也能看行程。
    修改網站檔案後，把 VERSION 數字加 1，手機才會拿到新版。 */
-var VERSION = 'okinawa-love-v11';
+var VERSION = 'okinawa-love-v12';
 var SHELL = [
   './', 'index.html', 'css/style.css', 'manifest.webmanifest',
   'js/data.js', 'js/store.js', 'js/ui.js', 'js/app.js',
@@ -9,7 +9,7 @@ var SHELL = [
 ];
 
 self.addEventListener('install', function (e) {
-  e.waitUntil(caches.open(VERSION).then(function (c) { return c.addAll(SHELL); }).then(function () { return self.skipWaiting(); }));
+  e.waitUntil(caches.open(VERSION).then(function (c) { return c.addAll(SHELL.map(function (u) { return new Request(u, { cache: 'reload' }); })); }).then(function () { return self.skipWaiting(); }));
 });
 
 self.addEventListener('activate', function (e) {
@@ -27,7 +27,8 @@ self.addEventListener('fetch', function (e) {
   if (url.origin === location.origin) {
     e.respondWith(caches.open(VERSION).then(function (cache) {
       var fromCache = function () { return cache.match(req).then(function (hit) { return hit || cache.match('index.html'); }); };
-      var net = fetch(req).then(function (res) {
+      // no-cache：每次都跟 GitHub 確認有沒有新版，不用等瀏覽器自己的 10 分鐘快取
+      var net = fetch(req.url, { cache: 'no-cache', credentials: 'same-origin' }).then(function (res) {
         if (res && res.ok) cache.put(req, res.clone());
         return res;
       });
