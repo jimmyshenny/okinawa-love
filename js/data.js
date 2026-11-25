@@ -157,7 +157,7 @@ window.TRIP = (function () {
       itinerary: [
         item('d9-1', '早午餐', 'food', '餐廳待決定', { navigable: false }),
         item('d9-2', '還車', 'transport', '加滿油、檢查個人物品', { mapQuery: '' , notes: '還車檢查清單在「交通 › 租車」', driveTime: '接駁車約 10 分' }),
-        item('d9-3', '出發去機場', 'transport', '星宇 JX871 15:25 起飛，16:10 抵達桃園 T1', { time: '13:00',  mapQuery: '那覇空港', placeId: 'ChIJjSyLjsRp5TQRkP5WN6rOTFA', addressEn: '150 Kagamizu, Naha, Okinawa 901-0142', notes: '國際線櫃台沒有自助托運機、可能排很久，建議 13:00 前到機場。到了先辦退稅，再報到托運' }),
+        item('d9-3', '那霸空港', 'transport', '13:00 抵達機場；星宇 JX871 15:25 起飛，16:10 抵達桃園 T1', { time: '13:00',  mapQuery: '那覇空港', placeId: 'ChIJjSyLjsRp5TQRkP5WN6rOTFA', addressEn: '150 Kagamizu, Naha, Okinawa 901-0142', notes: '國際線櫃台沒有自助托運機、可能排很久，建議 13:00 前到機場。到了先辦退稅，再報到托運' }),
         item('d9-4', '退稅（海關確認）', 'transport', '托運行李前，先到海關 KIOSK 確認退稅商品', { navigable: false, reservation: '', notes: '到機場第一件事：帶著所有退稅商品和護照，到國際線出發大廳的海關 KIOSK 刷護照（或連上機場退稅專用 Wi-Fi，用 Visit Japan Web 線上辦）。顯示要檢查的話，把商品拿給海關看。確認完才能托運，托運後就不能補辦。同一張收據的商品要全部帶著，少一件整張不能退。退款依購物店家的方式（信用卡等）；出境後 2F 有「Self Tax Refund」機器可領現金（看店家是否使用這個服務），領現金可能另收手續費' }),
         item('d9-5', '線上報到', 'transport', '星宇官網線上報到、取得登機證', { navigable: false, link: 'https://www.starlux-airlines.com/zh-TW/check-in-fly/check-in-now/online-check-in', linkLabel: '星宇線上報到', notes: '起飛前 48–1 小時開放（3/8 15:25 起就能辦），可以前一天先在飯店辦好。有托運行李的話，要在起飛 1 小時前（14:25 前）完成托運。登機門和登機時間可能更改，到機場再確認一次' }),
         item('d9-6', '機場 Check in', 'transport', '櫃台托運行李、安檢、出境', { navigable: false, baggageTips: 'return', notes: '托運前確認退稅已辦完；行李額度：托運 23kg × 1、手提 7kg（手提＋個人物品合計），伴手禮買多了要注意重量' }),
