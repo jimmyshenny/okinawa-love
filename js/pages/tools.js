@@ -1,4 +1,4 @@
-/* Tools：匯率換算在最上面，下面是其他工具方格 */
+/* Tools：工具方格在最上面，下面是匯率換算 */
 (function () {
   'use strict';
   var T = TRIP, U = UI, S = Store, ic = U.icon, esc = U.esc, v = U.v, has = U.has;
@@ -359,10 +359,10 @@
           '<div><span class="deco">' + esc(t[2]) + '</span><h1>' + esc(t[1]) + '</h1></div></header><div class="section">' + VIEWS[t[0]]() + '</div>';
       }
       return '<header class="page-head"><div><span class="deco">Travel Kit</span><h1>旅行工具箱</h1></div></header>' +
-        '<div class="section">' + fxHtml() + '</div>' +
         '<div class="section"><h2 style="font-size:17px;margin-bottom:10px">更多工具</h2><div class="tool-grid">' + TOOLS.map(function (x) {
           return '<a class="tool-card" href="#/tools/' + x[0] + '" style="text-decoration:none"><span class="ic" style="background:' + x[4] + '">' + ic(x[3], 20) + '</span><b>' + esc(x[1]) + '</b><span>' + esc(x[2]) + '</span></a>';
-        }).join('') + '</div></div>';
+        }).join('') + '</div></div>' +
+        '<div class="section">' + fxHtml() + '</div>';
     },
     bind: function (root) {
       bindFx(root);
