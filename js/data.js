@@ -55,7 +55,7 @@ window.TRIP = (function () {
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-naha-1',
       itinerary: [
-        item('d1-1', '出發去機場', 'transport', '從家裡出發，車停第一航廈 P1 停車場', { mapQuery: '桃園國際機場 第一航廈 P1停車場', placeId: 'ChIJRe0zvkafQjQR1FqaR2m0fA8', parking: '第一航廈 P1 停車場（平面，約 912 位，靠台四線端）', addressEn: 'Terminal 1, Hangzhan S Rd, Dayuan District, Taoyuan City 337', hours: '24 小時', parkingFee: '第 1 小時 NT$30，之後每半小時 +NT$20，每日上限 NT$490（停 9 天約 NT$4,400）', notes: '星宇 JX870 11:40 從第一航廈起飛，建議 9:40 前到機場。P1 不能預約，看現場車位；滿了可改停第一航廈 P2。記得拍下停車區域，回國在停車場自動繳費機付款再出場' }),
+        item('d1-1', '桃園國際機場 第一航廈', 'transport', '9:30 抵達機場，車停第一航廈 P1 停車場', { time: '09:30', mapQuery: '桃園國際機場 第一航廈 P1停車場', placeId: 'ChIJRe0zvkafQjQR1FqaR2m0fA8', parking: '第一航廈 P1 停車場（平面，約 912 位，靠台四線端）', addressEn: 'Terminal 1, Hangzhan S Rd, Dayuan District, Taoyuan City 337', hours: '24 小時', parkingFee: '第 1 小時 NT$30，之後每半小時 +NT$20，每日上限 NT$490（停 9 天約 NT$4,400）', notes: '星宇 JX870 11:40 從第一航廈起飛，9:30 到機場。P1 不能預約，看現場車位；滿了可改停第一航廈 P2。記得拍下停車區域，回國在停車場自動繳費機付款再出場' }),
         item('d1-1b', '線上報到', 'transport', '星宇官網線上報到、取得登機證', { navigable: false, link: 'https://www.starlux-airlines.com/zh-TW/check-in-fly/check-in-now/online-check-in', linkLabel: '星宇線上報到', notes: '起飛前 48–1 小時開放（2/28 11:40 起就能辦），建議出門前先辦好，省去櫃台排隊。有托運行李的話，要在起飛 1 小時前（10:40 前）完成托運。登機門和登機時間可能更改，到機場再確認一次' }),
         item('d1-2', '機場 Check in', 'transport', '辦理報到、托運行李', { navigable: false, baggageTips: 'outbound', notes: '出發前兩人都要先填好 Visit Japan Web，把入境 QR Code 截圖存在手機裡（詳見「工具 › 入境・退稅」）' }),
         item('d1-3', '上飛機', 'transport', '星宇 JX870 桃園 T1 → 那霸，14:15 抵達（當地時間）', { time: '11:40', navigable: false, notes: '登機時間以登機證上印的為準。一般起飛前 30–40 分鐘開始登機、約 15–20 分鐘前關閉登機門，建議 11:00 前到登機門。機上全程不能用行動電源，手機先充飽' }),
@@ -202,7 +202,7 @@ window.TRIP = (function () {
 
   // 航班：bookingRef、ticketUrl 屬於私人資訊，請在網站內填寫
   var flights = {
-    outbound: { airline: '星宇航空 STARLUX', flightNo: 'JX870', aircraft: 'A350-900', duration: '1 小時 35 分', date: '2027-03-02', depTime: '11:40', arrTime: '14:15', from: 'TPE', fromName: '桃園國際機場', fromTerminal: '第一航廈', to: 'OKA', toName: '那霸機場', toTerminal: '國際線航廈', cabin: '經濟艙', baggage: '托運 23kg × 1', baggageNote: '每人：托運 1 件 23kg（長＋寬＋高 158cm 內）；手提行李 1 件（56×36×23cm）＋個人物品 1 件（30×40×10cm，放前方座位下），兩件合計 7kg', checkinNote: '時間都是當地時間（沖繩比台灣快 1 小時）。建議 9:40 前到桃園機場第一航廈辦理報到' },
+    outbound: { airline: '星宇航空 STARLUX', flightNo: 'JX870', aircraft: 'A350-900', duration: '1 小時 35 分', date: '2027-03-02', depTime: '11:40', arrTime: '14:15', from: 'TPE', fromName: '桃園國際機場', fromTerminal: '第一航廈', to: 'OKA', toName: '那霸機場', toTerminal: '國際線航廈', cabin: '經濟艙', baggage: '托運 23kg × 1', baggageNote: '每人：托運 1 件 23kg（長＋寬＋高 158cm 內）；手提行李 1 件（56×36×23cm）＋個人物品 1 件（30×40×10cm，放前方座位下），兩件合計 7kg', checkinNote: '時間都是當地時間（沖繩比台灣快 1 小時）。建議 9:30 到桃園機場第一航廈辦理報到' },
     'return': { airline: '星宇航空 STARLUX', flightNo: 'JX871', aircraft: 'A330-900neo', duration: '1 小時 45 分', date: '2027-03-10', depTime: '15:25', arrTime: '16:10', from: 'OKA', fromName: '那霸機場', fromTerminal: '國際線航廈', to: 'TPE', toName: '桃園國際機場', toTerminal: '第一航廈', cabin: '經濟艙', baggage: '托運 23kg × 1', baggageNote: '每人：托運 1 件 23kg（長＋寬＋高 158cm 內）；手提行李 1 件（56×36×23cm）＋個人物品 1 件（30×40×10cm，放前方座位下），兩件合計 7kg', checkinNote: '那霸國際線托運沒有自助機、排隊可能很久，建議 12:30 前還車、13:00 前到機場' }
   };
 
