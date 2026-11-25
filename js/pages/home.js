@@ -71,26 +71,33 @@
   }
 
   function detailRows(it) {
-    var r = it.restaurantId ? App.restaurant(it.restaurantId) : (it.stayId ? App.accommodation(it.stayId) : null);
+    var isFood = !!it.restaurantId;
+    var r = isFood ? App.restaurant(it.restaurantId) : (it.stayId ? App.accommodation(it.stayId) : null);
+    var R = r || {};
+    function pick(a, b) { return has(a) ? a : (has(b) ? b : ''); }
+    var addr = [pick(it.address, R.address), it.addressEn].filter(has);
+    var park = pick(it.parking, R.parking);
     var rows = [
-      ['地址', has(it.address) || has(it.addressEn) ? [has(it.address) ? esc(it.address) : '', has(it.addressEn) ? '<span class="muted">' + esc(it.addressEn) + '</span>' : ''].filter(Boolean).join('<br>') : (r && has(r.address) ? esc(r.address) : v('')) ],
-      ['營業時間', v(it.hours || (r && r.hours))],
-      ['門票', v(it.ticket)],
-      ['停車', has(it.parking) ? esc(it.parking) + (has(it.parkingFee) ? '（' + esc(it.parkingFee) + '）' : '') : v(r && r.parking)],
-      ['預約', v(it.reservation || (r && r.reservationInfo))],
-      ['建議停留', v(it.duration)]
-    ];
-    var notes = [it.notes, r && r.notes].filter(has);
+      ['地址', addr.length ? addr.map(function (x, i) { return i ? '<span class="muted">' + esc(x) + '</span>' : esc(x); }).join('<br>') : ''],
+      ['Check-in', it.stayId ? pick(R.checkIn && R.checkOut ? R.checkIn + '（退房 ' + R.checkOut + '）' : '', '') : ''],
+      ['營業時間', pick(it.hours, R.hours)],
+      ['價格', isFood ? R.price : ''],
+      ['推薦', isFood ? R.recommend : ''],
+      ['門票', it.ticket],
+      ['停車', park ? park + (has(it.parkingFee) ? '（' + it.parkingFee + '）' : '') : ''],
+      ['預約', pick(it.reservation, R.reservationInfo)],
+      ['電話', pick(it.phone, R.phone)],
+      ['建議停留', it.duration],
+      ['介紹', isFood ? R.description : '']
+    ].filter(function (x) { return has(x[1]); }).map(function (x) {
+      return [x[0], x[0] === '地址' ? x[1] : x[0] === '電話' ? '<a href="tel:' + esc(x[1]) + '">' + esc(x[1]) + '</a>' : esc(x[1])];
+    });
+    var notes = [it.notes, R.notes].filter(has);
     if (notes.length) rows.push(['注意事項', notes.map(esc).join('<br>')]);
-    return '<dl class="kv">' + rows.map(function (x) { return '<dt>' + x[0] + '</dt><dd>' + x[1] + '</dd>'; }).join('') + '</dl>' +
+    return (rows.length ? '<dl class="kv">' + rows.map(function (x) { return '<dt>' + x[0] + '</dt><dd>' + x[1] + '</dd>'; }).join('') + '</dl>'
+        : '<p class="small muted" style="margin:0">這一站還沒有詳細資料。</p>') +
       (it.photos && it.photos.length ? '<div class="tl-photos">' + it.photos.map(function (p) { return '<img src="' + esc(p) + '" alt="' + esc(it.name) + '" loading="lazy">'; }).join('') + '</div>' : '') +
-      (function () {
-        var m = it.navigable ? App.mapUrl(it) : '';
-        if (!m && !(r && it.restaurantId)) return '';
-        return '<div class="btn-row" style="margin-top:10px">' +
-          (m ? '<a class="btn btn-sm btn-outline" href="' + esc(m) + '" target="_blank" rel="noopener">' + ic('map', 15) + 'Google Maps 地點</a>' : '') +
-          (r && it.restaurantId ? '<a class="btn btn-sm btn-outline" href="#/food/r/' + encodeURIComponent(r.id) + '">' + ic('food', 15) + '餐廳資訊・菜單</a>' : '') + '</div>';
-      })();
+      (isFood && r ? '<a class="btn btn-sm btn-outline" style="margin-top:10px" href="#/food/r/' + encodeURIComponent(r.id) + '">' + ic('food', 15) + '餐廳資訊・菜單</a>' : '');
   }
 
   function timeline(day) {

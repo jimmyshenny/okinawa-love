@@ -116,7 +116,7 @@ window.TRIP = (function () {
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-north',
       itinerary: [
-        item('d6-1', '古宇利大橋', 'sight', '開車跨海兜風', { mapQuery: '古宇利大橋', placeId: 'ChIJyy0FRAhZ5DQRIfztLp8vdWc', addressEn: 'Kouri, Nakijin, Okinawa 905-0406', duration: '開車過橋約 5 分鐘，拍照 20–30 分鐘', parking: '過橋前右側「古宇利大橋南展望所」有停車場，可拍大橋全景', notes: '全長約 2 km，晴天中午海最藍；過橋右轉約 1 km 是古宇利海洋塔（大人 ¥1,000，10:00–18:00）' }),
+        item('d6-1', '古宇利大橋', 'sight', '開車跨海兜風', { mapQuery: '古宇利大橋', placeId: 'ChIJyy0FRAhZ5DQRIfztLp8vdWc', addressEn: 'Kouri, Nakijin, Okinawa 905-0406', duration: '20–30 分鐘', parking: '過橋前右側「古宇利大橋南展望所」有停車場，可拍大橋全景', notes: '全長約 2 km，晴天中午海最藍；過橋右轉約 1 km 是古宇利海洋塔（大人 ¥1,000，10:00–18:00）' }),
         item('d6-2', '土產休息站', 'shopping', '買伴手禮', { mapQuery: '' }),
         item('d6-3', '洞窟沙灘', 'sight', '海邊洞窟拍照', { mapQuery: '' }),
         item('d6-4', '午餐：沖繩蝦蝦飯', 'food', '古宇利島蝦蝦飯', { restaurantId: 'r-shrimp', driveTime: '約 10 分' }),

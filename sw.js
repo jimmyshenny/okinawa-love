@@ -1,6 +1,6 @@
 /* 離線支援：打開過一次網站後，沒網路也能看行程。
    修改網站檔案後，把 VERSION 數字加 1，手機才會拿到新版。 */
-var VERSION = 'okinawa-love-v9';
+var VERSION = 'okinawa-love-v10';
 var SHELL = [
   './', 'index.html', 'css/style.css', 'manifest.webmanifest',
   'js/data.js', 'js/store.js', 'js/ui.js', 'js/app.js',
@@ -23,15 +23,25 @@ self.addEventListener('fetch', function (e) {
   if (req.method !== 'GET') return;
   // 天氣、匯率：一律走網路（離線時由頁面顯示提示）
   if (/open-meteo\.com|er-api\.com/.test(url.hostname)) return;
-  // 網站檔案與字型：先用快取，背景更新
-  if (url.origin === location.origin || /fonts\.(googleapis|gstatic)\.com/.test(url.hostname)) {
+  // 網站檔案：有網路就拿最新版（更新馬上看得到），沒網路才用快取
+  if (url.origin === location.origin) {
+    e.respondWith(caches.open(VERSION).then(function (cache) {
+      var fromCache = function () { return cache.match(req).then(function (hit) { return hit || cache.match('index.html'); }); };
+      var net = fetch(req).then(function (res) {
+        if (res && res.ok) cache.put(req, res.clone());
+        return res;
+      });
+      // 訊號很差時，等 3 秒還沒回應就先用快取（新版會在背景存好，下次打開就是新的）
+      var timeout = new Promise(function (resolve) { setTimeout(resolve, 3000); }).then(fromCache);
+      return Promise.race([net.catch(fromCache), timeout.then(function (hit) { return hit || net; })]);
+    }));
+    return;
+  }
+  // 字型：先用快取
+  if (/fonts\.(googleapis|gstatic)\.com/.test(url.hostname)) {
     e.respondWith(caches.open(VERSION).then(function (cache) {
       return cache.match(req).then(function (hit) {
-        var net = fetch(req).then(function (res) {
-          if (res && (res.ok || res.type === 'opaque')) cache.put(req, res.clone());
-          return res;
-        }).catch(function () { return hit; });
-        return hit || net;
+        return hit || fetch(req).then(function (res) { if (res && (res.ok || res.type === 'opaque')) cache.put(req, res.clone()); return res; });
       });
     }));
   }
