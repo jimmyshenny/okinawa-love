@@ -100,29 +100,29 @@ window.TRIP = (function () {
     },
     {
       id: 'd5', day: 5, date: '2027-03-06', weekday: '星期六', area: '北部',
-      theme: '美麗海水族館浪漫天',
+      theme: '北上古宇利環島：海洋塔、蝦蝦飯與心型岩',
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-north',
       itinerary: [
         item('d5-1', '旅館 Check out', 'stay', '恩納村住宿退房', { navigable: false, driveTime: '約 35 分' }),
-        item('d5-2', '許田休息站', 'shopping', '道之驛，沿途小歇', { mapQuery: '道の駅 許田', placeId: 'ChIJFfz3q_H_5DQRttsFg7-7wLE', addressEn: '17-1 Kyoda, Nago, Okinawa 905-0024', hours: '8:30–19:00', duration: '30–40 分鐘', parking: '道路兩側都有停車場，北上時停左側再走天橋過去', parkingFee: '免費', notes: '可買美麗海水族館優惠票；有天婦羅、沙翁、芒果冰；部分攤位只收現金', driveTime: '約 50 分' }),
-        item('d5-3', '美麗海水族館', 'sight', '黑潮之海與鯨鯊', { mapQuery: '沖縄美ら海水族館', placeId: 'ChIJPZ5hUjH65DQR_p_dD3CmCOo', address: '沖縄県国頭郡本部町石川424（海洋博公園內）', hours: '8:30–18:30（最後入館 17:30）', ticket: '大人 ¥2,180；網路買電子票可掃 QR 直接入館', parking: '海洋博公園停車場', parkingFee: '免費', duration: '2–3 小時', notes: '重點是「黑潮之海」鯨鯊與鬼蝠魟；園區內海豚表演、海牛館、海龜館免費；人多時建議一開門就進場', driveTime: '約 5 分', needTicket: true, reservation: '【何時買】出發前 1–2 週網路買就好（不會賣完，主要省排隊）。【怎麼買】KKday、Klook、VELTRA 買「電子入館票」，入口直接掃 QR 碼進場，不用排售票口；大人 ¥2,180。也可以在當天經過的許田休息站買優惠票。買了不能退票。' }),
-        item('d5-4', '旅館 Check in', 'stay', '入住 Yukurina Resort Lemon House', { stayId: 'stay-north' })
-      ]
-    },
-    {
-      id: 'd6', day: 6, date: '2027-03-07', weekday: '星期日', area: '北部',
-      theme: '古宇利環島：海洋塔、蝦蝦飯與心型岩',
-      weather: { icon: '', status: '', temp: '', rain: '' },
-      accommodationId: 'stay-north',
-      itinerary: [
-        item('d6-0', '早午餐：天の船', 'food', '洞窟造型咖啡廳的法式可麗餅（要預約）', { restaurantId: 'r-usagi', time: '10:30', driveTime: '約 25 分' }),
+        item('d5-2', '許田休息站', 'shopping', '道之驛，沿途小歇', { mapQuery: '道の駅 許田', placeId: 'ChIJFfz3q_H_5DQRttsFg7-7wLE', addressEn: '17-1 Kyoda, Nago, Okinawa 905-0024', hours: '8:30–19:00', duration: '30–40 分鐘', parking: '道路兩側都有停車場，北上時停左側再走天橋過去', parkingFee: '免費', notes: '可買美麗海水族館優惠票；有天婦羅、沙翁、芒果冰；部分攤位只收現金', driveTime: '約 35 分' }),
         item('d6-1', '古宇利大橋', 'sight', '開車跨海兜風', { mapQuery: '古宇利大橋', placeId: 'ChIJyy0FRAhZ5DQRIfztLp8vdWc', addressEn: 'Kouri, Nakijin, Okinawa 905-0406', duration: '20–30 分鐘', parking: '過橋前右側「古宇利大橋南展望所」有停車場，可拍大橋全景', notes: '全長約 2 km，晴天中午海最藍；過橋右轉約 1 km 就是古宇利海洋塔', driveTime: '約 3 分' }),
         item('d6-1b', '古宇利海洋塔', 'sight', '海拔 82m 的觀景塔，看古宇利大橋全景', { mapQuery: '古宇利オーシャンタワー', placeId: 'ChIJEx3cOjJY5DQRJM-BcuwWU-g', address: '沖縄県国頭郡今帰仁村古宇利538', hours: '10:00–18:00（最後入館 17:30）', ticket: '大人 ¥1,000（含自動駕駛遊園車、貝殼博物館、觀景台）', parking: '停車場約 200 台', parkingFee: '免費', duration: '1 小時', notes: '過古宇利大橋右轉約 1 km 就到；搭自動駕駛遊園車上觀景台，餐廳有南瓜愛心鬆餅、拿坡里披薩', needTicket: true, reservation: '【何時買】出發前 1–2 週網路買就好。【怎麼買】古宇利海洋塔官網、VELTRA 或 KKday 事前購票，大人約 ¥900–1,000，現場出示憑證換票；也可以現場買。' }),
         item('d6-2', '土產休息站', 'shopping', '買伴手禮', { mapQuery: '' }),
         item('d6-3', '洞窟沙灘', 'sight', '海邊洞窟拍照', { mapQuery: '' }),
         item('d6-4', '午餐：沖繩蝦蝦飯', 'food', '古宇利島蝦蝦飯', { restaurantId: 'r-shrimp', driveTime: '約 10 分' }),
-        item('d6-5', '心型岩 & 渡海沙灘', 'sight', '看心型岩、渡海沙灘', { mapQuery: 'ハートロック 古宇利島', placeId: 'ChIJf3Y9SjJY5DQRIZUnKV_U1Hg', addressEn: 'Kouri, Nakijin, Kunigami District, Okinawa 905-0406（Tinu Beach）', hours: '24 小時', duration: '40 分鐘–1 小時', parking: '沒有公共停車場，附近私人停車場約 ¥300', parkingFee: '約 ¥200–500', notes: '下到沙灘的步道又陡又滑，別穿夾腳拖；退潮時心型更清楚，出發前查潮汐；觀光客多，拍照要排隊' })
+        item('d6-5', '心型岩 & 渡海沙灘', 'sight', '看心型岩、渡海沙灘', { mapQuery: 'ハートロック 古宇利島', placeId: 'ChIJf3Y9SjJY5DQRIZUnKV_U1Hg', addressEn: 'Kouri, Nakijin, Kunigami District, Okinawa 905-0406（Tinu Beach）', hours: '24 小時', duration: '40 分鐘–1 小時', parking: '沒有公共停車場，附近私人停車場約 ¥300', parkingFee: '約 ¥200–500', notes: '下到沙灘的步道又陡又滑，別穿夾腳拖；退潮時心型更清楚，出發前查潮汐；觀光客多，拍照要排隊', driveTime: '約 30 分' }),
+        item('d5-4', '旅館 Check in', 'stay', '入住 Yukurina Resort Lemon House', { stayId: 'stay-north' })
+      ]
+    },
+    {
+      id: 'd6', day: 6, date: '2027-03-07', weekday: '星期日', area: '北部',
+      theme: '美麗海水族館，悠閒的北部午後',
+      weather: { icon: '', status: '', temp: '', rain: '' },
+      accommodationId: 'stay-north',
+      itinerary: [
+        item('d5-3', '美麗海水族館', 'sight', '8:30 一開門就進場，避開週日人潮', { mapQuery: '沖縄美ら海水族館', placeId: 'ChIJPZ5hUjH65DQR_p_dD3CmCOo', address: '沖縄県国頭郡本部町石川424（海洋博公園內）', hours: '8:30–18:30（最後入館 17:30）', ticket: '大人 ¥2,180；網路買電子票可掃 QR 直接入館', parking: '海洋博公園停車場', parkingFee: '免費', duration: '2–3 小時', notes: '重點是「黑潮之海」鯨鯊與鬼蝠魟；園區內海豚表演、海牛館、海龜館免費；人多時建議一開門就進場', driveTime: '約 15 分', needTicket: true, reservation: '【何時買】出發前 1–2 週網路買就好（不會賣完，主要省排隊）。【怎麼買】KKday、Klook、VELTRA 買「電子入館票」，入口直接掃 QR 碼進場，不用排售票口；大人 ¥2,180。也可以在當天經過的許田休息站買優惠票。買了不能退票。', time: '08:30' }),
+        item('d6-0', '下午咖啡：天の船（看情況）', 'food', '逛完水族館去喝咖啡、吃可麗餅；14:30 關門', { restaurantId: 'r-usagi' })
       ]
     },
     {
@@ -184,8 +184,8 @@ window.TRIP = (function () {
     rest('r-nakama', 'Shima Shabushabu Nakama 島', { type: '涮涮鍋', area: '那霸 久茂地', status: 'planned', needReservation: true, day: 2, mapQuery: 'Shima Shabu-Shabu NAKAMA', placeId: 'ChIJe1CMMnZp5TQRAdq6Ro0rUwI', price: '¥2,000–7,000', recommend: '阿古豬涮涮鍋吃到飽（石垣牛評價普通，選阿古豬就好）', hours: '11:30–15:00、17:00–22:30', address: '那霸市久茂地 3-3-1 B1', phone: '098-917-1529', description: '島野菜和湯頭很加分，豬肉新鮮帶甜味', notes: '冰淇淋要另外點；店員英文不太通，可用手指菜單', reservationInfo: '【何時訂】晚餐熱門，建議 2–3 週前訂；想坐沙發座一定要預約。【怎麼訂】Hot Pepper（ホットペッパーグルメ）網路訂位，可選「お席のみ」只訂位子或選套餐，例如阿古豬＋島野菜吃到飽 ¥5,280；或打電話 098-917-1529。' }),
     rest('r-itoman', '系滿魚市場', { nameJa: '糸満漁業協同組合 お魚センター', type: '海鮮', area: '系滿', status: 'planned', day: 2, mapQuery: '糸満漁業協同組合 お魚センター', placeId: 'ChIJnfH0IcJn5TQRFTMsWWcjFlg', parkingPlaceId: 'ChIJieT1IMJn5TQRwD1JYCP82ek', parkingName: '糸満魚市場 駐車場', parking: '魚市場旁免費停車場', price: '約 ¥1,500–3,000／人', recommend: '生魚片丼、海鮮丼、龍蝦或生蠔燒烤、海葡萄', hours: '9:00–18:00（週六日到 19:00）', address: '糸満市西崎町 4-19', phone: '098-992-2803', description: '十幾個海鮮攤位，買好在外面的座位區吃', notes: '部分攤位只收現金；自己找位子、擦桌子，帶濕紙巾；炸物放比較久不推' }),
     rest('r-buchi', 'Buchi 燒肉', { nameJa: 'ぶち 久茂地店', type: '燒肉', area: '那霸 久茂地', status: 'planned', needReservation: true, day: 1, mapQuery: 'Buchi Kumojiten', placeId: 'ChIJzcnA2ndp5TQRRkXi5c02uKk', notes: '週三公休（已改到 3/2 星期二）', price: '¥3,000–7,000', recommend: '和牛沙朗、無骨牛小排、沖繩和牛拼盤', hours: '17:00–22:00（週三公休）', address: '那霸市久茂地 3-12-1', phone: '098-943-6567', reservationInfo: '【何時訂】非常熱門，建議出發前 1 個月就訂（3/2 晚上 19:00）。【怎麼訂】用店家 Instagram 私訊，寫日期、時間、人數、姓名；或打電話 098-943-6567。沒訂到的話可以白天先去店門口拿號碼牌。' }),
-    rest('r-shrimp', '沖繩蝦蝦飯', { type: '蝦飯', area: '古宇利島', status: 'planned', day: 6, mapQuery: 'KOURI SHRIMP', placeId: 'ChIJcep34MxZ5DQR5VjNV0a8HWg', price: '約 ¥2,000–2,500／份', recommend: '辣味蒜香奶油蝦、原味蒜香蝦；可加點 Onaha 牛、沖繩薯條', hours: '11:00–16:00', address: '今帰仁村古宇利 314', phone: '0980-56-1242', parking: '有停車場，有人指揮', description: '夏威夷風蒜香蝦，3F 露台看海', notes: '平板點餐，1F 拿飲料、2F 拿餐；一份份量大，兩人可分食；可刷卡', reservationInfo: '不接受訂位，現場排隊（翻桌快）' }),
-    rest('r-usagi', '天の船 咖啡廳', { nameJa: '天の船', type: '早午餐', area: '本部町', status: 'planned', needReservation: true, day: 6, group: 'cafe', mapQuery: '天の船 本部', placeId: 'ChIJFST7ErT55DQR__lPMDSAoGE', notes: '週一、週五公休（已改到 3/7 星期日）；10:30 開門', price: '¥1,000–2,000', recommend: '法式鹹可麗餅（galette）、甜可麗餅', hours: '10:30–14:30（週一、週五公休）', address: '本部町泉 3514-24', phone: '070-3803-5308', description: '像飛碟的洞窟造型咖啡廳，被自然包圍', reservationInfo: '【何時訂】每 30 分鐘只接 4 位客人，建議 1 個月前就訂（3/7 星期日 10:30）。【怎麼訂】打電話 070-3803-5308，或用店家 Instagram 私訊預約；請在 Google Maps 店家頁確認最新的預約方式。' }),
+    rest('r-shrimp', '沖繩蝦蝦飯', { type: '蝦飯', area: '古宇利島', status: 'planned', day: 5, mapQuery: 'KOURI SHRIMP', placeId: 'ChIJcep34MxZ5DQR5VjNV0a8HWg', price: '約 ¥2,000–2,500／份', recommend: '辣味蒜香奶油蝦、原味蒜香蝦；可加點 Onaha 牛、沖繩薯條', hours: '11:00–16:00', address: '今帰仁村古宇利 314', phone: '0980-56-1242', parking: '有停車場，有人指揮', description: '夏威夷風蒜香蝦，3F 露台看海', notes: '平板點餐，1F 拿飲料、2F 拿餐；一份份量大，兩人可分食；可刷卡', reservationInfo: '不接受訂位，現場排隊（翻桌快）' }),
+    rest('r-usagi', '天の船 咖啡廳', { nameJa: '天の船', type: '咖啡廳・可麗餅', area: '本部町', status: 'planned', needReservation: true, day: 6, group: 'cafe', mapQuery: '天の船 本部', placeId: 'ChIJFST7ErT55DQR__lPMDSAoGE', notes: '週一、週五公休；營業到 14:30，逛完水族館要在 14:00 前到', price: '¥1,000–2,000', recommend: '法式鹹可麗餅（galette）、甜可麗餅', hours: '10:30–14:30（週一、週五公休）', address: '本部町泉 3514-24', phone: '070-3803-5308', description: '像飛碟的洞窟造型咖啡廳，被自然包圍', reservationInfo: '【何時訂】每 30 分鐘只接 4 位客人，決定要去的話建議 1 個月前訂（3/7 星期日，約 11:30–13:00）；還不確定也可以當天打電話問有沒有空位。【怎麼訂】打電話 070-3803-5308，或用店家 Instagram 私訊；請在 Google Maps 店家頁確認最新的預約方式。' }),
     rest('r-isshin', '一心壽喜燒', { type: '壽喜燒', area: '那霸 久茂地', status: 'planned', needReservation: true, day: 7, mapQuery: 'Oniku no Isshin', placeId: 'ChIJLcZbI5xp5TQRtD4FrGpXwws', price: '¥5,000–10,000', recommend: '阿古豬或和牛壽喜燒套餐（最後加烏龍麵或蕎麥麵）', hours: '週一 18:00–22:00、其他 14:00–22:00（週三公休）', address: '那霸市久茂地 1-5-1', phone: '098-866-0736', description: '老闆會在桌邊幫忙煮第一輪', notes: '3/8 是星期一，18:00 才開；菜單只有日文／中文，店員會說英文', reservationInfo: '【何時訂】建議 2–3 週前訂（3/8 星期一 18:00 才開）。【怎麼訂】TableCheck 網路訂位，有中文介面，直接選日期、時間、人數就好；或打電話 098-866-0736。', website: 'https://www.tablecheck.com/isshin-okinawa' }),
     rest('r-paca', 'Paca Café', { type: '咖啡廳', area: '', status: 'planned', day: 8, group: 'cafe' }),
     rest('r-zhyvago', 'Zhyvago Coffee Roastery', { type: '咖啡', area: '美國村', group: 'cafe', addedBy: '心萱', mapQuery: 'ZHYVAGO COFFEE ROASTERY', placeId: 'ChIJh4EKsv4T5TQRU-h2svXc5tk', price: '¥1,000 以內', recommend: '冷萃咖啡、提拉米蘇、起司蛋糕、Mad Chocolate Shake', hours: '7:00–22:00', address: '北谷町美浜 34-1', phone: '098-988-7833', description: '美國村海邊的紅磚咖啡館，2F 陽台看海' }),
