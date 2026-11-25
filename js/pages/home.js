@@ -71,24 +71,25 @@
   }
 
   function detailRows(it) {
-    var r = it.restaurantId ? App.restaurant(it.restaurantId) : null;
+    var r = it.restaurantId ? App.restaurant(it.restaurantId) : (it.stayId ? App.accommodation(it.stayId) : null);
     var rows = [
-      ['地址', has(it.address) || has(it.addressEn) ? esc(it.address) + (has(it.addressEn) ? '<br><span class="muted">' + esc(it.addressEn) + '</span>' : '') : (r && has(r.address) ? esc(r.address) : v('')) ],
+      ['地址', has(it.address) || has(it.addressEn) ? [has(it.address) ? esc(it.address) : '', has(it.addressEn) ? '<span class="muted">' + esc(it.addressEn) + '</span>' : ''].filter(Boolean).join('<br>') : (r && has(r.address) ? esc(r.address) : v('')) ],
       ['營業時間', v(it.hours || (r && r.hours))],
       ['門票', v(it.ticket)],
       ['停車', has(it.parking) ? esc(it.parking) + (has(it.parkingFee) ? '（' + esc(it.parkingFee) + '）' : '') : v(r && r.parking)],
       ['預約', v(it.reservation || (r && r.reservationInfo))],
       ['建議停留', v(it.duration)]
     ];
-    if (has(it.notes)) rows.push(['注意事項', esc(it.notes)]);
+    var notes = [it.notes, r && r.notes].filter(has);
+    if (notes.length) rows.push(['注意事項', notes.map(esc).join('<br>')]);
     return '<dl class="kv">' + rows.map(function (x) { return '<dt>' + x[0] + '</dt><dd>' + x[1] + '</dd>'; }).join('') + '</dl>' +
       (it.photos && it.photos.length ? '<div class="tl-photos">' + it.photos.map(function (p) { return '<img src="' + esc(p) + '" alt="' + esc(it.name) + '" loading="lazy">'; }).join('') + '</div>' : '') +
       (function () {
         var m = it.navigable ? App.mapUrl(it) : '';
-        if (!m && !r) return '';
+        if (!m && !(r && it.restaurantId)) return '';
         return '<div class="btn-row" style="margin-top:10px">' +
           (m ? '<a class="btn btn-sm btn-outline" href="' + esc(m) + '" target="_blank" rel="noopener">' + ic('map', 15) + 'Google Maps 地點</a>' : '') +
-          (r ? '<a class="btn btn-sm btn-outline" href="#/food/r/' + encodeURIComponent(r.id) + '">' + ic('food', 15) + '餐廳資訊・菜單</a>' : '') + '</div>';
+          (r && it.restaurantId ? '<a class="btn btn-sm btn-outline" href="#/food/r/' + encodeURIComponent(r.id) + '">' + ic('food', 15) + '餐廳資訊・菜單</a>' : '') + '</div>';
       })();
   }
 
