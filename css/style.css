@@ -97,7 +97,7 @@ h1, h2, h3 { font-family: var(--serif); margin: 0; line-height: 1.35; }
 .icon-btn { width: 44px; height: 44px; border-radius: 50%; border: 0; background: transparent; display: inline-flex; align-items: center; justify-content: center; color: var(--ink-2); }
 .icon-btn:hover { background: var(--sand-soft); }
 .btn-row { display: flex; gap: 8px; flex-wrap: wrap; }
-.btn-row > .btn { flex: 1 1 0; border-radius: 12px; }
+.btn-row > .btn { flex: 1 1 0; border-radius: 12px; white-space: nowrap; padding: 0 10px; }
 
 /* 分段切換 / 標籤 */
 .seg { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 4px; padding: 4px; border-radius: var(--r); background: var(--sand-soft); }

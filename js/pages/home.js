@@ -158,7 +158,8 @@
         '<span class="tag-paper">Tonight\'s Stay</span>' +
         (cont ? '<span class="pill dark" style="position:absolute;top:10px;right:12px">連住第 ' + night + ' 晚</span>' : '') + '</div>' +
       '<div class="card-pad" style="display:flex;flex-direction:column;gap:10px">' +
-        '<span class="tiny muted">今日住宿 · ' + esc(a.area) + '</span>' +
+        '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span class="tiny muted">今日住宿 · ' + esc(a.area) + '</span>' +
+          (day.stayAction ? '<a class="btn btn-sm btn-primary" style="min-height:36px;padding:0 12px;white-space:nowrap" href="' + esc(day.stayAction.url) + '" target="_blank" rel="noopener">' + ic('plane', 14) + esc(day.stayAction.label) + '</a>' : '') + '</div>' +
         '<h3 style="font-size:18px">' + name + '</h3>' +
         (cont ? '<p class="small muted" style="margin:0">和昨晚同一間，訂房資訊請見「交通 › 住宿」。</p>' :
         '<div class="stay-times"><div>Check-in <b>' + v(a.checkIn) + '</b></div><div>Check-out <b>' + v(a.checkOut) + '</b></div></div>' +
@@ -169,8 +170,8 @@
         '<div class="btn-row">' +
           (navU ? '<a class="btn btn-primary" href="' + esc(navU) + '" target="_blank" rel="noopener">' + ic('nav', 16) + '導航</a>' : '<span class="btn disabled">' + ic('nav', 16) + '導航</span>') +
           (mapU ? '<a class="btn" href="' + esc(mapU) + '" target="_blank" rel="noopener">' + ic('map', 16) + '地圖</a>' : '') +
-          (has(a.phone) ? '<a class="btn" href="tel:' + esc(a.phone) + '">' + ic('phone', 16) + '電話</a>' : '<span class="btn disabled">' + ic('phone', 16) + '電話</span>') +
-          (has(a.website) ? '<a class="btn" href="' + esc(a.website) + '" target="_blank" rel="noopener">' + ic('globe', 16) + '網站</a>' : '<span class="btn disabled">' + ic('globe', 16) + '網站</span>') +
+          (has(a.phone) ? '<a class="btn" href="tel:' + esc(a.phone) + '">' + ic('phone', 16) + '電話</a>' : '') +
+          (has(a.website) ? '<a class="btn" href="' + esc(a.website) + '" target="_blank" rel="noopener">' + ic('globe', 16) + '網站</a>' : '') +
         '</div>' +
       '</div></article>';
   }

@@ -139,6 +139,7 @@ window.TRIP = (function () {
     },
     {
       id: 'd8', day: 8, date: '2027-03-09', weekday: '星期二', area: '那霸',
+      stayAction: { label: '星宇線上報到', url: 'https://www.starlux-airlines.com/zh-TW/check-in-fly/check-in-now/online-check-in' },
       theme: '那霸購物日',
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-naha-2',
