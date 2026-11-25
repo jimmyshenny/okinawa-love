@@ -55,10 +55,10 @@ window.TRIP = (function () {
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-naha-1',
       itinerary: [
-        item('d1-1', '出發去機場', 'transport', '從家裡出發，提早抵達桃園機場，車停第二航廈 P4', { mapQuery: '桃園國際機場 第二航廈 P4停車場', placeId: 'ChIJoXBSF7afQjQRPg2UN7vaX3c', addressEn: 'No. 9, Hangzhan S Rd, Dayuan District, Taoyuan City 337', hours: '24 小時', parkingFee: '每次前 30 分鐘免費（每天 3 次）；之後第 1 小時 NT$30、每半小時 +NT$20，每日上限 NT$490；網路預約約 NT$300／天', notes: '車位不大、指標少，記得拍下停車樓層與區域；回程從入境大廳走空橋回 B1', parking: '第二航廈 P4 停車場（地下 1、2 樓）' }),
+        item('d1-1', '出發去機場', 'transport', '從家裡出發，提早抵達桃園機場，車停第二航廈 P4', { mapQuery: '桃園國際機場 第二航廈 P4停車場', placeId: 'ChIJoXBSF7afQjQRPg2UN7vaX3c', addressEn: 'No. 9, Hangzhan S Rd, Dayuan District, Taoyuan City 337', hours: '24 小時', parkingFee: '每次前 30 分鐘免費（每天 3 次）；之後第 1 小時 NT$30、每半小時 +NT$20，每日上限 NT$490；網路預約約 NT$300／天', notes: '⚠️ 星宇 JX870 是從「第一航廈」出發，P4 是第二航廈的停車場，停好要再走到 T1（或改停 T1 停車場）；建議 9:40 前到機場。車位不大、指標少，記得拍下停車樓層與區域', parking: '第二航廈 P4 停車場（地下 1、2 樓）' }),
         item('d1-2', '機場 Check in', 'transport', '辦理報到、托運行李', { navigable: false }),
-        item('d1-3', '上飛機', 'transport', '航班資訊請見「交通」頁', { navigable: false }),
-        item('d1-4', '抵達沖繩', 'transport', '那霸機場入境', { mapQuery: '那覇空港', placeId: 'ChIJjSyLjsRp5TQRkP5WN6rOTFA', addressEn: '150 Kagamizu, Naha, Okinawa 901-0142', notes: '租車公司多在機場外，入境後到租車櫃台／接駁巴士站搭車去取車；入境大廳就有 Pork Tamago 飯糰' }),
+        item('d1-3', '上飛機', 'transport', '星宇 JX870 桃園 T1 → 那霸，14:15 抵達（當地時間）', { time: '11:40', navigable: false }),
+        item('d1-4', '抵達沖繩', 'transport', '那霸機場國際線入境', { time: '14:15',  mapQuery: '那覇空港', placeId: 'ChIJjSyLjsRp5TQRkP5WN6rOTFA', addressEn: '150 Kagamizu, Naha, Okinawa 901-0142', notes: '租車公司多在機場外，入境後到租車櫃台／接駁巴士站搭車去取車；入境大廳就有 Pork Tamago 飯糰' }),
         item('d1-5', '租車', 'transport', '取車並確認保險、ETC、油種', { mapQuery: '' , notes: '取車檢查清單在「交通 › 租車」' }),
         item('d1-6', '旅館 Check in', 'stay', '入住那霸歌町大和 Roynet 飯店 PREMIER', { stayId: 'stay-naha-1' }),
         item('d1-7', '國際通 逛街', 'shopping', '第一晚散步、逛唐吉訶德、買伴手禮', { mapQuery: '国際通り 那覇', placeId: 'ChIJMS9BUXdp5TQRAl6RXvY5aY0', hours: '店家多 10:00–22:00 左右，唐吉訶德營業到深夜', duration: '2–3 小時', parking: '沿路多為收費停車場；也可搭單軌電車到「牧志」或「縣廳前」站', notes: '約 1.6 km 長的購物大街，旁邊巷子通往第一牧志公設市場與 Pork Tamago 飯糰本店' }),
@@ -155,7 +155,7 @@ window.TRIP = (function () {
       itinerary: [
         item('d9-1', '早午餐', 'food', '餐廳待決定', { navigable: false }),
         item('d9-2', '還車', 'transport', '加滿油、檢查個人物品', { mapQuery: '' , notes: '還車檢查清單在「交通 › 租車」' }),
-        item('d9-3', '出發去機場', 'transport', '那霸機場', { mapQuery: '那覇空港', placeId: 'ChIJjSyLjsRp5TQRkP5WN6rOTFA', addressEn: '150 Kagamizu, Naha, Okinawa 901-0142', notes: '國際線托運行李沒有自助機，櫃台排隊可能很久，建議起飛前 2.5–3 小時到；國際線美食街有 Pork Tamago 飯糰' })
+        item('d9-3', '出發去機場', 'transport', '星宇 JX871 15:25 起飛，16:10 抵達桃園 T1', { time: '13:00',  mapQuery: '那覇空港', placeId: 'ChIJjSyLjsRp5TQRkP5WN6rOTFA', addressEn: '150 Kagamizu, Naha, Okinawa 901-0142', notes: '國際線托運行李沒有自助機，櫃台排隊可能很久，建議起飛前 2.5–3 小時到；國際線美食街有 Pork Tamago 飯糰' })
       ]
     }
   ];
@@ -197,8 +197,8 @@ window.TRIP = (function () {
 
   // 航班：bookingRef、ticketUrl 屬於私人資訊，請在網站內填寫
   var flights = {
-    outbound: { airline: '', flightNo: '', date: '2027-03-02', depTime: '', arrTime: '', from: 'TPE', fromName: '桃園國際機場', fromTerminal: '', to: 'OKA', toName: '那霸機場', toTerminal: '', baggage: '', checkinNote: '' },
-    'return': { airline: '', flightNo: '', date: '2027-03-10', depTime: '', arrTime: '', from: 'OKA', fromName: '那霸機場', fromTerminal: '', to: 'TPE', toName: '桃園國際機場', toTerminal: '', baggage: '', checkinNote: '' }
+    outbound: { airline: '星宇航空 STARLUX', flightNo: 'JX870', aircraft: 'A350-900', duration: '1 小時 35 分', date: '2027-03-02', depTime: '11:40', arrTime: '14:15', from: 'TPE', fromName: '桃園國際機場', fromTerminal: '第一航廈', to: 'OKA', toName: '那霸機場', toTerminal: '國際線航廈', cabin: '經濟艙', baggage: '', checkinNote: '時間都是當地時間（沖繩比台灣快 1 小時）。建議 9:40 前到桃園機場第一航廈辦理報到' },
+    'return': { airline: '星宇航空 STARLUX', flightNo: 'JX871', aircraft: 'A330-900neo', duration: '1 小時 45 分', date: '2027-03-10', depTime: '15:25', arrTime: '16:10', from: 'OKA', fromName: '那霸機場', fromTerminal: '國際線航廈', to: 'TPE', toName: '桃園國際機場', toTerminal: '第一航廈', cabin: '經濟艙', baggage: '', checkinNote: '那霸國際線托運沒有自助機、排隊可能很久，建議 12:30 前還車、13:00 前到機場' }
   };
 
   var rentalCar = {

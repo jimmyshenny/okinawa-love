@@ -24,8 +24,10 @@
       '<div class="ticket-grid">' +
         '<div><div class="k">日期</div><div class="v">' + (has(f.date) ? U.md(f.date) : '<span class="tbd">待確認</span>') + '</div></div>' +
         '<div><div class="k">航空公司</div><div class="v">' + v(f.airline) + '</div></div>' +
-        '<div><div class="k">航班</div><div class="v">' + v(f.flightNo) + '</div></div>' +
+        '<div><div class="k">航班</div><div class="v">' + v(f.flightNo) + (has(f.cabin) ? '<div class="tiny muted" style="font-weight:400">' + esc(f.cabin) + '</div>' : '') + '</div></div>' +
         '<div><div class="k">出發航廈</div><div class="v">' + v(f.fromTerminal) + '</div></div>' +
+        '<div><div class="k">機型</div><div class="v">' + v(f.aircraft) + '</div></div>' +
+        '<div><div class="k">飛行時間</div><div class="v">' + v(f.duration) + '</div></div>' +
         '<div><div class="k">行李</div><div class="v">' + v(f.baggage) + '</div></div>' +
         '<div><div class="k">訂位代號</div><div class="v">' + privVal(key + ':ref') + '</div></div>' +
       '</div>' +
