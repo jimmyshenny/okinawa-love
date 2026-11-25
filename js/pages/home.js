@@ -104,6 +104,7 @@
     return (rows.length ? '<dl class="kv">' + rows.map(function (x) { return '<dt>' + x[0] + '</dt><dd>' + x[1] + '</dd>'; }).join('') + '</dl>'
         : '<p class="small muted" style="margin:0">這一站還沒有詳細資料。</p>') +
       (it.photos && it.photos.length ? '<div class="tl-photos">' + it.photos.map(function (p) { return '<img src="' + esc(p) + '" alt="' + esc(it.name) + '" loading="lazy">'; }).join('') + '</div>' : '') +
+      (has(it.link) ? '<a class="btn btn-sm btn-primary" style="margin-top:10px;margin-right:6px" href="' + esc(it.link) + '" target="_blank" rel="noopener">' + ic('globe', 15) + esc(it.linkLabel || '開啟連結') + '</a>' : '') +
       (isFood && r ? '<a class="btn btn-sm btn-outline" style="margin-top:10px" href="#/food/r/' + encodeURIComponent(r.id) + '">' + ic('food', 15) + '餐廳資訊・菜單</a>' : '');
   }
 
