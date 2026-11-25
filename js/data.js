@@ -58,7 +58,7 @@ window.TRIP = (function () {
         item('d1-1', '出發去機場', 'transport', '從家裡出發，車停第一航廈 P1 停車場', { mapQuery: '桃園國際機場 第一航廈 P1停車場', placeId: 'ChIJRe0zvkafQjQR1FqaR2m0fA8', parking: '第一航廈 P1 停車場（平面，約 912 位，靠台四線端）', addressEn: 'Terminal 1, Hangzhan S Rd, Dayuan District, Taoyuan City 337', hours: '24 小時', parkingFee: '第 1 小時 NT$30，之後每半小時 +NT$20，每日上限 NT$490（停 9 天約 NT$4,400）', notes: '星宇 JX870 11:40 從第一航廈起飛，建議 9:40 前到機場。P1 不能預約，看現場車位；滿了可改停第一航廈 P2。記得拍下停車區域，回國在停車場自動繳費機付款再出場' }),
         item('d1-1b', '線上報到', 'transport', '星宇官網線上報到、取得登機證', { navigable: false, link: 'https://www.starlux-airlines.com/zh-TW/check-in-fly/check-in-now/online-check-in', linkLabel: '星宇線上報到', notes: '起飛前 48–1 小時開放（2/28 11:40 起就能辦），建議出門前先辦好，省去櫃台排隊。有托運行李的話，要在起飛 1 小時前（10:40 前）完成托運。登機門和登機時間可能更改，到機場再確認一次' }),
         item('d1-2', '機場 Check in', 'transport', '辦理報到、托運行李', { navigable: false, baggageTips: 'outbound', notes: '出發前兩人都要先填好 Visit Japan Web，把入境 QR Code 截圖存在手機裡（詳見「工具 › 入境・退稅」）' }),
-        item('d1-3', '上飛機', 'transport', '星宇 JX870 桃園 T1 → 那霸，14:15 抵達（當地時間）', { time: '11:40', navigable: false }),
+        item('d1-3', '上飛機', 'transport', '星宇 JX870 桃園 T1 → 那霸，14:15 抵達（當地時間）', { time: '11:40', navigable: false, notes: '登機時間以登機證上印的為準。一般起飛前 30–40 分鐘開始登機、約 15–20 分鐘前關閉登機門，建議 11:00 前到登機門。機上全程不能用行動電源，手機先充飽' }),
         item('d1-4', '抵達沖繩', 'transport', '那霸機場國際線入境', { time: '14:15',  mapQuery: '那覇空港', placeId: 'ChIJjSyLjsRp5TQRkP5WN6rOTFA', addressEn: '150 Kagamizu, Naha, Okinawa 901-0142', notes: '租車公司多在機場外，入境後到租車櫃台／接駁巴士站搭車去取車；入境大廳就有 Pork Tamago 飯糰' }),
         item('d1-5', '租車', 'transport', '取車並確認保險、ETC、油種', { mapQuery: '' , notes: '取車檢查清單在「交通 › 租車」', driveTime: '約 25 分' }),
         item('d1-6', '旅館 Check in', 'stay', '入住那霸歌町大和 Roynet 飯店 PREMIER', { stayId: 'stay-naha-1', driveTime: '約 10 分（也可搭單軌）' }),
@@ -160,7 +160,8 @@ window.TRIP = (function () {
         item('d9-3', '出發去機場', 'transport', '星宇 JX871 15:25 起飛，16:10 抵達桃園 T1', { time: '13:00',  mapQuery: '那覇空港', placeId: 'ChIJjSyLjsRp5TQRkP5WN6rOTFA', addressEn: '150 Kagamizu, Naha, Okinawa 901-0142', notes: '國際線櫃台沒有自助托運機、可能排很久，建議 13:00 前到機場。到了先辦退稅，再報到托運' }),
         item('d9-4', '退稅（海關確認）', 'transport', '托運行李前，先到海關 KIOSK 確認退稅商品', { navigable: false, reservation: '', notes: '到機場第一件事：帶著所有退稅商品和護照，到國際線出發大廳的海關 KIOSK 刷護照（或連上機場退稅專用 Wi-Fi，用 Visit Japan Web 線上辦）。顯示要檢查的話，把商品拿給海關看。確認完才能托運，托運後就不能補辦。同一張收據的商品要全部帶著，少一件整張不能退。退款依購物店家的方式（信用卡等）；出境後 2F 有「Self Tax Refund」機器可領現金（看店家是否使用這個服務），領現金可能另收手續費' }),
         item('d9-5', '線上報到', 'transport', '星宇官網線上報到、取得登機證', { navigable: false, link: 'https://www.starlux-airlines.com/zh-TW/check-in-fly/check-in-now/online-check-in', linkLabel: '星宇線上報到', notes: '起飛前 48–1 小時開放（3/8 15:25 起就能辦），可以前一天先在飯店辦好。有托運行李的話，要在起飛 1 小時前（14:25 前）完成托運。登機門和登機時間可能更改，到機場再確認一次' }),
-        item('d9-6', '機場 Check in', 'transport', '櫃台托運行李、安檢、出境', { navigable: false, baggageTips: 'return', notes: '托運前確認退稅已辦完；行李額度：托運 23kg × 1、手提 7kg（手提＋個人物品合計），伴手禮買多了要注意重量' })
+        item('d9-6', '機場 Check in', 'transport', '櫃台托運行李、安檢、出境', { navigable: false, baggageTips: 'return', notes: '托運前確認退稅已辦完；行李額度：托運 23kg × 1、手提 7kg（手提＋個人物品合計），伴手禮買多了要注意重量' }),
+        item('d9-7', '上飛機', 'transport', '星宇 JX871 那霸 → 桃園 T1，16:10 抵達', { time: '15:25', navigable: false, notes: '登機時間以登機證上印的為準。一般起飛前 30–40 分鐘開始登機、約 15–20 分鐘前關閉登機門，建議 14:45 前到登機門。辦完退稅和托運就直接入關，出境後要排安檢和證照查驗' })
       ]
     }
   ];
