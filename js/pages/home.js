@@ -92,6 +92,13 @@
     ].filter(function (x) { return has(x[1]); }).map(function (x) {
       return [x[0], x[0] === '地址' ? x[1] : x[0] === '電話' ? '<a href="tel:' + esc(x[1]) + '">' + esc(x[1]) + '</a>' : esc(x[1])];
     });
+    var BR = it.baggageTips && T.travelGuide && T.travelGuide.baggageRules;
+    if (BR) {
+      var li = function (arr) { return arr.map(function (x) { return '• ' + esc(x); }).join('<br>'); };
+      rows.push(['只能手提', li(BR.carryOnOnly)]);
+      rows.push(['要放托運', li(BR.checkedOnly) + '<br><span class="muted">' + esc(BR.carryOnLiquids) + '</span>']);
+      if (it.baggageTips === 'return') rows.push(['不能帶回台灣', li(BR.bringBackBanned)]);
+    }
     var notes = [it.notes, R.notes].filter(has);
     if (notes.length) rows.push(['注意事項', notes.map(esc).join('<br>')]);
     return (rows.length ? '<dl class="kv">' + rows.map(function (x) { return '<dt>' + x[0] + '</dt><dd>' + x[1] + '</dd>'; }).join('') + '</dl>'

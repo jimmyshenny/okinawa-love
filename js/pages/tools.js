@@ -15,7 +15,7 @@
     ['backup', '資料備份', '匯出・匯入', 'backup', '#EFEBE0']
   ];
   var BUDGET_CATS = ['餐飲', '購物', '交通', '門票', '住宿', '其他'];
-  var PACK_CATS = ['證件', '衣物', '電子用品', '盥洗用品', '藥品', '旅行用品', '其他'];
+  var PACK_CATS = ['證件', '衣物', '電子用品', '盥洗用品', '藥品', '旅行用品', '其他', '搭機規定'];
   var OWNERS = [['jimmy', 'Jimmy'], ['shenny', 'Shenny'], ['shared', '共用']];
 
   function rate() { var r = Number(App.fx().rate); return r > 0 ? r : 0; }
@@ -159,7 +159,13 @@
   var PACK_SEED = [
     ['shared', '證件', '護照（兩本）'], ['shared', '證件', '台灣駕照正本 + 日文譯本'], ['shared', '證件', '信用卡・少量日幣現金'], ['shared', '證件', 'Visit Japan Web 填好、QR Code 截圖（兩人）'],
     ['shared', '電子用品', '行動電源'], ['shared', '電子用品', '網卡／eSIM'], ['shared', '旅行用品', '防曬乳'],
-    ['jimmy', '衣物', '換洗衣物'], ['shenny', '衣物', '換洗衣物']
+    ['jimmy', '衣物', '換洗衣物'], ['shenny', '衣物', '換洗衣物'],
+    ['shared', '搭機規定', '行動電源放手提（每人最多 2 個、160Wh 以下，機上禁用）'],
+    ['shared', '搭機規定', '手提液體每瓶 100ml 以下，裝進 1L 透明夾鏈袋'],
+    ['shared', '搭機規定', '超過 100ml 的液體（保養品、防曬、泡盛）放托運'],
+    ['shared', '搭機規定', '打火機只帶 1 個、隨身；刀剪放托運'],
+    ['shared', '搭機規定', '回程：退稅商品先別放托運，辦完海關確認再托運'],
+    ['shared', '搭機規定', '回程：豬肉製品、含肉食品、生鮮水果不能帶回台灣']
   ];
   var PACK_SEED_V1 = 8; // 舊版就有的前 8 項（舊手機已經複製過，不再重複補）
   function seedKey(x) { return x[0] + '|' + x[2]; }
@@ -325,7 +331,11 @@
     return '<article class="card card-pad" style="display:flex;flex-direction:column;gap:10px"><h3 style="font-size:16px">出發前：Visit Japan Web</h3>' + list(g.visitJapanWeb) +
         '<a class="btn btn-primary btn-block" href="https://www.vjw.digital.go.jp/" target="_blank" rel="noopener">' + ic('globe', 16) + '開啟 Visit Japan Web 官網</a></article>' +
       '<article class="card card-pad" style="margin-top:12px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:16px">退稅（2026/11 起新制）</h3>' + list(g.taxRefund) +
-        '<p class="tiny muted" style="margin:0">規定以出發前觀光廳與各店家的最新公告為準。</p></article>';
+        '<p class="tiny muted" style="margin:0">規定以出發前觀光廳與各店家的最新公告為準。</p></article>' +
+      (g.baggageRules ? '<article class="card card-pad" style="margin-top:12px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:16px">搭機行李規定</h3>' +
+        '<b class="small">只能手提</b>' + list(g.baggageRules.carryOnOnly) +
+        '<b class="small">要放托運</b>' + list(g.baggageRules.checkedOnly) + '<p class="small muted" style="margin:0">' + esc(g.baggageRules.carryOnLiquids) + '</p>' +
+        '<b class="small">不能帶回台灣</b>' + list(g.baggageRules.bringBackBanned) + '</article>' : '');
   }
 
   /* ---------- 備份 ---------- */

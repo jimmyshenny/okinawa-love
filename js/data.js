@@ -56,7 +56,7 @@ window.TRIP = (function () {
       accommodationId: 'stay-naha-1',
       itinerary: [
         item('d1-1', '出發去機場', 'transport', '從家裡出發，車停第一航廈 P1 停車場', { mapQuery: '桃園國際機場 第一航廈 P1停車場', placeId: 'ChIJRe0zvkafQjQR1FqaR2m0fA8', parking: '第一航廈 P1 停車場（平面，約 912 位，靠台四線端）', addressEn: 'Terminal 1, Hangzhan S Rd, Dayuan District, Taoyuan City 337', hours: '24 小時', parkingFee: '第 1 小時 NT$30，之後每半小時 +NT$20，每日上限 NT$490（停 9 天約 NT$4,400）', notes: '星宇 JX870 11:40 從第一航廈起飛，建議 9:40 前到機場。P1 不能預約，看現場車位；滿了可改停第一航廈 P2。記得拍下停車區域，回國在停車場自動繳費機付款再出場' }),
-        item('d1-2', '機場 Check in', 'transport', '辦理報到、托運行李', { navigable: false, notes: '出發前兩人都要先填好 Visit Japan Web，把入境 QR Code 截圖存在手機裡（詳見「工具 › 入境・退稅」）' }),
+        item('d1-2', '機場 Check in', 'transport', '辦理報到、托運行李', { navigable: false, baggageTips: 'outbound', notes: '出發前兩人都要先填好 Visit Japan Web，把入境 QR Code 截圖存在手機裡（詳見「工具 › 入境・退稅」）' }),
         item('d1-3', '上飛機', 'transport', '星宇 JX870 桃園 T1 → 那霸，14:15 抵達（當地時間）', { time: '11:40', navigable: false }),
         item('d1-4', '抵達沖繩', 'transport', '那霸機場國際線入境', { time: '14:15',  mapQuery: '那覇空港', placeId: 'ChIJjSyLjsRp5TQRkP5WN6rOTFA', addressEn: '150 Kagamizu, Naha, Okinawa 901-0142', notes: '租車公司多在機場外，入境後到租車櫃台／接駁巴士站搭車去取車；入境大廳就有 Pork Tamago 飯糰' }),
         item('d1-5', '租車', 'transport', '取車並確認保險、ETC、油種', { mapQuery: '' , notes: '取車檢查清單在「交通 › 租車」', driveTime: '約 25 分' }),
@@ -155,7 +155,7 @@ window.TRIP = (function () {
       itinerary: [
         item('d9-1', '早午餐', 'food', '餐廳待決定', { navigable: false }),
         item('d9-2', '還車', 'transport', '加滿油、檢查個人物品', { mapQuery: '' , notes: '還車檢查清單在「交通 › 租車」', driveTime: '接駁車約 10 分' }),
-        item('d9-3', '出發去機場', 'transport', '星宇 JX871 15:25 起飛，16:10 抵達桃園 T1', { time: '13:00',  mapQuery: '那覇空港', placeId: 'ChIJjSyLjsRp5TQRkP5WN6rOTFA', addressEn: '150 Kagamizu, Naha, Okinawa 901-0142', notes: '⚠️ 有退稅商品的話：到機場第一件事，先帶著退稅商品到出發大廳的海關 KIOSK 刷護照（或用 Visit Japan Web 線上辦），確認完才能托運行李，托運後就不能補辦。之後再去櫃台報到。國際線托運沒有自助機、可能排很久，建議 13:00 前到。退款方式依購物店家而定，詳見「工具 › 入境・退稅」' })
+        item('d9-3', '出發去機場', 'transport', '星宇 JX871 15:25 起飛，16:10 抵達桃園 T1', { baggageTips: 'return', time: '13:00',  mapQuery: '那覇空港', placeId: 'ChIJjSyLjsRp5TQRkP5WN6rOTFA', addressEn: '150 Kagamizu, Naha, Okinawa 901-0142', notes: '⚠️ 有退稅商品的話：到機場第一件事，先帶著退稅商品到出發大廳的海關 KIOSK 刷護照（或用 Visit Japan Web 線上辦），確認完才能托運行李，托運後就不能補辦。之後再去櫃台報到。國際線托運沒有自助機、可能排很久，建議 13:00 前到。退款方式依購物店家而定，詳見「工具 › 入境・退稅」' })
       ]
     }
   ];
@@ -226,6 +226,25 @@ window.TRIP = (function () {
 
   // 入境・退稅（2026/11 起日本免稅改為「先付含稅價、出境退稅」）
   var travelGuide = {
+    // 搭機行李規定（行程「機場 Check in」「出發去機場」與工具頁共用）
+    baggageRules: {
+      carryOnOnly: [
+        '行動電源、備用鋰電池：不能托運。每人最多 2 個、160Wh 以下（100Wh 以下最保險），要看得到 Wh 標示；機上全程禁用、不能充電，不能放頭頂行李櫃',
+        '電子菸、打火機（打火機限 1 個，隨身帶）',
+        '筆電、相機、平板等電子產品與貴重物品'
+      ],
+      checkedOnly: [
+        '超過 100ml 的液體：保養品、防曬乳、泡盛、醬料、果醬等',
+        '刀子、剪刀、指甲刀等尖銳物品'
+      ],
+      carryOnLiquids: '手提的液體每瓶 100ml 以下，全部裝進 1 個 1 公升以內的透明夾鏈袋',
+      bringBackBanned: [
+        '豬肉和含豬肉的食品（午餐肉、阿古豬肉乾、Pork Tamago 飯糰等），違規罰 20 萬',
+        '含肉食品：含肉飯糰、三明治、雞皮零食、雞肉蛋白棒',
+        '所有生鮮水果（飛機餐的水果也不行）、溫泉蛋、溏心蛋',
+        '藥品、錠狀保健食品：每種最多 12 件，合計不超過 36 件'
+      ]
+    },
     visitJapanWeb: [
       '出發前 1–2 週到 Visit Japan Web 官網註冊（網址認明 vjw.digital.go.jp），兩人都要各自登錄',
       '登錄護照、航班（JX870 3/2 那霸）、第一晚住宿（那霸歌町大和 Roynet）',
