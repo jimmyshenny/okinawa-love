@@ -121,7 +121,7 @@ window.TRIP = (function () {
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-north',
       itinerary: [
-        item('d5-3', '美麗海水族館', 'sight', '8:30 一開門就進場，避開週日人潮', { mapQuery: '沖縄美ら海水族館', placeId: 'ChIJPZ5hUjH65DQR_p_dD3CmCOo', address: '沖縄県国頭郡本部町石川424（海洋博公園內）', hours: '8:30–18:30（最後入館 17:30）', ticket: '大人 ¥2,180；網路買電子票可掃 QR 直接入館', parking: '海洋博公園停車場', parkingFee: '免費', duration: '2–3 小時', notes: '重點是「黑潮之海」鯨鯊與鬼蝠魟；園區內海豚表演、海牛館、海龜館免費；人多時建議一開門就進場', needTicket: true, reservation: '【何時買】出發前 1–2 週網路買就好（不會賣完，主要省排隊）。【怎麼買】KKday、Klook、VELTRA 買「電子入館票」，入口直接掃 QR 碼進場，不用排售票口；大人 ¥2,180。也可以在當天經過的許田休息站買優惠票。買了不能退票。', time: '08:30' })
+        item('d5-3', '美麗海水族館', 'sight', '9:30 進場，早上人比較少', { mapQuery: '沖縄美ら海水族館', placeId: 'ChIJPZ5hUjH65DQR_p_dD3CmCOo', address: '沖縄県国頭郡本部町石川424（海洋博公園內）', hours: '8:30–18:30（最後入館 17:30）', ticket: '大人 ¥2,180；網路買電子票可掃 QR 直接入館', parking: '海洋博公園停車場', parkingFee: '免費', duration: '2–3 小時', notes: '重點是「黑潮之海」鯨鯊與鬼蝠魟；園區內海豚表演、海牛館、海龜館免費；人多時建議一開門就進場', needTicket: true, reservation: '【何時買】出發前 1–2 週網路買就好（不會賣完，主要省排隊）。【怎麼買】KKday、Klook、VELTRA 買「電子入館票」，入口直接掃 QR 碼進場，不用排售票口；大人 ¥2,180。也可以在當天經過的許田休息站買優惠票。買了不能退票。', time: '09:30' })
       ]
     },
     {
