@@ -80,13 +80,13 @@ window.TRIP = (function () {
     },
     {
       id: 'd3', day: 3, date: '2027-03-04', weekday: '星期四', area: '恩納村',
-      theme: '北上恩納村，美國村散步',
+      theme: 'A&W 午餐、美國村散步，北上恩納村',
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-onna',
       itinerary: [
-        item('d3-1', '旅館 Check out', 'stay', '那霸住宿退房', { navigable: false, driveTime: '約 30 分' }),
-        item('d3-2', '美國村', 'sight', '北谷海邊街區散步', { mapQuery: '美浜アメリカンビレッジ', placeId: 'ChIJzZoVCAUT5TQRzIueHYt83hs', addressEn: 'Mihama, Chatan, Nakagami District, Okinawa 904-0115', hours: '店家多 10:00–22:00', duration: '2–3 小時', parking: '大型免費町營停車場（約 1,500 台）', parkingFee: '免費', notes: 'ZHYVAGO 咖啡在這裡；傍晚到海邊看夕陽，摩天輪 11:00–22:00、一圈約 15 分鐘' }),
-        item('d3-3', '午餐', 'food', '餐廳待決定', { navigable: false }),
+        item('d3-1', '旅館 Check out', 'stay', '那霸住宿退房', { navigable: false, driveTime: '約 20 分' }),
+        item('d3-3', '午餐：A&W 牧港店', 'food', '復古得來速漢堡，麥根沙士漂浮', { restaurantId: 'r-aw', driveTime: '約 20 分' }),
+        item('d3-2', '美國村', 'sight', '北谷海邊街區散步', { mapQuery: '美浜アメリカンビレッジ', placeId: 'ChIJzZoVCAUT5TQRzIueHYt83hs', addressEn: 'Mihama, Chatan, Nakagami District, Okinawa 904-0115', hours: '店家多 10:00–22:00', duration: '2–3 小時', parking: '大型免費町營停車場（約 1,500 台）', parkingFee: '免費', notes: 'ZHYVAGO 咖啡在這裡；傍晚到海邊看夕陽，摩天輪 11:00–22:00、一圈約 15 分鐘', driveTime: '約 40 分' }),
         item('d3-4', '旅館 Check in', 'stay', '入住 BLISSTIA SUITES & RESORT', { stayId: 'stay-onna' })
       ]
     },
@@ -157,7 +157,7 @@ window.TRIP = (function () {
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: '',
       itinerary: [
-        item('d9-1', '早午餐', 'food', '餐廳待決定', { navigable: false }),
+        item('d9-1', '早午餐：Grill&Pancake RISE', 'food', '美式鬆餅早午餐，吃完去還車', { restaurantId: 'r-rise' }),
         item('d9-2', '還車', 'transport', '加滿油、檢查個人物品', { mapQuery: '' , notes: '還車檢查清單在「交通 › 租車」', driveTime: '接駁車約 10 分' }),
         item('d9-3', '那霸空港', 'transport', '13:00 抵達機場；星宇 JX871 15:25 起飛，16:10 抵達桃園 T1', { time: '13:00',  mapQuery: '那覇空港', placeId: 'ChIJjSyLjsRp5TQRkP5WN6rOTFA', addressEn: '150 Kagamizu, Naha, Okinawa 901-0142', notes: '國際線櫃台沒有自助托運機、可能排很久，建議 13:00 前到機場。到了先辦退稅，再報到托運' }),
         item('d9-4', '退稅（海關確認）', 'transport', '托運行李前，先到海關 KIOSK 確認退稅商品', { navigable: false, reservation: '', notes: '到機場第一件事：帶著所有退稅商品和護照，到國際線出發大廳的海關 KIOSK 刷護照（或連上機場退稅專用 Wi-Fi，用 Visit Japan Web 線上辦）。顯示要檢查的話，把商品拿給海關看。確認完才能托運，托運後就不能補辦。同一張收據的商品要全部帶著，少一件整張不能退。退款依購物店家的方式（信用卡等）；出境後 2F 有「Self Tax Refund」機器可領現金（看店家是否使用這個服務），領現金可能另收手續費' }),
@@ -196,10 +196,11 @@ window.TRIP = (function () {
     rest('r-poco', 'POCO CAFE', { nameJa: 'POCO CAFE OKINAWA', type: '沖繩料理・咖啡', area: '那霸 牧志', status: 'planned', day: 8, mapQuery: 'POCO CAFE OKINAWA 牧志', placeId: 'ChIJ9-mXA3pp5TQRaDZ2b2Fz7bo', price: '¥1,000–2,000', recommend: '塔可飯＋沖繩麵套餐（A Set，附飲料）、咖哩飯、紅芋甜點、果昔', hours: '10:00–24:00', address: '那霸市牧志 1-3-62 2F', phone: '098-988-9980', description: '國際通旁的 2 樓小店，可以坐吧台或榻榻米，份量剛好、價格親民', notes: '在國際通附近，停車要找收費停車場；從 THE NEST 走路約 20 分，或搭單軌電車到牧志站', reservationInfo: '不用預約' }),
     rest('r-zhyvago', 'Zhyvago Coffee Roastery', { type: '咖啡', area: '美國村', group: 'cafe', addedBy: '心萱', mapQuery: 'ZHYVAGO COFFEE ROASTERY', placeId: 'ChIJh4EKsv4T5TQRU-h2svXc5tk', price: '¥1,000 以內', recommend: '冷萃咖啡、提拉米蘇、起司蛋糕、Mad Chocolate Shake', hours: '7:00–22:00', address: '北谷町美浜 34-1', phone: '098-988-7833', description: '美國村海邊的紅磚咖啡館，2F 陽台看海' }),
     rest('r-applepie', '蘋果派', { type: '甜點', area: '機場', group: 'cafe', addedBy: '心萱' }),
-    rest('r-aw', 'A&W 漢堡', { type: '漢堡', area: '浦添 牧港', addedBy: '心萱', mapQuery: 'A&W 牧港店', placeId: 'ChIJk5jkbZxs5TQR9YajcZ3aWXw', price: '¥1,000–2,000', recommend: '麥根沙士漂浮（沙士可免費續杯）、捲捲薯條、洋蔥圈', hours: '6:00–凌晨 2:00', address: '浦添市牧港 4-9-1', phone: '098-876-6081', description: '1969 年開的復古得來速，超好拍', notes: '觀光客多，點餐可能要排 30 分鐘；只想吃 A&W 可去其他分店（國際通也有）' }),
+    rest('r-aw', 'A&W 牧港店', { type: '漢堡', area: '浦添 牧港', status: 'planned', day: 3, addedBy: '心萱', mapQuery: 'A&W 牧港店', placeId: 'ChIJk5jkbZxs5TQR9YajcZ3aWXw', price: '¥1,000–2,000', recommend: '麥根沙士漂浮（沙士可免費續杯）、捲捲薯條、洋蔥圈', hours: '6:00–凌晨 2:00', address: '浦添市牧港 4-9-1', phone: '098-876-6081', description: '1969 年開的復古得來速，超好拍', notes: '觀光客多，點餐可能要排 30 分鐘；只想吃 A&W 可去其他分店（國際通也有）' }),
     rest('r-hama', 'Hama 壽司', { type: '壽司', area: '那霸 古島', addedBy: '心萱', mapQuery: 'はま寿司 那覇古島店', placeId: 'ChIJ0bDIk-hr5TQRtvrRQOAyur0', price: '¥1,000–2,000', recommend: '沖繩限定握壽司、多種醬油可選', hours: '10:00–凌晨 5:00', address: '那霸市古島 1-25-3', phone: '0570-001-689', description: '平價迴轉壽司連鎖', notes: '入口機台抽號碼；平板點餐可切換中文' }),
     rest('r-kokuto', '黑糖飲料店', { type: '飲料', area: '沖繩北部', group: 'cafe', addedBy: '心萱' }),
-    rest('r-pork', 'Pork Tamago 飯糰', { type: '飯糰', area: '那霸 牧志', addedBy: '心萱', mapQuery: 'ポークたまごおにぎり 牧志市場本店', placeId: 'ChIJRX9edXpp5TQRRGYawVc2Jmk', price: '約 ¥400–800／個', recommend: '炸蝦塔塔醬飯糰、苦瓜天婦羅、油味噌', hours: '7:00–20:00', address: '那霸市松尾 2-8-35', phone: '098-867-9550', description: '現點現做的沖繩國民飯糰', notes: '早上常大排長龍；內用座位在隔壁另一間；那霸機場國內線、國際線也有分店' })
+    rest('r-pork', 'Pork Tamago 飯糰', { type: '飯糰', area: '那霸 牧志', addedBy: '心萱', mapQuery: 'ポークたまごおにぎり 牧志市場本店', placeId: 'ChIJRX9edXpp5TQRRGYawVc2Jmk', price: '約 ¥400–800／個', recommend: '炸蝦塔塔醬飯糰、苦瓜天婦羅、油味噌', hours: '7:00–20:00', address: '那霸市松尾 2-8-35', phone: '098-867-9550', description: '現點現做的沖繩國民飯糰', notes: '早上常大排長龍；內用座位在隔壁另一間；那霸機場國內線、國際線也有分店' }),
+    rest('r-rise', 'Grill&Pancake RISE', { type: '早午餐・鬆餅', area: '那霸 鏡原', status: 'planned', day: 9, group: 'cafe', mapQuery: 'Grill&Pancake RISE', placeId: 'ChIJ9_PYOABp5TQRlynY01fe_6k', price: '¥1,000–2,000', recommend: '香草風味鬆餅、厚切培根和香腸、阿古豬墨西哥餅配太陽蛋', hours: '8:00–15:00（週一、週二公休）', address: '那霸市鏡原町 3-7 101', phone: '080-2573-0322', description: '叢林風小店的美式早餐，份量大，評分 4.9', notes: '3/10 是星期三，有營業；在往機場的方向，吃完去還車很順', reservationInfo: '不用預約' })
   ];
 
   // 航班：bookingRef、ticketUrl 屬於私人資訊，請在網站內填寫
