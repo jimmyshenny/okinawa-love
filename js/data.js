@@ -62,7 +62,7 @@ window.TRIP = (function () {
         item('d1-5', '租車', 'transport', '取車並確認保險、ETC、油種', { mapQuery: '' , notes: '取車檢查清單在「交通 › 租車」', driveTime: '約 25 分' }),
         item('d1-6', '旅館 Check in', 'stay', '入住那霸歌町大和 Roynet 飯店 PREMIER', { stayId: 'stay-naha-1', driveTime: '約 10 分（也可搭單軌）' }),
         item('d1-7', '國際通 逛街', 'shopping', '第一晚散步、逛唐吉訶德、買伴手禮', { mapQuery: '国際通り 那覇', placeId: 'ChIJMS9BUXdp5TQRAl6RXvY5aY0', hours: '店家多 10:00–22:00 左右，唐吉訶德營業到深夜', duration: '2–3 小時', parking: '沿路多為收費停車場；也可搭單軌電車到「牧志」或「縣廳前」站', notes: '約 1.6 km 長的購物大街，旁邊巷子通往第一牧志公設市場與 Pork Tamago 飯糰本店', driveTime: '步行約 5 分' }),
-        item('d1-8', '晚餐：Buchi 燒肉', 'food', '燒肉晚餐（需訂位）', { restaurantId: 'r-buchi' })
+        item('d1-8', '晚餐：Buchi 燒肉', 'food', '燒肉晚餐（需訂位，訂 19:00）', { restaurantId: 'r-buchi', time: '19:00' })
       ]
     },
     {
