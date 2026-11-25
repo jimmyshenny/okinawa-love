@@ -122,7 +122,7 @@ window.TRIP = (function () {
     },
     {
       id: 'd6', day: 6, date: '2027-03-07', weekday: '星期日', area: '北部',
-      theme: '美麗海水族館、福木林道與 OKI-SHABU',
+      theme: '美麗海水族館、福木林道與島豆腐晚餐',
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-north',
       itinerary: [
@@ -130,7 +130,7 @@ window.TRIP = (function () {
         item('d6-a', '翡翠海灘', 'sight', '水族館旁的白沙灘，散步拍照', { mapQuery: 'エメラルドビーチ 海洋博公園', placeId: 'ChIJk4Fw-Dn65DQRkdNLoaBpJLI', duration: '30–40 分鐘', parking: '在海洋博公園內，車可以繼續停水族館的停車場走過去', parkingFee: '免費', notes: '11 月到 3 月不開放游泳，散步拍照就好；海水很清、沙子很細，沒有遮蔭記得防曬。海牛館旁邊的樓梯往下還有一個小沙灘', driveTime: '約 5 分' }),
         item('d6-l', '午餐：ふくぎ屋', 'food', '福木林道裡的沖繩麵', { restaurantId: 'r-fukugiya', driveTime: '步行即到' }),
         item('d6-b', '備瀬福木林道', 'sight', '福木樹蔭下的老村落散步', { mapQuery: '備瀬のフクギ並木', placeId: 'ChIJ6z_osjv65DQRNpoSOgG1iqM', hours: '24 小時', duration: '1–1.5 小時', parking: '村子入口有幾個小停車場，免費的不好找，收費的約 ¥500', notes: '整條走完來回約 1 小時，可以租腳踏車或電動滑板車；路上有小咖啡店和紅豆冰（ぜんざい）；走到底是海邊，很適合看夕陽；蚊子多，記得防蚊', driveTime: '約 15 分' }),
-        item('d6-d', '晚餐：OKI-SHABU 本部美ら海', 'food', '阿古豬與和牛涮涮鍋，蜜月特別的一晚', { restaurantId: 'r-okishabu' })
+        item('d6-d', '晚餐：沖縄そばと島どうふ TOPU', 'food', '自製島豆腐和沖繩麵，在地平價', { restaurantId: 'r-topu', nearby: [{ name: 'Kana Sando', q: '金三度 本部', placeId: 'ChIJZzzV9db75DQR_Qu5FvKwjKo', note: '家庭沖繩居酒屋，18:00–23:00；父子現場表演三線和民謠，最後可以上台拍照' }, { name: '居酒屋 琉波', q: '居酒屋 琉波 本部', placeId: 'ChIJVwIHiDT75DQRuMmWfCAB9sI', note: '在地人常來，17:00–22:30；推薦炸雞、鮮蝦春捲、牛肉豆腐味噌炒' }, { name: 'やまちゃん', q: 'やまちゃん 本部 山川', placeId: 'ChIJv3AtLtP75DQR5oXZ5rdFFTk', note: '就在飯店旁，18:00–20:20；超平價，推薦炸雞（菜單 30 號）、苦瓜炒；日文菜單、只收現金' }] })
       ]
     },
     {
@@ -215,7 +215,7 @@ window.TRIP = (function () {
     rest('r-yanbaru', 'Yanbaru Meat', { type: '牛排・西式小菜', area: '恩納村 前兼久', status: 'planned', needReservation: true, day: 4, mapQuery: 'Yanbaru Meat 恩納', placeId: 'ChIJ0wPjcMoa5TQROmbpLullsko', price: '約 ¥3,000–5,000', recommend: '夏多布里昂、沙朗牛排、蒸豬肉、蒜香炒飯、凱薩沙拉', hours: '17:00–24:00（週三、週日公休）', address: '恩納村前兼久 858-1 2F', phone: '098-923-3915', description: '氣氛熱鬧的牛排小酒館，評分 4.7，店員親切', notes: '跟 BLISSTIA 同一區，可以走路或開車幾分鐘', reservationInfo: '【何時訂】2 個月前開放訂位，3/5 大約 1/5 就能訂，開放後就先訂（我們訂 18:30）。【怎麼訂】TableCheck 訂位頁（點「官網」按鈕，跟沖繩料理しまぶた屋同一個頁面，選 Yanbaru Meat），或打電話 098-923-3915。', website: 'https://www.tablecheck.com/shops/shimabutaya/reserve' }),
     rest('r-yukuruba', 'ゆくるば', { nameJa: 'ゆくるば｜カフェ & あぐー豚しゃぶしゃぶ', type: '阿古豬涮涮鍋・咖啡', area: '本部 備瀬', status: 'planned', needReservation: true, day: 5, mapQuery: 'ゆくるば 備瀬', placeId: 'ChIJiSmQpjv65DQR_4gb3c97PIc', price: '約 ¥2,000–4,000', recommend: '阿古豬涮涮鍋、芒果汁', hours: '11:00–16:00、17:00–22:00', address: '本部町備瀬 403', phone: '0980-43-1271', parking: '店門口有停車位', description: '福木林道旁被綠樹包圍的小店，白天是咖啡廳、晚上吃涮涮鍋', notes: '離 Yukurina 開車約 5 分', reservationInfo: '【何時訂】2 個月前開放訂位，3/6 大約 1/6 就能訂，開放後就先訂。【怎麼訂】食べログ（Tabelog）中文訂位頁（點「官網」按鈕），或打電話 0980-43-1271。', website: 'https://s.tabelog.com/tw/okinawa/A4702/A470202/47031589/?tb_from_lang_modal=1' }),
     rest('r-fukugiya', 'ふくぎ屋', { nameJa: 'ふくぎ屋', type: '沖繩麵・定食', area: '本部 備瀬', status: 'planned', day: 6, mapQuery: 'ふくぎ屋 備瀬', placeId: 'ChIJbYkXrjv65DQRMcI12696IAY', price: '約 ¥1,000–1,500', recommend: '限定的海藻（アーサ）沖繩麵、排骨沖繩麵、苦瓜炒、塔可飯、芒果汁', hours: '11:30–14:30（週四公休）', address: '本部町備瀬 388-3', phone: '0980-43-5001', description: '就在福木林道裡，往翡翠海灘的路上，在地人也常來', notes: '14:30 就關門，逛完海灘先來吃再散步林道', reservationInfo: '不用預約' }),
-    rest('r-okishabu', 'OKI-SHABU 本部美ら海', { nameJa: 'OKINAWA SHABU-SHABU OKI-SHABU', type: '涮涮鍋・牛排', area: '本部 濱元', status: 'planned', needReservation: true, day: 6, mapQuery: 'OKI-SHABU 本部', placeId: 'ChIJN2RZGsH75DQRXdwFoOCiUTU', price: '較高價位', recommend: '阿古豬涮涮鍋、和牛、夏多布里昂牛排、最後的蕎麥麵', address: '本部町濱元 335-1', phone: '050-1794-8520', description: '露營風的溫馨小店，老闆很熱情，評論說是沖繩最好吃的阿古豬涮涮鍋之一', notes: 'Google Maps 上的營業時間不準，訂位時請確認晚餐時段', reservationInfo: '附近晚上很多店客滿，建議出發前先打電話或用 Google Maps 訂位' })
+    rest('r-topu', '沖縄そばと島どうふ TOPU', { nameJa: '沖縄そばと島どうふ【TOPU】', type: '沖繩麵・島豆腐', area: '本部 濱元', status: 'planned', day: 6, mapQuery: '沖縄そばと島どうふ TOPU', placeId: 'ChIJBwhDebv75DQRcEJjtmWX6I4', price: '約 ¥1,000–1,500', recommend: '島豆腐沖繩麵、三種豆腐套餐、花生豆腐、炸雞、薑燒豬肉、炸麵團甜點', hours: '11:00–15:00、17:00–21:00（週二公休，週一只有中午）', address: '本部町濱元 233', phone: '0980-43-4390', description: '自己做島豆腐的老派小店，評分 4.6，豆腐又輕又綿', notes: '只收現金；招牌在路邊不明顯，看到機車行就要減速；對向車道不能右轉進去', reservationInfo: '不用預約' }),
   ];
 
   // 航班：bookingRef、ticketUrl 屬於私人資訊，請在網站內填寫
