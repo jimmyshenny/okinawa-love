@@ -56,7 +56,7 @@ window.TRIP = (function () {
       accommodationId: 'stay-naha-1',
       itinerary: [
         item('d1-1', '出發去機場', 'transport', '從家裡出發，車停第一航廈 P1 停車場', { mapQuery: '桃園國際機場 第一航廈 P1停車場', placeId: 'ChIJRe0zvkafQjQR1FqaR2m0fA8', parking: '第一航廈 P1 停車場（平面，約 912 位，靠台四線端）', addressEn: 'Terminal 1, Hangzhan S Rd, Dayuan District, Taoyuan City 337', hours: '24 小時', parkingFee: '第 1 小時 NT$30，之後每半小時 +NT$20，每日上限 NT$490（停 9 天約 NT$4,400）', notes: '星宇 JX870 11:40 從第一航廈起飛，建議 9:40 前到機場。P1 不能預約，看現場車位；滿了可改停第一航廈 P2。記得拍下停車區域，回國在停車場自動繳費機付款再出場' }),
-        item('d1-2', '機場 Check in', 'transport', '辦理報到、托運行李', { navigable: false }),
+        item('d1-2', '機場 Check in', 'transport', '辦理報到、托運行李', { navigable: false, notes: '出發前兩人都要先填好 Visit Japan Web，把入境 QR Code 截圖存在手機裡（詳見「工具 › 入境・退稅」）' }),
         item('d1-3', '上飛機', 'transport', '星宇 JX870 桃園 T1 → 那霸，14:15 抵達（當地時間）', { time: '11:40', navigable: false }),
         item('d1-4', '抵達沖繩', 'transport', '那霸機場國際線入境', { time: '14:15',  mapQuery: '那覇空港', placeId: 'ChIJjSyLjsRp5TQRkP5WN6rOTFA', addressEn: '150 Kagamizu, Naha, Okinawa 901-0142', notes: '租車公司多在機場外，入境後到租車櫃台／接駁巴士站搭車去取車；入境大廳就有 Pork Tamago 飯糰' }),
         item('d1-5', '租車', 'transport', '取車並確認保險、ETC、油種', { mapQuery: '' , notes: '取車檢查清單在「交通 › 租車」', driveTime: '約 25 分' }),
@@ -155,7 +155,7 @@ window.TRIP = (function () {
       itinerary: [
         item('d9-1', '早午餐', 'food', '餐廳待決定', { navigable: false }),
         item('d9-2', '還車', 'transport', '加滿油、檢查個人物品', { mapQuery: '' , notes: '還車檢查清單在「交通 › 租車」', driveTime: '接駁車約 10 分' }),
-        item('d9-3', '出發去機場', 'transport', '星宇 JX871 15:25 起飛，16:10 抵達桃園 T1', { time: '13:00',  mapQuery: '那覇空港', placeId: 'ChIJjSyLjsRp5TQRkP5WN6rOTFA', addressEn: '150 Kagamizu, Naha, Okinawa 901-0142', notes: '國際線托運行李沒有自助機，櫃台排隊可能很久，建議起飛前 2.5–3 小時到；國際線美食街有 Pork Tamago 飯糰' })
+        item('d9-3', '出發去機場', 'transport', '星宇 JX871 15:25 起飛，16:10 抵達桃園 T1', { time: '13:00',  mapQuery: '那覇空港', placeId: 'ChIJjSyLjsRp5TQRkP5WN6rOTFA', addressEn: '150 Kagamizu, Naha, Okinawa 901-0142', notes: '⚠️ 有退稅商品的話：到機場第一件事，先帶著退稅商品到出發大廳的海關 KIOSK 刷護照（或用 Visit Japan Web 線上辦），確認完才能托運行李，托運後就不能補辦。之後再去櫃台報到。國際線托運沒有自助機、可能排很久，建議 13:00 前到。退款方式依購物店家而定，詳見「工具 › 入境・退稅」' })
       ]
     }
   ];
@@ -224,6 +224,24 @@ window.TRIP = (function () {
     '發生事故：先確認安全 → 報警 110 → 聯絡租車公司'
   ];
 
+  // 入境・退稅（2026/11 起日本免稅改為「先付含稅價、出境退稅」）
+  var travelGuide = {
+    visitJapanWeb: [
+      '出發前 1–2 週到 Visit Japan Web 官網註冊（網址認明 vjw.digital.go.jp），兩人都要各自登錄',
+      '登錄護照、航班（JX870 3/2 那霸）、第一晚住宿（那霸歌町大和 Roynet）',
+      '填完「入境審查」和「海關申報」，會拿到一組合併的 QR Code',
+      '把 QR Code 截圖存在手機，落地後入境審查和海關都出示這組 QR Code'
+    ],
+    taxRefund: [
+      '買東西時先付含稅價格，結帳時出示護照，並在店裡登記退款方式（信用卡等）',
+      '同一張收據的商品要全部帶出境，只要其中一件用掉或沒帶，整張收據都不能退',
+      '3/10 到那霸機場：先到出發大廳的海關 KIOSK 刷護照（或用 Visit Japan Web 線上辦），再去托運行李',
+      '被判定要檢查的話，要把商品拿給海關看，所以退稅商品先不要放進托運行李',
+      '海關確認後，由購物的店家或退稅業者退款；那霸機場出境後 2F 有「Self Tax Refund」機器可以直接領現金（要看店家是否使用這個服務）',
+      '手續費依店家而定：唐吉訶德等宣布不收退稅手續費，但在機場領日圓現金可能另收費用'
+    ]
+  };
+
   var stamps = ['飛機', '海洋', '海灘', '夕陽', '鯨魚', '古宇利大橋', '海龜', '沖繩花朵', '蜜月'];
 
   return {
@@ -240,6 +258,7 @@ window.TRIP = (function () {
     rentalCar: rentalCar,
     emergency: emergency,
     drivingTips: drivingTips,
+    travelGuide: travelGuide,
     stamps: stamps
   };
 })();
