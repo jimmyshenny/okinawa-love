@@ -92,11 +92,12 @@ window.TRIP = (function () {
     },
     {
       id: 'd4', day: 4, date: '2027-03-05', weekday: '星期五', area: '恩納村',
-      theme: '什麼都不做的耍廢日',
+      theme: '什麼都不做的耍廢日，Yanbaru Meat 牛排',
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-onna',
       itinerary: [
-        item('d4-1', '耍廢日', 'rest', '在飯店好好休息，享受海景', { navigable: false, nearby: [{ name: '青之洞窟', q: '青の洞窟 真栄田岬', placeId: 'ChIJFSBnObgb5TQRQA1ByAocZog', note: '離飯店開車約 10 分；要浮潛或潛水需參加付費行程，不下水的話可以在真榮田岬步道看海' }, { name: '永旺夢樂城沖繩來客夢', q: 'イオンモール沖縄ライカム', placeId: 'ChIJJ_TSFGIS5TQRa_HkdjGALss', note: '離飯店開車約 35 分；有寶可夢中心、LOFT、大水族箱，10:00–22:00' }] })
+        item('d4-1', '耍廢日', 'rest', '在飯店好好休息，享受海景', { navigable: false, nearby: [{ name: '青之洞窟', q: '青の洞窟 真栄田岬', placeId: 'ChIJFSBnObgb5TQRQA1ByAocZog', note: '離飯店開車約 10 分；要浮潛或潛水需參加付費行程，不下水的話可以在真榮田岬步道看海' }, { name: '永旺夢樂城沖繩來客夢', q: 'イオンモール沖縄ライカム', placeId: 'ChIJJ_TSFGIS5TQRa_HkdjGALss', note: '離飯店開車約 35 分；有寶可夢中心、LOFT、大水族箱，10:00–22:00' }] }),
+        item('d4-2', '晚餐：Yanbaru Meat', 'food', '牛排和西式小菜，飯店附近', { restaurantId: 'r-yanbaru', time: '18:30' })
       ]
     },
     {
@@ -113,18 +114,21 @@ window.TRIP = (function () {
         item('d6-3', '始まりの洞窟（チグヌ浜）', 'sight', '海邊洞窟拍照，從ソラハシ走過去', { mapQuery: 'チグヌ浜 始まりの洞窟 古宇利島', placeId: 'ChIJtSw1wz9Z5DQRLL32XVrluEc', hours: '24 小時', duration: '20–30 分鐘', parking: '附近幾乎沒有停車位，車停ソラハシ走過去', notes: '下到海邊面向大海往右看，石頭和階梯之間有小洞窟入口；岩石很滑、沿路要走路邊，注意來車；也是看夕陽的好地方', driveTime: '走回ソラハシ取車，開車約 5 分' }),
         item('d6-1b', '古宇利海洋塔', 'sight', '海拔 82m 的觀景塔，看古宇利大橋全景', { mapQuery: '古宇利オーシャンタワー', placeId: 'ChIJEx3cOjJY5DQRJM-BcuwWU-g', address: '沖縄県国頭郡今帰仁村古宇利538', hours: '10:00–18:00（最後入館 17:30）', ticket: '大人 ¥1,000（含自動駕駛遊園車、貝殼博物館、觀景台）', parking: '停車場約 200 台', parkingFee: '免費', duration: '1 小時', notes: '過古宇利大橋右轉約 1 km 就到；搭自動駕駛遊園車上觀景台，餐廳有南瓜愛心鬆餅、拿坡里披薩', needTicket: true, reservation: '【何時買】出發前 1–2 週網路買就好。【怎麼買】古宇利海洋塔官網、VELTRA 或 KKday 事前購票，大人約 ¥900–1,000，現場出示憑證換票；也可以現場買。', driveTime: '約 5 分' }),
         item('d6-5', '心型岩 & 渡海沙灘', 'sight', '看心型岩、渡海沙灘', { mapQuery: 'ハートロック 古宇利島', placeId: 'ChIJf3Y9SjJY5DQRIZUnKV_U1Hg', addressEn: 'Kouri, Nakijin, Kunigami District, Okinawa 905-0406（Tinu Beach）', hours: '24 小時', duration: '40 分鐘–1 小時', parking: '沒有公共停車場，附近私人停車場約 ¥300', parkingFee: '約 ¥200–500', notes: '下到沙灘的步道又陡又滑，別穿夾腳拖；退潮時心型更清楚，出發前查潮汐；觀光客多，拍照要排隊', driveTime: '約 30 分' }),
-        item('d5-4', '旅館 Check in', 'stay', '入住 Yukurina Resort Lemon House', { stayId: 'stay-north' })
+        item('d5-4', '旅館 Check in', 'stay', '入住 Yukurina Resort Lemon House', { stayId: 'stay-north', driveTime: '約 5 分' }),
+        item('d5-5', '晚餐：ゆくるば', 'food', '備瀬的阿古豬涮涮鍋', { restaurantId: 'r-yukuruba' })
       ]
     },
     {
       id: 'd6', day: 6, date: '2027-03-07', weekday: '星期日', area: '北部',
-      theme: '美麗海水族館、翡翠海灘與福木林道',
+      theme: '美麗海水族館、福木林道與 OKI-SHABU',
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-north',
       itinerary: [
         item('d5-3', '美麗海水族館', 'sight', '9:30 進場，早上人比較少', { mapQuery: '沖縄美ら海水族館', placeId: 'ChIJPZ5hUjH65DQR_p_dD3CmCOo', address: '沖縄県国頭郡本部町石川424（海洋博公園內）', hours: '8:30–18:30（最後入館 17:30）', ticket: '大人 ¥2,180；網路買電子票可掃 QR 直接入館', parking: '海洋博公園停車場', parkingFee: '免費', duration: '2–3 小時', notes: '重點是「黑潮之海」鯨鯊與鬼蝠魟；園區內海豚表演、海牛館、海龜館免費；人多時建議一開門就進場', needTicket: true, reservation: '【何時買】出發前 1–2 週網路買就好（不會賣完，主要省排隊）。【怎麼買】KKday、Klook、VELTRA 買「電子入館票」，入口直接掃 QR 碼進場，不用排售票口；大人 ¥2,180。也可以在當天經過的許田休息站買優惠票。買了不能退票。', time: '09:30', driveTime: '園區內步行約 10 分' }),
         item('d6-a', '翡翠海灘', 'sight', '水族館旁的白沙灘，散步拍照', { mapQuery: 'エメラルドビーチ 海洋博公園', placeId: 'ChIJk4Fw-Dn65DQRkdNLoaBpJLI', duration: '30–40 分鐘', parking: '在海洋博公園內，車可以繼續停水族館的停車場走過去', parkingFee: '免費', notes: '11 月到 3 月不開放游泳，散步拍照就好；海水很清、沙子很細，沒有遮蔭記得防曬。海牛館旁邊的樓梯往下還有一個小沙灘', driveTime: '約 5 分' }),
-        item('d6-b', '備瀬福木林道', 'sight', '福木樹蔭下的老村落散步', { mapQuery: '備瀬のフクギ並木', placeId: 'ChIJ6z_osjv65DQRNpoSOgG1iqM', hours: '24 小時', duration: '1–1.5 小時', parking: '村子入口有幾個小停車場，免費的不好找，收費的約 ¥500', notes: '整條走完來回約 1 小時，可以租腳踏車或電動滑板車；路上有小咖啡店和紅豆冰（ぜんざい）；走到底是海邊，很適合看夕陽；蚊子多，記得防蚊' })
+        item('d6-l', '午餐：ふくぎ屋', 'food', '福木林道裡的沖繩麵', { restaurantId: 'r-fukugiya', driveTime: '步行即到' }),
+        item('d6-b', '備瀬福木林道', 'sight', '福木樹蔭下的老村落散步', { mapQuery: '備瀬のフクギ並木', placeId: 'ChIJ6z_osjv65DQRNpoSOgG1iqM', hours: '24 小時', duration: '1–1.5 小時', parking: '村子入口有幾個小停車場，免費的不好找，收費的約 ¥500', notes: '整條走完來回約 1 小時，可以租腳踏車或電動滑板車；路上有小咖啡店和紅豆冰（ぜんざい）；走到底是海邊，很適合看夕陽；蚊子多，記得防蚊', driveTime: '約 15 分' }),
+        item('d6-d', '晚餐：OKI-SHABU 本部美ら海', 'food', '阿古豬與和牛涮涮鍋，蜜月特別的一晚', { restaurantId: 'r-okishabu' })
       ]
     },
     {
@@ -201,7 +205,11 @@ window.TRIP = (function () {
     rest('r-hama', 'HAMA 壽司 古島店', { type: '壽司', area: '那霸 古島', status: 'planned', day: 8, addedBy: '心萱', mapQuery: 'はま寿司 那覇古島店', placeId: 'ChIJ0bDIk-hr5TQRtvrRQOAyur0', price: '¥1,000–2,000', recommend: '沖繩限定握壽司、多種醬油可選', hours: '10:00–凌晨 5:00', address: '那霸市古島 1-25-3', phone: '0570-001-689', description: '平價迴轉壽司連鎖', notes: '入口機台抽號碼；平板點餐可切換中文' }),
     rest('r-kokuto', '黑糖飲料店', { type: '飲料', area: '沖繩北部', group: 'cafe', addedBy: '心萱' }),
     rest('r-pork', 'Pork Tamago 飯糰', { type: '飯糰', area: '那霸 牧志', addedBy: '心萱', mapQuery: 'ポークたまごおにぎり 牧志市場本店', placeId: 'ChIJRX9edXpp5TQRRGYawVc2Jmk', price: '約 ¥400–800／個', recommend: '炸蝦塔塔醬飯糰、苦瓜天婦羅、油味噌', hours: '7:00–20:00', address: '那霸市松尾 2-8-35', phone: '098-867-9550', description: '現點現做的沖繩國民飯糰', notes: '早上常大排長龍；內用座位在隔壁另一間；那霸機場國內線、國際線也有分店' }),
-    rest('r-rise', 'Grill&Pancake RISE', { type: '早午餐・鬆餅', area: '那霸 鏡原', status: 'planned', day: 9, group: 'cafe', mapQuery: 'Grill&Pancake RISE', placeId: 'ChIJ9_PYOABp5TQRlynY01fe_6k', price: '¥1,000–2,000', recommend: '香草風味鬆餅、厚切培根和香腸、阿古豬墨西哥餅配太陽蛋', hours: '8:00–15:00（週一、週二公休）', address: '那霸市鏡原町 3-7 101', phone: '080-2573-0322', description: '叢林風小店的美式早餐，份量大，評分 4.9', notes: '3/10 是星期三，有營業；在往機場的方向，吃完去還車很順', reservationInfo: '不用預約' })
+    rest('r-rise', 'Grill&Pancake RISE', { type: '早午餐・鬆餅', area: '那霸 鏡原', status: 'planned', day: 9, group: 'cafe', mapQuery: 'Grill&Pancake RISE', placeId: 'ChIJ9_PYOABp5TQRlynY01fe_6k', price: '¥1,000–2,000', recommend: '香草風味鬆餅、厚切培根和香腸、阿古豬墨西哥餅配太陽蛋', hours: '8:00–15:00（週一、週二公休）', address: '那霸市鏡原町 3-7 101', phone: '080-2573-0322', description: '叢林風小店的美式早餐，份量大，評分 4.9', notes: '3/10 是星期三，有營業；在往機場的方向，吃完去還車很順', reservationInfo: '不用預約' }),
+    rest('r-yanbaru', 'Yanbaru Meat', { type: '牛排・西式小菜', area: '恩納村 前兼久', status: 'planned', day: 4, mapQuery: 'Yanbaru Meat 恩納', placeId: 'ChIJ0wPjcMoa5TQROmbpLullsko', price: '約 ¥3,000–5,000', recommend: '夏多布里昂、沙朗牛排、蒸豬肉、蒜香炒飯、凱薩沙拉', hours: '17:00–24:00（週三、週日公休）', address: '恩納村前兼久 858-1 2F', phone: '098-923-3915', description: '氣氛熱鬧的牛排小酒館，評分 4.7，店員親切', notes: '跟 BLISSTIA 同一區，可以走路或開車幾分鐘', reservationInfo: '晚餐熱門，建議前幾天打電話訂位' }),
+    rest('r-yukuruba', 'ゆくるば', { nameJa: 'ゆくるば｜カフェ & あぐー豚しゃぶしゃぶ', type: '阿古豬涮涮鍋・咖啡', area: '本部 備瀬', status: 'planned', day: 5, mapQuery: 'ゆくるば 備瀬', placeId: 'ChIJiSmQpjv65DQR_4gb3c97PIc', price: '約 ¥2,000–4,000', recommend: '阿古豬涮涮鍋、芒果汁', hours: '11:00–16:00、17:00–22:00', address: '本部町備瀬 403', phone: '0980-43-1271', parking: '店門口有停車位', description: '福木林道旁被綠樹包圍的小店，白天是咖啡廳、晚上吃涮涮鍋', notes: '離 Yukurina 開車約 5 分', reservationInfo: '週六晚上建議先打電話訂位' }),
+    rest('r-fukugiya', 'ふくぎ屋', { nameJa: 'ふくぎ屋', type: '沖繩麵・定食', area: '本部 備瀬', status: 'planned', day: 6, mapQuery: 'ふくぎ屋 備瀬', placeId: 'ChIJbYkXrjv65DQRMcI12696IAY', price: '約 ¥1,000–1,500', recommend: '限定的海藻（アーサ）沖繩麵、排骨沖繩麵、苦瓜炒、塔可飯、芒果汁', hours: '11:30–14:30（週四公休）', address: '本部町備瀬 388-3', phone: '0980-43-5001', description: '就在福木林道裡，往翡翠海灘的路上，在地人也常來', notes: '14:30 就關門，逛完海灘先來吃再散步林道', reservationInfo: '不用預約' }),
+    rest('r-okishabu', 'OKI-SHABU 本部美ら海', { nameJa: 'OKINAWA SHABU-SHABU OKI-SHABU', type: '涮涮鍋・牛排', area: '本部 濱元', status: 'planned', needReservation: true, day: 6, mapQuery: 'OKI-SHABU 本部', placeId: 'ChIJN2RZGsH75DQRXdwFoOCiUTU', price: '較高價位', recommend: '阿古豬涮涮鍋、和牛、夏多布里昂牛排、最後的蕎麥麵', address: '本部町濱元 335-1', phone: '050-1794-8520', description: '露營風的溫馨小店，老闆很熱情，評論說是沖繩最好吃的阿古豬涮涮鍋之一', notes: 'Google Maps 上的營業時間不準，訂位時請確認晚餐時段', reservationInfo: '附近晚上很多店客滿，建議出發前先打電話或用 Google Maps 訂位' })
   ];
 
   // 航班：bookingRef、ticketUrl 屬於私人資訊，請在網站內填寫
