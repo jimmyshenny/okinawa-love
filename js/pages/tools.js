@@ -9,7 +9,7 @@
     ['packing', '行李清單', 'Jimmy・Shenny・共用', 'bag', '#E4ECE7'],
     ['shopping', '購物清單', '想買的東西', 'list', '#EEE8F0'],
     ['notes', '旅行備忘錄', '臨時資訊與提醒', 'note', '#EFEBE0'],
-    ['guide', '入境・退稅', 'Visit Japan Web・退稅新制', 'plane', '#E4ECE7'],
+    ['guide', '出發準備', 'eSIM・入境・退稅・行李', 'plane', '#E4ECE7'],
     ['emergency', '緊急資訊', '110・119・保險', 'sos', '#F6E9E0'],
     ['bookings', '重要預約', '訂位・訂房一覽', 'lock', '#E7EEF1'],
     ['backup', '資料備份', '匯出・匯入', 'backup', '#EFEBE0']
@@ -328,7 +328,9 @@
   function guide() {
     var g = T.travelGuide || {};
     function list(arr) { return '<ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px">' + (arr || []).map(function (x) { return '<li class="small">' + esc(x) + '</li>'; }).join('') + '</ol>'; }
-    return '<article class="card card-pad" style="display:flex;flex-direction:column;gap:10px"><h3 style="font-size:16px">出發前：Visit Japan Web</h3>' + list(g.visitJapanWeb) +
+    return (g.esim ? '<article class="card card-pad" style="display:flex;flex-direction:column;gap:10px;margin-bottom:12px"><h3 style="font-size:16px">出發前：網路 eSIM</h3><p class="small" style="margin:0"><b>' + esc(g.esim.name) + '</b></p>' + list(g.esim.tips) +
+        '<a class="btn btn-primary btn-block" href="' + esc(g.esim.url) + '" target="_blank" rel="noopener">' + ic('globe', 16) + '到 KKday 購買 eSIM</a></article>' : '') +
+      '<article class="card card-pad" style="display:flex;flex-direction:column;gap:10px"><h3 style="font-size:16px">出發前：Visit Japan Web</h3>' + list(g.visitJapanWeb) +
         '<a class="btn btn-primary btn-block" href="https://www.vjw.digital.go.jp/" target="_blank" rel="noopener">' + ic('globe', 16) + '開啟 Visit Japan Web 官網</a></article>' +
       '<article class="card card-pad" style="margin-top:12px;display:flex;flex-direction:column;gap:10px"><h3 style="font-size:16px">退稅（2026/11 起新制）</h3>' + list(g.taxRefund) +
         '<p class="tiny muted" style="margin:0">規定以出發前觀光廳與各店家的最新公告為準。</p></article>' +
