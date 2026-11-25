@@ -197,8 +197,8 @@ window.TRIP = (function () {
 
   // 航班：bookingRef、ticketUrl 屬於私人資訊，請在網站內填寫
   var flights = {
-    outbound: { airline: '星宇航空 STARLUX', flightNo: 'JX870', aircraft: 'A350-900', duration: '1 小時 35 分', date: '2027-03-02', depTime: '11:40', arrTime: '14:15', from: 'TPE', fromName: '桃園國際機場', fromTerminal: '第一航廈', to: 'OKA', toName: '那霸機場', toTerminal: '國際線航廈', cabin: '經濟艙', baggage: '', checkinNote: '時間都是當地時間（沖繩比台灣快 1 小時）。建議 9:40 前到桃園機場第一航廈辦理報到' },
-    'return': { airline: '星宇航空 STARLUX', flightNo: 'JX871', aircraft: 'A330-900neo', duration: '1 小時 45 分', date: '2027-03-10', depTime: '15:25', arrTime: '16:10', from: 'OKA', fromName: '那霸機場', fromTerminal: '國際線航廈', to: 'TPE', toName: '桃園國際機場', toTerminal: '第一航廈', cabin: '經濟艙', baggage: '', checkinNote: '那霸國際線托運沒有自助機、排隊可能很久，建議 12:30 前還車、13:00 前到機場' }
+    outbound: { airline: '星宇航空 STARLUX', flightNo: 'JX870', aircraft: 'A350-900', duration: '1 小時 35 分', date: '2027-03-02', depTime: '11:40', arrTime: '14:15', from: 'TPE', fromName: '桃園國際機場', fromTerminal: '第一航廈', to: 'OKA', toName: '那霸機場', toTerminal: '國際線航廈', cabin: '經濟艙', baggage: '托運 23kg × 1', baggageNote: '每人：托運 1 件 23kg（長＋寬＋高 158cm 內）；手提行李 1 件（56×36×23cm）＋個人物品 1 件（30×40×10cm，放前方座位下），兩件合計 7kg', checkinNote: '時間都是當地時間（沖繩比台灣快 1 小時）。建議 9:40 前到桃園機場第一航廈辦理報到' },
+    'return': { airline: '星宇航空 STARLUX', flightNo: 'JX871', aircraft: 'A330-900neo', duration: '1 小時 45 分', date: '2027-03-10', depTime: '15:25', arrTime: '16:10', from: 'OKA', fromName: '那霸機場', fromTerminal: '國際線航廈', to: 'TPE', toName: '桃園國際機場', toTerminal: '第一航廈', cabin: '經濟艙', baggage: '托運 23kg × 1', baggageNote: '每人：托運 1 件 23kg（長＋寬＋高 158cm 內）；手提行李 1 件（56×36×23cm）＋個人物品 1 件（30×40×10cm，放前方座位下），兩件合計 7kg', checkinNote: '那霸國際線托運沒有自助機、排隊可能很久，建議 12:30 前還車、13:00 前到機場' }
   };
 
   var rentalCar = {

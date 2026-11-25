@@ -32,6 +32,7 @@
         '<div><div class="k">訂位代號</div><div class="v">' + privVal(key + ':ref') + '</div></div>' +
       '</div>' +
       '<div class="card-pad" style="padding-top:0;display:flex;flex-direction:column;gap:8px">' +
+        (has(f.baggageNote) ? '<p class="small" style="margin:0">🧳 ' + esc(f.baggageNote) + '</p>' : '') +
         '<p class="small muted" style="margin:0">' + (has(f.checkinNote) ? esc(f.checkinNote) : '建議起飛前 2 小時抵達機場辦理報到') + '</p>' +
         '<div class="btn-row">' +
           (etk ? '<a class="btn btn-primary" href="' + esc(etk) + '" target="_blank" rel="noopener">電子機票</a>' : '') +
