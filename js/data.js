@@ -68,13 +68,14 @@ window.TRIP = (function () {
     },
     {
       id: 'd2', day: 2, date: '2027-03-03', weekday: '星期三', area: '那霸',
-      theme: '魚市場與瀨長島的海風，涮涮鍋晚餐',
+      theme: '瀨長島的海風、魚市場午餐，涮涮鍋晚餐',
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-naha-1',
       itinerary: [
-        item('d2-1', '午餐：系滿魚市場', 'food', '海鮮午餐', { restaurantId: 'r-itoman', driveTime: '約 15 分' }),
-        item('d2-2', '瀨長島', 'sight', '海邊白色小鎮，看飛機起降', { mapQuery: '瀬長島ウミカジテラス', parkingPlaceId: 'ChIJ-TqfJ8Rp5TQRgox-4OQ8hwA', parkingName: '瀬長島 サンセットパーキング', parking: '瀨長島展望台附近停車（免費，車位不多）', addressEn: 'Senaga, Tomigusuku, Okinawa 901-0233', parkingFee: '免費', duration: '1.5–2 小時', notes: '白色小鎮「Umikaji Terrace」有很多餐廳甜點；島西邊展望台可近距離看飛機起降、看夕陽。停車場常滿，上坡處還有更多免費車位', driveTime: '約 30 分' }),
-        item('d2-3', '玉泉洞', 'sight', '沖繩世界・鐘乳石洞', { mapQuery: '玉泉洞 おきなわワールド', placeId: 'ChIJa3ifUYVp5TQR3QZD1tyLml4', address: '沖縄県南城市玉城前川1336（おきなわワールド內）', hours: '9:00–17:30（最後入園 16:00）', ticket: '大人 ¥2,000（含玉泉洞與園區）', parking: '免費停車場約 400 台', parkingFee: '免費', duration: '2–3 小時', notes: '洞內開放約 890 m，潮濕地滑請穿好走的鞋；Super Eisa 太鼓表演約 10:30、12:30、14:30', driveTime: '約 40 分', needTicket: true, reservation: '【何時買】出發前 1–2 週網路買就好（不會賣完，主要省排隊、還有小折扣）。【怎麼買】KKday、Klook、HIS 等平台買「おきなわワールド 入園券」，網路價大人約 ¥1,900（現場 ¥2,000）；依平台指示出示 QR 碼或憑證換票。買了通常不能退。' }),
+        item('d2-2', '瀨長島', 'sight', '海邊白色小鎮，看飛機起降', { mapQuery: '瀬長島ウミカジテラス', parkingPlaceId: 'ChIJ-TqfJ8Rp5TQRgox-4OQ8hwA', parkingName: '瀬長島 サンセットパーキング', parking: '瀨長島展望台附近停車（免費，車位不多）', addressEn: 'Senaga, Tomigusuku, Okinawa 901-0233', parkingFee: '免費', duration: '1.5–2 小時', notes: '白色小鎮「Umikaji Terrace」有很多餐廳甜點；島西邊展望台可近距離看飛機起降、看夕陽。停車場常滿，上坡處還有更多免費車位', driveTime: '約 15 分' }),
+        item('d2-1', '午餐：系滿魚市場', 'food', '海鮮午餐', { restaurantId: 'r-itoman', driveTime: '約 25 分' }),
+        item('d2-3', '玉泉洞', 'sight', '沖繩世界・鐘乳石洞', { mapQuery: '玉泉洞 おきなわワールド', placeId: 'ChIJa3ifUYVp5TQR3QZD1tyLml4', address: '沖縄県南城市玉城前川1336（おきなわワールド內）', hours: '9:00–17:30（最後入園 16:00）', ticket: '大人 ¥2,000（含玉泉洞與園區）', parking: '免費停車場約 400 台', parkingFee: '免費', duration: '2–3 小時', notes: '洞內開放約 890 m，潮濕地滑請穿好走的鞋；Super Eisa 太鼓表演約 10:30、12:30、14:30', driveTime: '約 35 分', needTicket: true, reservation: '【何時買】出發前 1–2 週網路買就好（不會賣完，主要省排隊、還有小折扣）。【怎麼買】KKday、Klook、HIS 等平台買「おきなわワールド 入園券」，網路價大人約 ¥1,900（現場 ¥2,000）；依平台指示出示 QR 碼或憑證換票。買了通常不能退。' }),
+        item('d2-3b', '回旅館', 'stay', '回那霸歌町 Roynet 休息一下，再出門吃晚餐', { stayId: 'stay-naha-1', driveTime: '約 10 分' }),
         item('d2-4', '晚餐：Shima Shabushabu Nakama 島', 'food', '涮涮鍋晚餐（約 1/3 開放訂位，訂 19:30）', { restaurantId: 'r-nakama', time: '19:30' })
       ]
     },
@@ -84,9 +85,9 @@ window.TRIP = (function () {
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-onna',
       itinerary: [
-        item('d3-1', '旅館 Check out', 'stay', '那霸住宿退房', { navigable: false, driveTime: '約 20 分' }),
-        item('d3-3', '午餐：A&W 牧港店', 'food', '復古得來速漢堡，麥根沙士漂浮', { restaurantId: 'r-aw', driveTime: '約 20 分' }),
-        item('d3-2', '美國村', 'sight', '北谷海邊街區散步', { mapQuery: '美浜アメリカンビレッジ', placeId: 'ChIJzZoVCAUT5TQRzIueHYt83hs', addressEn: 'Mihama, Chatan, Nakagami District, Okinawa 904-0115', hours: '店家多 10:00–22:00', duration: '2–3 小時', parking: '大型免費町營停車場（約 1,500 台）', parkingFee: '免費', notes: 'ZHYVAGO 咖啡在這裡；傍晚到海邊看夕陽，摩天輪 11:00–22:00、一圈約 15 分鐘', driveTime: '約 40 分', nearby: [{ name: 'ZHYVAGO COFFEE ROASTERY', q: 'ZHYVAGO COFFEE ROASTERY', placeId: 'ChIJh4EKsv4T5TQRU-h2svXc5tk', note: '就在美國村海邊，冷萃咖啡和提拉米蘇；2F 陽台看海' }] }),
+        item('d3-1', '旅館 Check out', 'stay', '那霸住宿退房', { navigable: false, driveTime: '約 30 分' }),
+        item('d3-3', '午餐：A&W 牧港店', 'food', '復古得來速漢堡，麥根沙士漂浮', { restaurantId: 'r-aw', driveTime: '約 30 分' }),
+        item('d3-2', '美國村', 'sight', '北谷海邊街區散步', { mapQuery: '美浜アメリカンビレッジ', placeId: 'ChIJzZoVCAUT5TQRzIueHYt83hs', addressEn: 'Mihama, Chatan, Nakagami District, Okinawa 904-0115', hours: '店家多 10:00–22:00', duration: '2–3 小時', parking: '大型免費町營停車場（約 1,500 台）', parkingFee: '免費', notes: 'ZHYVAGO 咖啡在這裡；傍晚到海邊看夕陽，摩天輪 11:00–22:00、一圈約 15 分鐘', driveTime: '約 35 分', nearby: [{ name: 'ZHYVAGO COFFEE ROASTERY', q: 'ZHYVAGO COFFEE ROASTERY', placeId: 'ChIJh4EKsv4T5TQRU-h2svXc5tk', note: '就在美國村海邊，冷萃咖啡和提拉米蘇；2F 陽台看海' }] }),
         item('d3-4', '旅館 Check in', 'stay', '入住 BLISSTIA SUITES & RESORT', { stayId: 'stay-onna', driveTime: '約 10 分' }),
         item('d3-5', '晚餐：STEAK HOUSE jam', 'food', '鐵板燒牛排套餐，份量很大', { restaurantId: 'r-jam', time: '18:30' })
       ]
@@ -142,7 +143,7 @@ window.TRIP = (function () {
         item('d7-1', '早午餐：MOKULELE', 'food', '海景早午餐，吃完再回飯店退房', { restaurantId: 'r-mokulele', driveTime: '約 7 分', nearby: [{ name: 'Fruit Cafe（備案）', q: 'Fruit Cafe 本部 健堅', placeId: 'ChIJsyj2qff75DQRPu6gcxt4XA4', note: '9:00–15:00，看得到海和瀨底大橋，巴西莓碗、法式吐司；只收日幣現金；在往南回那霸的路上' }] }),
         item('d7-2', '旅館 Check out', 'stay', '北部住宿退房', { navigable: false, driveTime: '約 1 小時 20 分（走高速）' }),
         item('d7-3', '逛街：PARCO CITY', 'shopping', '浦添的購物中心', { mapQuery: 'サンエー浦添西海岸 PARCO CITY', placeId: 'ChIJxZQf9gpr5TQRwLWyT5Osigc', addressEn: '3-1-1 Irijima, Urasoe, Okinawa 901-2123', hours: '10:00–22:00', duration: '3 小時以上', parking: '大型停車場（假日找車位要等一下）', notes: '三層樓，有 UNIQLO、GU、無印、Daiso、ABC-Mart、LEGO 等；美食街看得到海景；退稅櫃台在 1F', driveTime: '約 20 分' }),
-        item('d7-4', '旅館 Check in', 'stay', '入住 THE NEST 那霸', { stayId: 'stay-naha-2', driveTime: '步行約 10 分' }),
+        item('d7-4', '旅館 Check in', 'stay', '入住 Hotel Torifito 那霸旭橋', { stayId: 'stay-naha-2', driveTime: '步行約 15 分（開車約 5 分）' }),
         item('d7-5', '晚餐：一心壽喜燒', 'food', '壽喜燒晚餐（2/1 開放訂位，18:00 場）', { restaurantId: 'r-isshin', time: '18:00' })
       ]
     },
@@ -153,9 +154,9 @@ window.TRIP = (function () {
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-naha-2',
       itinerary: [
-        item('d8-1', '午餐：POCO CAFE', 'food', '沖繩家常菜午餐（塔可飯、沖繩麵）', { restaurantId: 'r-poco', driveTime: '約 25 分' }),
+        item('d8-1', '午餐：POCO CAFE', 'food', '沖繩家常菜午餐（塔可飯、沖繩麵）', { restaurantId: 'r-poco', driveTime: '約 30 分' }),
         item('d8-2', '豐崎百貨', 'shopping', 'iias 沖繩豐崎', { mapQuery: 'iias沖縄豊崎', placeId: 'ChIJj-bxt39p5TQRVVi5ETcWlRM', addressEn: '3-35 Toyosaki, Tomigusuku, Okinawa 901-0225', hours: '10:00–21:00', duration: '2–3 小時', parking: '室內停車場', parkingFee: '免費', notes: '豐崎 LOFT 在 3F；有 UNIQLO、GU、超市可買伴手禮；旁邊就是 Ashibinaa Outlet', driveTime: '步行約 5 分', nearby: [{ name: '豐崎 LOFT', q: '豊崎ロフト', placeId: 'ChIJH8VZ7Ilp5TQRVKVM97AdiUA', note: '就在 iias 3F，文具、雜貨、美妝' }] }),
-        item('d8-3', 'Ashibinaa Outlet', 'shopping', '沖繩 Outlet 購物', { mapQuery: '沖縄アウトレットモール あしびなー', placeId: 'ChIJ98yehgto5TQRJj4hYbNQH9U', addressEn: '1-188 Toyosaki, Tomigusuku, Okinawa 901-0225', hours: '10:00–20:00', duration: '2–3 小時', parking: '大型停車場', parkingFee: '免費', notes: '開放式 Outlet，離機場約 15 分鐘；有投幣置物櫃；逛完可走去隔壁 iias', driveTime: '約 25 分' }),
+        item('d8-3', 'Ashibinaa Outlet', 'shopping', '沖繩 Outlet 購物', { mapQuery: '沖縄アウトレットモール あしびなー', placeId: 'ChIJ98yehgto5TQRJj4hYbNQH9U', addressEn: '1-188 Toyosaki, Tomigusuku, Okinawa 901-0225', hours: '10:00–20:00', duration: '2–3 小時', parking: '大型停車場', parkingFee: '免費', notes: '開放式 Outlet，離機場約 15 分鐘；有投幣置物櫃；逛完可走去隔壁 iias', driveTime: '約 40 分（傍晚可能塞車）' }),
         item('d8-4', '晚餐：HAMA 壽司', 'food', '迴轉壽司晚餐，平板點餐可切中文', { restaurantId: 'r-hama' })
       ]
     },
@@ -177,10 +178,10 @@ window.TRIP = (function () {
   ];
 
   var accommodations = [
-    { id: 'stay-naha-1', name: '那霸歌町大和 Roynet 飯店 PREMIER', area: '那霸', checkIn: '14:00', checkOut: '11:00', address: '沖縄県那覇市おもろまち4-2-14', addressEn: '4-2-14 Omoromachi, Naha, Okinawa 900-0006', parking: '飯店內 D-Parking 機械式 40 台，每晚 ¥1,100，先到先停，在停車場直接付款；23:00–7:00 不能進出', notes: '單軌電車「おもろまち」站走路約 6 分；1F 有 7-11，對面是 DFS 免稅店和大型購物中心', phone: '098-862-5055', website: '', photo: '', mapQuery: '', placeId: 'ChIJ__Ak3T5r5TQR5GJXTBtBiNE' },
+    { id: 'stay-naha-1', name: '那霸歌町大和 Roynet 飯店 PREMIER', area: '那霸', checkIn: '15:00', checkOut: '11:00', address: '沖縄県那覇市おもろまち4-2-14', addressEn: '4-2-14 Omoromachi, Naha, Okinawa 900-0006', parking: '飯店內 D-Parking 機械式 40 台，每晚 ¥1,100，先到先停，在停車場直接付款；23:00–7:00 不能進出', notes: '訂的是官網「沖繩暢享」方案：15:00 入住、不含早餐，免費取消到 2027/2/28 23:59（日本時間）。單軌電車「おもろまち」站走路約 6 分；1F 有 7-11，對面是 DFS 免稅店和大型購物中心', phone: '098-862-5055', website: '', photo: '', mapQuery: '', placeId: 'ChIJ__Ak3T5r5TQR5GJXTBtBiNE' },
     { id: 'stay-onna', name: 'BLISSTIA SUITES & RESORT 沖繩恩納村', area: '恩納村', checkIn: '15:00', checkOut: '11:00', address: '沖縄県国頭郡恩納村前兼久497-6', addressEn: '497-6 Maeganeku, Onna, Kunigami District, Okinawa 904-0414', parking: '戶外停車場 124 台，每天 ¥1,000（最多 ¥2,000）', notes: '全房 50㎡ 以上附廚房與陽台；無邊際泳池、室內泳池、大浴場（6:00–10:00、16:00–23:00）；泳池旁 Lounge 12:00–22:00 有飲料暢飲', phone: '098-979-5177', website: '', photo: '', mapQuery: '', placeId: 'ChIJFepf2EIb5TQR6qfIYlX5wKw' },
     { id: 'stay-north', name: 'Yukurina Resort Okinawa Lemon House', area: '北部（本部町）', checkIn: '', checkOut: '', address: '', addressEn: '75-5 Yamakawa, Motobu, Kunigami District, Okinawa 905-0205', parking: '', notes: 'Google Maps 上有兩個同名地點，入住前請跟訂房資料確認地址；Yukurina 部分房型沒有櫃台、要到別處辦入住，請先看訂房確認信', phone: '0980-48-3903', website: '', photo: '', mapQuery: '', placeId: 'ChIJvaDVIdL75DQRBUVjMK-K_0s' },
-    { id: 'stay-naha-2', name: 'THE NEST 那霸', area: '那霸', checkIn: '15:00', checkOut: '11:00', address: '沖縄県那覇市西1-6-1', addressEn: '1-6-1 Nishi, Naha, Okinawa 900-0036', parking: '飯店停車場每天約 ¥1,800（升降式，進出可能要等）', notes: '14F 有戶外泳池；單軌電車「旭橋」站走路約 4 分，國際通走路約 6 分', phone: '098-869-8015', website: '', photo: '', mapQuery: '', placeId: 'ChIJQ_4MyIpp5TQRhiteieLyayA' }
+    { id: 'stay-naha-2', name: 'Hotel Torifito 那霸旭橋（托麗芙特酒店）', area: '那霸', checkIn: '14:00', checkOut: '11:00', address: '沖縄県那覇市西1-11-19', addressEn: '1-11-19 Nishi, Naha, Okinawa 900-0036', parking: '飯店室內立體停車場約 28 台，每晚約 ¥1,500–1,800，不能預約；滿了要停附近的收費停車場', notes: '訂的是 Booking.com「舒適雙人房」（17㎡、一張大床），2027/2/22 前可免費取消、2/20 前不用付款。單軌電車「旭橋」站走路約 8 分，國際通、波之上海灘走路可到；早餐自助餐 6:30–10:00（另外付費）', phone: '098-860-6430', website: '', photo: '', mapQuery: 'ホテル・トリフィート那覇旭橋', placeId: '' },
   ];
 
   // status：reserved 已預約 | planned 已安排 | mustEat 必吃 | wishlist 想去 | visited 已造訪
@@ -202,7 +203,7 @@ window.TRIP = (function () {
     rest('r-buchi', 'Buchi 燒肉', { nameJa: 'ぶち 久茂地店', type: '燒肉', area: '那霸 久茂地', status: 'planned', needReservation: true, reserveOn: '2027-02-01', day: 1, mapQuery: 'Buchi Kumojiten', placeId: 'ChIJzcnA2ndp5TQRRkXi5c02uKk', notes: '週三公休（已改到 3/2 星期二）', price: '¥3,000–7,000', recommend: '和牛沙朗、無骨牛小排、沖繩和牛拼盤', hours: '17:00–22:00（週三公休）', address: '那霸市久茂地 3-12-1', phone: '098-943-6567', reservationInfo: '【何時訂】每月 1 日開放下個月的訂位，3/2 要在 2/1 訂，熱門時段很快滿，2/1 一開放就訂。【時段】固定時段：18:40（訂位只保留 10 分鐘，請準時到）。【怎麼訂】到官方 Instagram @buchi_kumoji，看個人檔案裡的預約連結；或直接私訊（DM），照店家格式提供：日期、姓名、人數、時段。', website: 'https://www.instagram.com/buchi_kumoji/' }),
     rest('r-shrimp', '沖繩蝦蝦飯', { type: '蝦飯', area: '古宇利島', status: 'planned', day: 5, mapQuery: 'KOURI SHRIMP', placeId: 'ChIJcep34MxZ5DQR5VjNV0a8HWg', price: '約 ¥2,000–2,500／份', recommend: '辣味蒜香奶油蝦、原味蒜香蝦；可加點 Onaha 牛、沖繩薯條', hours: '11:00–16:00', address: '今帰仁村古宇利 314', phone: '0980-56-1242', parking: '有停車場，有人指揮', description: '夏威夷風蒜香蝦，3F 露台看海', notes: '建議前一天先下載 KOURI SHRIMP App，用 App 點餐、選取餐時間（3/6 約 13:00）；現場點的話是平板點餐，1F 拿飲料、2F 拿餐；一份份量大，兩人可分食；可刷卡', reservationInfo: '可以先用「KOURI SHRIMP」官方 App 線上點餐：線上刷卡付款，並選擇取餐時間，到店直接取餐，不用排隊點餐。內用座位不能訂，到了再找位子。' }),
     rest('r-isshin', '一心壽喜燒', { type: '壽喜燒', area: '那霸 久茂地', status: 'planned', needReservation: true, reserveOn: '2027-02-01', day: 7, mapQuery: 'Oniku no Isshin', placeId: 'ChIJLcZbI5xp5TQRtD4FrGpXwws', price: '¥5,000–10,000', recommend: '阿古豬或和牛壽喜燒套餐（最後加烏龍麵或蕎麥麵）', hours: '14:00–22:00（週三公休；3/8 週一 Google Maps 顯示 18:00 開）', address: '那霸市久茂地 1-5-1', phone: '098-866-0736', description: '老闆會在桌邊幫忙煮第一輪', notes: '週三公休；標示價格不含消費稅，另收桌位費每人 ¥300；最後點餐 21:00；菜單只有日文／中文，店員會說英文', reservationInfo: '【何時訂】應該是 2/1 開放 3 月的訂位，2/1 一開放就訂（跟 Buchi 同一天）。【時段】固定 4 個時段：14:00、16:00、18:00、20:00，每場最多 1 小時 45 分鐘；3/8 星期一 Google Maps 顯示 18:00 才開，所以訂 18:00 場。【怎麼訂】TableCheck 中文訂位頁（點「官網」按鈕），或寫信到 isshin.okinawa3855@gmail.com、打電話 098-866-0736。取消和變更規定以預約時顯示的為準。', website: 'https://www.tablecheck.com/zh-TW/isshin-okinawa/reserve/message' }),
-    rest('r-poco', 'POCO CAFE', { nameJa: 'POCO CAFE OKINAWA', type: '沖繩料理・咖啡', area: '那霸 牧志', status: 'planned', day: 8, mapQuery: 'POCO CAFE OKINAWA 牧志', placeId: 'ChIJ9-mXA3pp5TQRaDZ2b2Fz7bo', price: '¥1,000–2,000', recommend: '塔可飯＋沖繩麵套餐（A Set，附飲料）、咖哩飯、紅芋甜點、果昔', hours: '10:00–24:00', address: '那霸市牧志 1-3-62 2F', phone: '098-988-9980', description: '國際通旁的 2 樓小店，可以坐吧台或榻榻米，份量剛好、價格親民', notes: '在國際通附近，停車要找收費停車場；從 THE NEST 走路約 20 分，或搭單軌電車到牧志站', reservationInfo: '不用預約' }),
+    rest('r-poco', 'POCO CAFE', { nameJa: 'POCO CAFE OKINAWA', type: '沖繩料理・咖啡', area: '那霸 牧志', status: 'planned', day: 8, mapQuery: 'POCO CAFE OKINAWA 牧志', placeId: 'ChIJ9-mXA3pp5TQRaDZ2b2Fz7bo', price: '¥1,000–2,000', recommend: '塔可飯＋沖繩麵套餐（A Set，附飲料）、咖哩飯、紅芋甜點、果昔', hours: '10:00–24:00', address: '那霸市牧志 1-3-62 2F', phone: '098-988-9980', description: '國際通旁的 2 樓小店，可以坐吧台或榻榻米，份量剛好、價格親民', notes: '在國際通附近，停車要找收費停車場；從飯店開車約 13 分、走路約 25 分，或搭單軌電車到牧志站', reservationInfo: '不用預約' }),
     rest('r-zhyvago', 'Zhyvago Coffee Roastery', { type: '咖啡', area: '美國村', group: 'cafe', addedBy: '心萱', mapQuery: 'ZHYVAGO COFFEE ROASTERY', placeId: 'ChIJh4EKsv4T5TQRU-h2svXc5tk', price: '¥1,000 以內', recommend: '冷萃咖啡、提拉米蘇、起司蛋糕、Mad Chocolate Shake', hours: '7:00–22:00', address: '北谷町美浜 34-1', phone: '098-988-7833', description: '美國村海邊的紅磚咖啡館，2F 陽台看海' }),
     rest('r-applepie', '蘋果派', { type: '甜點', area: '機場', group: 'cafe', addedBy: '心萱' }),
     rest('r-aw', 'A&W 牧港店', { type: '漢堡', area: '浦添 牧港', status: 'planned', day: 3, addedBy: '心萱', mapQuery: 'A&W 牧港店', placeId: 'ChIJk5jkbZxs5TQR9YajcZ3aWXw', price: '¥1,000–2,000', recommend: '麥根沙士漂浮（沙士可免費續杯）、捲捲薯條、洋蔥圈', hours: '6:00–凌晨 2:00', address: '浦添市牧港 4-9-1', phone: '098-876-6081', description: '1969 年開的復古得來速，超好拍', notes: '觀光客多，點餐可能要排 30 分鐘；只想吃 A&W 可去其他分店（國際通也有）' }),
