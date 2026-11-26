@@ -314,12 +314,15 @@
         '<button class="btn btn-sm" data-priv="' + esc(key) + '" data-label="' + esc(label) + '">' + ic('lock', 14) + '編輯</button></div>';
     }
     var stayRows = T.accommodations.map(function (a0) { var a = App.accommodation(a0.id); return row((a.name || a.area + '住宿') + ' 訂房編號', 'stay:' + a.id); }).join('');
+    var today = (function () { var d = new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); })();
+    function resDate(iso) { var p = iso.split('-'); var d = new Date(+p[0], p[1] - 1, +p[2]); return (+p[1]) + '/' + (+p[2]) + '（' + '日一二三四五六'[d.getDay()] + '）'; }
     var needRes = App.restaurants().filter(function (r) { return r.needReservation || r.status === 'reserved'; });
     return '<p class="small muted" style="margin-top:0">' + ic('lock', 14) + ' 這裡的編號只存在這支手機，不會出現在 GitHub 上。兩支手機要各自填寫，或用「資料備份」互傳。</p>' +
       '<article class="card card-pad"><h3 style="font-size:16px">航班・租車</h3>' + row('去程訂位代號', 'flight:outbound:ref') + row('回程訂位代號', 'flight:return:ref') + row('租車預約編號', 'car:booking') + '</article>' +
       '<article class="card card-pad" style="margin-top:12px"><h3 style="font-size:16px">住宿</h3>' + stayRows + '</article>' +
       '<article class="card card-pad" style="margin-top:12px"><h3 style="font-size:16px;margin-bottom:6px">餐廳訂位</h3>' + (needRes.length ? needRes.map(function (r) {
-        return '<a href="#/food/r/' + encodeURIComponent(r.id) + '" style="display:flex;justify-content:space-between;align-items:center;min-height:48px;border-bottom:1px dashed #E3DDCE;text-decoration:none"><span>' + esc(r.name) + (r.day ? ' <span class="tiny muted">Day ' + esc(r.day) + '</span>' : '') + '</span>' +
+        return '<a href="#/food/r/' + encodeURIComponent(r.id) + '" style="display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:48px;padding:6px 0;border-bottom:1px dashed #E3DDCE;text-decoration:none"><span>' + esc(r.name) + (r.day ? ' <span class="tiny muted">Day ' + esc(r.day) + '</span>' : '') +
+          (r.reserveOn && r.status !== 'reserved' ? ' <span class="pill ' + (r.reserveOn <= today ? 'dark' : 'sand') + '">' + resDate(r.reserveOn) + (r.reserveOn <= today ? ' 可以訂了' : ' 訂') + '</span>' : '') + '</span>' +
           (r.status === 'reserved' ? '<span class="pill green">已預約</span>' : '<span class="pill peach">尚未預約</span>') + '</a>';
       }).join('') : '<p class="small muted">沒有需要訂位的餐廳</p>') + '</article>';
   }

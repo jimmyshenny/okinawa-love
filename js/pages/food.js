@@ -136,6 +136,7 @@
         { name: 'website', label: '官方網站', type: 'url', value: r.website },
         { name: 'menu', label: '菜單', type: 'textarea', value: r.menu },
         { name: 'reservationInfo', label: '預約資訊', type: 'textarea', value: r.reservationInfo },
+        { name: 'reserveOn', label: '預約日期（哪天要去訂位）', type: 'date', value: r.reserveOn, help: '會顯示在「工具 → 重要預約」的餐廳後面' },
         { name: 'parking', label: '停車資訊', value: r.parking },
         { name: 'description', label: '介紹', type: 'textarea', value: r.description },
         { name: 'notes', label: '注意事項', type: 'textarea', value: r.notes }
