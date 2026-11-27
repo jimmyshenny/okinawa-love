@@ -316,7 +316,8 @@
     var stayRows = T.accommodations.map(function (a0) { var a = App.accommodation(a0.id); return row((a.name || a.area + '住宿') + ' 訂房編號', 'stay:' + a.id); }).join('');
     var today = (function () { var d = new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); })();
     function resDate(iso) { var p = iso.split('-'); var d = new Date(+p[0], p[1] - 1, +p[2]); return (+p[1]) + '/' + (+p[2]) + '（' + '日一二三四五六'[d.getDay()] + '）'; }
-    var needRes = App.restaurants().filter(function (r) { return r.needReservation || r.status === 'reserved'; });
+    // 只列有排進行程（或已預約）的餐廳；還在想去清單、沒排日期的不放
+    var needRes = App.restaurants().filter(function (r) { return (r.needReservation && (r.day || r.status === 'planned')) || r.status === 'reserved'; });
     var todoDone = S.get('todo.done', {});
     var todoCard = (T.todos || []).length ? '<article class="card card-pad" style="margin-bottom:12px"><h3 style="font-size:16px;margin-bottom:6px">出發前待辦</h3>' + T.todos.slice().sort(function (a, b) { return a.date < b.date ? -1 : 1; }).map(function (t) {
       var done = !!todoDone[t.id];
