@@ -56,7 +56,7 @@
   }
 
   function card(r, i) {
-    var st = stLabel(r), fav = App.isFav(r.id);
+    var st = stLabel(r);
     return '<article class="food-card">' +
       '<div class="food-photo" style="background:' + TINTS[i % TINTS.length] + '">' + (has(r.photo) ? '<img src="' + esc(r.photo) + '" alt="" loading="lazy">' : esc(r.type || 'Okinawa')) + '</div>' +
       '<div class="food-body">' +
@@ -69,7 +69,6 @@
           (r.needReservation && r.status !== 'reserved' ? '<span class="pill peach">需訂位</span>' : '') + '</div>' +
       '</div>' +
       '<button class="food-open" data-detail="' + esc(r.id) + '" aria-label="查看 ' + esc(r.name) + ' 詳細資訊"></button>' +
-      '<button class="fav-btn" data-fav="' + esc(r.id) + '" aria-pressed="' + fav + '" aria-label="' + (fav ? '取消收藏' : '收藏') + ' ' + esc(r.name) + '">' + ic('heart', 18) + '</button>' +
     '</article>';
   }
 
