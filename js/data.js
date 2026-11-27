@@ -51,7 +51,7 @@ window.TRIP = (function () {
   var days = [
     {
       id: 'd1', day: 1, date: '2027-03-02', weekday: '星期二', area: '那霸',
-      theme: '啟程，飛向那霸，Buchi 燒肉',
+      theme: '啟程，奔赴沖繩',
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-naha-1',
       itinerary: [
@@ -68,7 +68,7 @@ window.TRIP = (function () {
     },
     {
       id: 'd2', day: 2, date: '2027-03-03', weekday: '星期三', area: '那霸',
-      theme: '瀨長島的海風、魚市場午餐，涮涮鍋晚餐',
+      theme: '瀨長島海風漫遊',
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-naha-1',
       itinerary: [
@@ -81,7 +81,7 @@ window.TRIP = (function () {
     },
     {
       id: 'd3', day: 3, date: '2027-03-04', weekday: '星期四', area: '恩納村',
-      theme: 'A&W 午餐、美國村散步，jam 鐵板燒晚餐',
+      theme: '美式風情悠閒漫步',
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-onna',
       itinerary: [
@@ -94,7 +94,7 @@ window.TRIP = (function () {
     },
     {
       id: 'd4', day: 4, date: '2027-03-05', weekday: '星期五', area: '恩納村',
-      theme: '耍廢日：濱之家午餐、Yanbaru Meat 晚餐',
+      theme: '甜蜜時光盡情耍廢',
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-onna',
       itinerary: [
@@ -105,7 +105,7 @@ window.TRIP = (function () {
     },
     {
       id: 'd5', day: 5, date: '2027-03-06', weekday: '星期六', area: '北部',
-      theme: '北上古宇利環島：海洋塔、蝦蝦飯，在心型岩看夕陽',
+      theme: '古宇利島環島逐海',
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-north',
       itinerary: [
@@ -123,7 +123,7 @@ window.TRIP = (function () {
     },
     {
       id: 'd6', day: 6, date: '2027-03-07', weekday: '星期日', area: '北部',
-      theme: '美麗海水族館、福木林道與島豆腐晚餐',
+      theme: '美麗海邂逅藍色世界',
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-north',
       itinerary: [
@@ -136,7 +136,7 @@ window.TRIP = (function () {
     },
     {
       id: 'd7', day: 7, date: '2027-03-08', weekday: '星期一', area: '北部 → 那霸',
-      theme: '飯店早餐，回那霸逛 PARCO、吃壽喜燒',
+      theme: '一路向南漫遊沖繩',
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-naha-2',
       itinerary: [
@@ -150,7 +150,7 @@ window.TRIP = (function () {
     {
       id: 'd8', day: 8, date: '2027-03-09', weekday: '星期二', area: '那霸',
       stayAction: { label: '星宇線上報到', url: 'https://www.starlux-airlines.com/zh-TW/check-in-fly/check-in-now/online-check-in' },
-      theme: '那霸購物日，HAMA 壽司收尾',
+      theme: '購物時光滿載而歸',
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-naha-2',
       itinerary: [
@@ -162,7 +162,7 @@ window.TRIP = (function () {
     },
     {
       id: 'd9', day: 9, date: '2027-03-10', weekday: '星期三', area: '那霸',
-      theme: '最後的早午餐，準備回家',
+      theme: '旅程終章，回我們的家',
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: '',
       itinerary: [
