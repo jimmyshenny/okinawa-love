@@ -221,7 +221,7 @@ h1, h2, h3 { font-family: var(--serif); margin: 0; line-height: 1.35; }
 .search input { flex: 1; min-width: 0; border: 0; background: transparent; font-size: 16px; color: var(--ink); outline: none; }
 .food-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .food-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; display: flex; flex-direction: column; text-align: left; padding: 0; width: 100%; position: relative; }
-.food-photo { height: 100px; display: flex; align-items: center; justify-content: center; font-family: var(--hand); font-size: 17px; color: var(--ink-2); }
+.food-photo { height: 120px; overflow: hidden; display: flex; align-items: center; justify-content: center; font-family: var(--hand); font-size: 17px; color: var(--ink-2); }
 .food-photo img { width: 100%; height: 100%; object-fit: cover; }
 .food-body { padding: 10px 10px 12px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
 .food-name { font-size: 15px; font-weight: 700; line-height: 1.35; }

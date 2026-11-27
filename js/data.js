@@ -199,7 +199,8 @@ window.TRIP = (function () {
       notes: '', website: '', photo: '', mapQuery: '', addedBy: '',
       mapUrl: '', placeId: '', parkingPlaceId: '', parkingName: '',
       kind: 'eat',         // eat 必吃 | buy 必買 | sight 景點
-      source: ''           // 'IG'：從 IG 收藏整理來的
+      source: '',          // 'IG'：從 IG 收藏整理來的
+      photoCredit: ''      // 圖片出處
     }, opts || {});
   }
 
@@ -309,6 +310,47 @@ window.TRIP = (function () {
       });
     });
   })();
+
+  // 口袋清單的圖片：餐廳／商店連到 Google Maps 店家照片，景點用維基共享資源的免費授權圖（附作者與授權）
+  var listPhotos = {
+    'r-nakama': ['https://lh3.googleusercontent.com/grass-cs/AABkmLfNsVNc_ibj5-j99wxwZL_0AcyPhcFwX875MOgydiA2Qt0nDx8QByfHXTOEP-CM7XQoD2683uuJ6MD_GWEs83kntoRJs9NVdjtyInkFygXi9CeOPVKURN62SkLZjHiMwW_jx-8JmNde6DGW=w640-h480-k-no', 'Google Maps'],
+    'r-itoman': ['https://lh3.googleusercontent.com/grass-cs/AABkmLfHwZPUl9tDnH06CPnGnTEa_p2xTMCBKmnhX6cr_2Q8ZLTIPOi4PaJooEoxY0Lqc6e3MX-_NAcrUHw3Z252pzQ4kGjBBI1fE46_iFvheOwcHDOfh23LgR6HoMo1Ltfa9zXCL08TRsUmoYD7=w640-h480-k-no', 'Google Maps'],
+    'r-urizun': ['https://lh3.googleusercontent.com/grass-cs/AABkmLdJ1vQUA2WyyjMpUWWySCVSl1XbIpASLXBK1gJu7DRv2pVKq78wHJb-BeGXuyO-Y4wJsWlBillAeVR2gDBLwzyY2yQ14UQy1o8iowkAesFRs0Gfji5PSQu1s392FoIBY202SFTCvg=w640-h480-k-no', 'Google Maps'],
+    'r-buchi': ['https://lh3.googleusercontent.com/grass-cs/AABkmLcN5p5m3QwLpAIBGR5BzKiVKEenq8BwROIBKWsv0M82cWFdhNFLud5l2hilidKHf8LJ1g7z8vKsSILf3MMSZI48GSuwQ8Svk3eARcu36pD999jQSrcInh540f4ZEl-yM7H-LCvATMO1DnOf=w640-h480-k-no', 'Google Maps'],
+    'r-shrimp': ['https://lh3.googleusercontent.com/grass-cs/AABkmLe9dhWvJbv2DE7iuVNZJzqJFZc3GhUoMEyOAqcfpg3SER3BWSzm-z2YaHuqnozxXLGqDFvLbeCN5vFe7UFRnVusqm41KllyqUrZovgyh6VnJMFX-bdIYXJIolsMu7aVcL2inmQ=w640-h480-k-no', 'Google Maps'],
+    'r-isshin': ['https://lh3.googleusercontent.com/grass-cs/AABkmLfu7OmihfOC9cIs8sMFHtdke1zy29TyFryc5BcdmNqG5ODX91h-UtfgjTARgzKoHifj7b70T9K4jLAffQKnE7hk7OruEZLzxnkxuqzqdt1o_3TSMDvO75y2wS4eeZ_r8b-m_26GoQ=w640-h480-k-no', 'Google Maps'],
+    'r-poco': ['https://lh3.googleusercontent.com/grass-cs/AABkmLfS1HXrnYtfHYX6dIcvEOAUgP1cbJh64NNoV3Q_WE_bjvSWZMOY4lT1KsLwvhPYkLsLqyovolLb9imB-sEstAUQzcCMLq_inna78g4vgAr1NYQckvgFPJkxpyiHNRyZ_RvZ7UkSjg=w640-h480-k-no', 'Google Maps'],
+    'r-zhyvago': ['https://lh3.googleusercontent.com/grass-cs/AABkmLdRjo3B16Jc5qpih23Aj02lM-SazhRY3GNjleH-NuRsOs7376Dd4DLCXIm_OyMjS8jftTc2nnmZ2-zKpevID2uYAhT2wdKJxQESan5eR7sOROt9zPEevaDVmGBFrcUHbygTc_YTcfCNCJI=w640-h480-k-no', 'Google Maps'],
+    'r-aw': ['https://lh3.googleusercontent.com/grass-cs/AABkmLfizmRNz4mO5jLYLUMb6T5s1KzLFcP1mA746eCHPOv0aMYeTNxXMffNKGOjYy_3cbWVf4pyg15AvcMCc863s4cP_KeppRTmyKnznT4otFhP00WPNWikCUma7drSLZIp3OnBQx_E0zU_vhkI=w640-h480-k-no', 'Google Maps'],
+    'r-hama': ['https://lh3.googleusercontent.com/grass-cs/AABkmLcjIDMrWLWt5V69RQM7W1QpcAwsqu-G4O-XW7Q_qqIi20x94ad7qxep-h0Gbt4D7N2utoxxbAN71CAnDN42VBE8Rr5Qt2i2u3vvGiYkGkyVR77wr9mMDP1_FucZJCAQDofnWdPn=w640-h480-k-no', 'Google Maps'],
+    'r-kokuto': ['https://lh3.googleusercontent.com/grass-cs/AABkmLf47zMUIi6qvZ533PErhzbi5Ws34e0w2zdi89hjZjVFH9rLFeVukEh1Z1HFRR_5vF-cIkY19cWBBIQ-3x-yx8oBflvNk132Irkx3ITfHEKPhZT_NJ-y7p7AHDvejQmA1DOi02ea08PXXC8O=w640-h480-k-no', 'Google Maps'],
+    'r-pork': ['https://lh3.googleusercontent.com/grass-cs/AABkmLfjMNF8v2Xqy1Z5jhsQOYKuLr-CS1ZtSOfkbqShESt9s4cbM8ZncE5uEnuYegzcsAQ4v3Z5vExGWWQIOlqe2V3bZPQqYJXuJADPgJww5Hhcd5UM8WHGxPhEfJSRDCGvTstbi7aUvA=w640-h480-k-no', 'Google Maps'],
+    'r-rise': ['https://lh3.googleusercontent.com/grass-cs/AABkmLeTRL2A8deoAG6nnLBlbO0Qu2yM7er7AesD8x4gaKJWRNfBWR3NIeC-RpPkI4pED3BUv0S19L1-HEePaNFq-yrlSY5oyinoywNQac37I2higMn5fTwbguDSKQ8wL6QdXX2MhLV8zA=w640-h480-k-no', 'Google Maps'],
+    'r-tsubaki': ['https://lh3.googleusercontent.com/grass-cs/AABkmLdqfk5IjcDVhT26ccb9FwMZbJax0ONWwHyMkKC2mJ7X_rlYFYS3GcpjQwkMBEIGu6Vg0U-s1YDdM6Inxu1Pc4_Pnmz0eMAMWYmez3ovICykgiaVyw8XXdXTYKJod_qZy2UTo9ru9bx3O5w=w640-h480-k-no', 'Google Maps'],
+    'r-jam': ['https://lh3.googleusercontent.com/grass-cs/AABkmLdDh4JN75LoHryg-uaqHQeaAzh7bFlN2lm_qRFVkQU2OP7vsja7RrwKymEtCivriDe1l8Ygom3mrnWolkYMwBdvhh6oPYNXO8qys_veNEgswsi1WNLxhYNedyIwIWZJD8WbN_oPCw=w640-h480-k-no', 'Google Maps'],
+    'r-mokulele': ['https://lh3.googleusercontent.com/grass-cs/AABkmLdlUuyscwAQGW6IoFGHbRb1DJmZzhWLwTYbQlTJLYhnpchOJ2gxivXuApPtrz01K8-I0HnKdeLkrwW-ZtpZ8TW1Hl6LD2Rc0DhSxFguNCdTou8f469nkynBucyR3vRlsUftADIe=w640-h480-k-no', 'Google Maps'],
+    'r-hamanoya': ['https://lh3.googleusercontent.com/grass-cs/AABkmLcO4dt1eDaTqb-zOeEEunL3GjH4E2Owj_2Da48QCI9ee6Y0t1WjKs0N_vem5SFk16OG8WalRKIYyafx1_86bGMmuVMFQqRgiCD4Vl0N1uuNBBx8BnSBEOxYP2Q1aXGejYMmHJkk=w640-h480-k-no', 'Google Maps'],
+    'r-yanbaru': ['https://lh3.googleusercontent.com/grass-cs/AABkmLe7uUOf8qwtA3kNWAc6NJDD3_H5aytjO2q1MlRWova0TxN_r4m62u6co9pntkmIlDXNU35_gaOKJF058YL4D46jOSbDIlsYwlnQgsgaUvHgENsg-l-y6QoPMj5d867lzwmWvaMY=w640-h480-k-no', 'Google Maps'],
+    'r-yukuruba': ['https://lh3.googleusercontent.com/grass-cs/AABkmLfaAzk-YcCNiVfsKbhhIdtYK1xmzIcTb1SK5xlJJgyn-tA9nNnrwtcA1vP6VVwPQNEL6G0L19Rg_g5gJklGH8o3j6KaSU1GUfTBPM1llc4l6lZ0bNGdIgvmAePFNtubwosvk2yzknL0wMyC=w640-h480-k-no', 'Google Maps'],
+    'r-fukugiya': ['https://lh3.googleusercontent.com/grass-cs/AABkmLdhImaCI0LywBzoPh3Y8yLV_YpDmFnfH-lWLedFWoEWTbW97bto-z_dpGPpsAfYYL4Uv_dr5C7P-HI69IzP1IefXoLZWudrjWlRDsKci11Ihw4nf2yVRbAxh9JlFTnoYZkPTa6H_IPAzG17=w640-h480-k-no', 'Google Maps'],
+    'r-topu': ['https://lh3.googleusercontent.com/grass-cs/AABkmLckTwQ2CuLY5rKdEOkLMng9PUuHLNrNC8X41FZeBl2OMZlU4K-xnTAGldtdhgsETa7KwalffT8rDBiIStR6NQhggDXGhvAqEtyGXqp9ochqXKeJDKPZXPS0UlHvuqVH1CdHmYhf=w640-h480-k-no', 'Google Maps'],
+    'r-morningbowls': ['https://lh3.googleusercontent.com/grass-cs/AABkmLcDHlWWBsw-zFcKB60wmvXhrqeo5H9d-0bkvg4pZjMQUTXGlzlUOKa7Aaf20G-bKtiqRPGjzxziD6UFQ8Vr8w5Qqbv97XRq6c4OrdLm1homDEccTXNvkznhittvsd4ECc4C__O7he5kIMnD=w640-h480-k-no', 'Google Maps'],
+    'r-jun': ['https://lh3.googleusercontent.com/grass-cs/AABkmLdd0GKh4veVvXcgZzwbGje6gA670mBB_1Zm3U8wkmUXr77G45MLHABuEeS58_69Us_kMdWFM2WCHW97mcIJPEPC0qd5ym12wbFPnovQ0Lo3wU2T6q_GdJjB5L1s8zUs3OFBqyc=w640-h480-k-no', 'Google Maps'],
+    'b-donki': ['https://lh3.googleusercontent.com/grass-cs/AABkmLd8unXz-QpuhZby0pKQbBQr0YpP0hYk1IPqygRcvFsSTSLaOHeO1MruXnNh6y1V8HkaA2K1vBSQ07ZDRgYlRMnvdrROBiqij0plKaqA9dynmYyGLncUFI9Lkm4oPk63qsAOETj8q9zpATH2=w640-h480-k-no', 'Google Maps'],
+    'b-parco': ['https://lh3.googleusercontent.com/grass-cs/AABkmLeQD7GJoXStUzIKdZYLDAmke4qackzRbc-Af7CQFq1Xi8oUX1lOD6iPkr_isKuNDasflw8ScHQxpLKyRPs8fLlcXeLrj6MCAmPGHIGsJI8EQuxbjdLQgP6wGLnD_LTAUY45QKyPkuaa43sP=w640-h480-k-no', 'Google Maps'],
+    's-churaumi': ['https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0a/Main_tank_of_the_Kuroshio_Sea_in_Okinawa_Churaumi_Aquarium.JPG/960px-Main_tank_of_the_Kuroshio_Sea_in_Okinawa_Churaumi_Aquarium.JPG', 'そらみみ／Wikimedia Commons（CC BY-SA 4.0）'],
+    's-sesoko': ['https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/%E7%80%AC%E5%BA%95%E3%83%93%E3%83%BC%E3%83%81.jpg/960px-%E7%80%AC%E5%BA%95%E3%83%93%E3%83%BC%E3%83%81.jpg', 'へいへ／Wikimedia Commons（CC BY-SA 4.0）'],
+    's-senaga': ['https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Umikaji_Terrace_Senagajima.jpg/960px-Umikaji_Terrace_Senagajima.jpg', 'Kugel／Wikimedia Commons（CC BY-SA 4.0）'],
+    's-americanvillage': ['https://thumb.wikimedia.org/wikipedia/commons/thumb/7/72/P_%E6%97%A5%E6%9C%AC_Japan_%E6%B2%96%E7%B9%A9_OKINAWA_Mihama_the_Beach_Tower_Hotel_room_balcony_view_Vessel_Hotel_n_%E7%BE%8E%E5%9C%8B%E6%9D%91_American_Village_morning_January_2025_R12S_03.jpg/960px-P_%E6%97%A5%E6%9C%AC_Japan_%E6%B2%96%E7%B9%A9_OKINAWA_Mihama_the_Beach_Tower_Hotel_room_balcony_view_Vessel_Hotel_n_%E7%BE%8E%E5%9C%8B%E6%9D%91_American_Village_morning_January_2025_R12S_03.jpg', 'Naha Mama Pavilionz／Wikimedia Commons（CC0）'],
+    's-naminoue': ['https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/111204_Naminoue_Beach_and_Naminoue-gu_Naha_Okinawa_pref_Japan04s3.jpg/960px-111204_Naminoue_Beach_and_Naminoue-gu_Naha_Okinawa_pref_Japan04s3.jpg', '663highland／Wikimedia Commons（CC BY 2.5）'],
+    's-daruma': ['https://thumb.wikimedia.org/wikipedia/commons/thumb/0/01/Seiraiin20151008_13.jpg/960px-Seiraiin20151008_13.jpg', 'Haruo.takagi／Wikimedia Commons（CC BY-SA 4.0）'],
+    'it-d2-3': ['https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/Gyokusendo_Cave_-_panoramio.jpg/960px-Gyokusendo_Cave_-_panoramio.jpg', 'FoxyStranger Kawasaki／Wikimedia Commons（CC BY-SA 3.0）'],
+    'it-d6-1': ['https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Kouri_Bridge_20150212.jpg/960px-Kouri_Bridge_20150212.jpg', 'Suicasmo／Wikimedia Commons（CC BY-SA 4.0）'],
+    'it-d6-5': ['https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Heart-shaped_rocks_at_Kouri_Island_202006.jpg/960px-Heart-shaped_rocks_at_Kouri_Island_202006.jpg', 'Kugel／Wikimedia Commons（CC BY-SA 4.0）'],
+    'it-d6-a': ['https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a8/Okinawa_Ocean_Expo_Park_Emerald_Beach_hdsr_Vlux5_04.jpg/960px-Okinawa_Ocean_Expo_Park_Emerald_Beach_hdsr_Vlux5_04.jpg', 'Hyppolyte de Saint-Rambert／Wikimedia Commons（CC BY 4.0）'],
+    'it-d6-b': ['https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Bise_Fukugi_Tree_Road_01.JPG/960px-Bise_Fukugi_Tree_Road_01.JPG', 'Abasaa／Wikimedia Commons（公有領域）']
+  };
+  restaurants.forEach(function (r) { var p = listPhotos[r.id]; if (p && !r.photo) { r.photo = p[0]; r.photoCredit = p[1]; } });
 
   // 日本自駕提醒（一般常識＋IG 收藏整理，可自行增修）
   // 每一組：{ title: 標題, items: [...] }

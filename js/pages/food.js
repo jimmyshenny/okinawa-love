@@ -58,13 +58,14 @@
   function card(r, i) {
     var st = stLabel(r);
     return '<article class="food-card">' +
-      '<div class="food-photo" style="background:' + TINTS[i % TINTS.length] + '">' + (has(r.photo) ? '<img src="' + esc(r.photo) + '" alt="" loading="lazy">' : esc(r.type || 'Okinawa')) + '</div>' +
+      '<div class="food-photo" style="background:' + TINTS[i % TINTS.length] + '">' + (has(r.photo) ? '<img src="' + esc(r.photo) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.replaceWith(document.createTextNode(this.dataset.alt))" data-alt="' + esc(r.type || 'Okinawa') + '">' : esc(r.type || 'Okinawa')) + '</div>' +
       '<div class="food-body">' +
         '<span class="food-name">' + esc(r.name) + '</span>' +
         (has(r.nameJa) ? '<span class="tiny muted">' + esc(r.nameJa) + '</span>' : '') +
         '<span class="tiny muted">' + esc([r.type, r.area, r.price].filter(has).join(' · ') || '—') + '</span>' +
         (has(r.recommend) ? '<span class="tiny">' + (kindOf(r) === 'sight' ? '重點' : '推薦') + '：' + esc(r.recommend) + '</span>' : '') +
         '<div class="food-tags">' +
+          (r.status === 'planned' || r.status === 'reserved' || r.day ? '<span class="pill ' + (r.status === 'reserved' ? 'green' : 'blue') + '">' + (r.status === 'reserved' ? '已預約' : '已安排') + '</span>' : '') +
           (r.day ? '<span class="pill blue">Day ' + esc(r.day) + '</span>' : '') +
           (r.needReservation && r.status !== 'reserved' ? '<span class="pill peach">需訂位</span>' : '') + '</div>' +
       '</div>' +
@@ -120,7 +121,9 @@
       ['營業時間', v(r.hours)], ['地址', v(r.address)], ['電話', has(r.phone) ? '<a href="tel:' + esc(r.phone) + '">' + esc(r.phone) + '</a>' : v('')],
       ['菜單', v(r.menu)], ['預約資訊', has(r.reservationInfo) ? U.lines(r.reservationInfo) : v('')], ['停車', has(r.parking) ? U.lines(r.parking) : v('')], ['注意事項', has(r.notes) ? U.lines(r.notes) : v('', '—')]]
       .filter(function (x) { return k === 'eat' || ['日文名稱', '菜單', '預約資訊', '價格', '門票'].indexOf(x[0]) < 0 || has(r[{ '日文名稱': 'nameJa', '菜單': 'menu', '預約資訊': 'reservationInfo', '價格': 'price', '門票': 'price' }[x[0]]]); });
-    var html = '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px"><span class="pill ' + st[1] + '">' + st[0] + '</span>' +
+    var html = (has(r.photo) ? '<figure style="margin:0 0 12px"><img src="' + esc(r.photo) + '" alt="" referrerpolicy="no-referrer" style="width:100%;max-height:220px;object-fit:cover;border-radius:12px;display:block" onerror="this.parentNode.remove()">' +
+        (has(r.photoCredit) ? '<figcaption class="tiny muted" style="margin-top:4px">照片：' + esc(r.photoCredit) + '</figcaption>' : '') + '</figure>' : '') +
+      '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px"><span class="pill ' + st[1] + '">' + st[0] + '</span>' +
         (r.day ? '<span class="pill blue">安排在 Day ' + esc(r.day) + '</span>' : '<span class="pill sand">尚未安排日期</span>') +
         (r.needReservation ? '<span class="pill peach">需訂位</span>' : '') + (r.addedBy ? '<span class="pill sand">' + esc(r.addedBy) + '想去</span>' : '') + (r.source === 'IG' ? '<span class="pill sand">IG 收藏</span>' : '') + '</div>' +
       (has(r.description) ? '<p style="margin:0 0 12px">' + esc(r.description) + '</p>' : '') +
