@@ -29,13 +29,16 @@
   }
 
   function todayNum() { return T.days[App.selectedDay()].day; }
+  // 地區：看「區域」和「地址」有沒有這些字
+  function inArea(words) { return function (r) { var t = (r.area || '') + ' ' + (r.address || ''); return words.some(function (w) { return t.indexOf(w) >= 0; }); }; }
+  var AREAS = [['naha', '那霸', inArea(['那霸', '那覇'])], ['onna', '恩納村', inArea(['恩納'])], ['motobu', '本部', inArea(['本部'])]];
   function filters() {
     var d = todayNum(), k = curKind();
     if (k !== 'eat') return [
       ['all', '全部', function () { return true; }],
       ['today', '今日 Day ' + d, function (r) { return Number(r.day) === d; }],
       ['planned', '已排進行程', function (r) { return !!r.day; }]
-    ];
+    ].concat(AREAS);
     return [
       ['all', '全部', function () { return true; }],
       ['today', '今日 Day ' + d, function (r) { return Number(r.day) === d; }],
@@ -43,7 +46,7 @@
       ['needres', '需訂位', function (r) { return r.needReservation && r.status !== 'reserved'; }],
       ['reserved', '已預約', function (r) { return r.status === 'reserved'; }],
       ['cafe', '咖啡甜點', function (r) { return r.group === 'cafe'; }]
-    ];
+    ].concat(AREAS);
   }
   function matches(r, q) {
     if (!q) return true;
