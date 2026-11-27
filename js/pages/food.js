@@ -34,19 +34,20 @@
   var AREAS = [['naha', '那霸', inArea(['那霸', '那覇'])], ['onna', '恩納村', inArea(['恩納'])], ['motobu', '本部', inArea(['本部'])]];
   function filters() {
     var d = todayNum(), k = curKind();
+    var planned = ['planned', '已安排', function (r) { return r.status === 'planned' || !!r.day; }];
     if (k !== 'eat') return [
       ['all', '全部', function () { return true; }],
-      ['today', '今日 Day ' + d, function (r) { return Number(r.day) === d; }],
-      ['planned', '已排進行程', function (r) { return !!r.day; }]
-    ].concat(AREAS);
+      ['today', '今日 Day ' + d, function (r) { return Number(r.day) === d; }]
+    ].concat(AREAS, [planned]);
     return [
       ['all', '全部', function () { return true; }],
       ['today', '今日 Day ' + d, function (r) { return Number(r.day) === d; }],
       ['store', '超商', function (r) { return r.group === 'store'; }],
-      ['needres', '需訂位', function (r) { return r.needReservation && r.status !== 'reserved'; }],
-      ['reserved', '已預約', function (r) { return r.status === 'reserved'; }],
       ['cafe', '咖啡甜點', function (r) { return r.group === 'cafe'; }]
-    ].concat(AREAS);
+    ].concat(AREAS, [planned,
+      ['needres', '需訂位', function (r) { return r.needReservation && r.status !== 'reserved'; }],
+      ['reserved', '已預約', function (r) { return r.status === 'reserved'; }]
+    ]);
   }
   function matches(r, q) {
     if (!q) return true;
