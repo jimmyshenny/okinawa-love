@@ -100,7 +100,8 @@ window.TRIP = (function () {
       accommodationId: 'stay-onna',
       itinerary: [
         item('d4-1', '耍廢日', 'rest', '在飯店好好休息，享受海景', { navigable: false, nearby: [{ name: '青之洞窟', q: '青の洞窟 真栄田岬', placeId: 'ChIJFSBnObgb5TQRQA1ByAocZog', note: '離飯店開車約 10 分；要浮潛或潛水需參加付費行程，不下水的話可以在真榮田岬步道看海' }, { name: '永旺夢樂城沖繩來客夢', q: 'イオンモール沖縄ライカム', placeId: 'ChIJJ_TSFGIS5TQRa_HkdjGALss', note: '離飯店開車約 35 分；有寶可夢中心、LOFT、大水族箱，10:00–22:00' }] }),
-        item('d4-l', '午餐：濱之家 Hamanoya', 'food', '整條魚料理，奶油香煎最有名', { restaurantId: 'r-hamanoya', time: '11:00', departDrive: '約 10 分' }),
+        item('d4-l', '午餐：濱之家 Hamanoya', 'food', '整條魚料理，奶油香煎最有名', { restaurantId: 'r-hamanoya', time: '11:00', departDrive: '約 10 分', driveTime: '約 10 分' }),
+        item('d4-r', '回旅館', 'stay', '回 BLISSTIA 繼續耍廢，泡泳池、Lounge、大浴場', { stayId: 'stay-onna', driveTime: '步行約 2 分' }),
         item('d4-2', '晚餐：Yanbaru Meat', 'food', '牛排和西式小菜，飯店附近', { restaurantId: 'r-yanbaru', time: '18:30' })
       ]
     },
