@@ -134,7 +134,8 @@
       if (!seen[d.accommodationId]) { seen[d.accommodationId] = { a: App.accommodation(d.accommodationId), dates: [] }; list.push(seen[d.accommodationId]); }
       seen[d.accommodationId].dates.push(d.date);
     });
-    return '<div style="display:flex;flex-direction:column;gap:12px">' + list.map(function (x) {
+    var taxNote = T.stayTaxNote ? '<article class="card card-pad" style="border-left:4px solid #E8A87C"><h3 style="font-size:16px;margin-bottom:6px">住宿稅（每間都要現場付）</h3><p class="small" style="margin:0">' + esc(T.stayTaxNote) + '</p></article>' : '';
+    return '<div style="display:flex;flex-direction:column;gap:12px">' + taxNote + list.map(function (x) {
       var a = x.a, q = App.navUrl(a), m = App.mapUrl(a);
       return '<article class="card card-pad" style="display:flex;flex-direction:column;gap:8px">' +
         '<div style="display:flex;justify-content:space-between;gap:8px"><h3 style="font-size:17px">' + (has(a.name) ? esc(a.name) : esc(a.area) + '住宿 <span class="tbd small">名稱待補</span>') + '</h3>' +

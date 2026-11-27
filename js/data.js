@@ -322,6 +322,7 @@ window.TRIP = (function () {
     drivingTips: drivingTips,
     travelGuide: travelGuide,
     todos: todos,
+    stayTaxNote: '沖繩 2027/2/1 起收住宿稅，入住時在飯店櫃台另外付，就算房費已經刷卡付清也一樣。稅額是「每人每晚」房價（不含餐費、消費稅）的 2%，每人每晚最多 ¥2,000；例如一晚房價 ¥20,000、兩個人住，每人算 ¥10,000，兩人共付約 ¥400。金額以飯店現場收取為準，記得留一點日圓現金或帶信用卡。',
     stamps: stamps
   };
 })();
