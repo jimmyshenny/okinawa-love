@@ -50,7 +50,8 @@
         }).join('') + '</div></section>' +
       '<section class="section"><div class="section-title"><h2 style="font-size:17px">拍立得照片牆</h2>' +
         '<label class="btn btn-sm btn-outline" style="cursor:pointer">' + ic('plus', 14) + '新增照片<input type="file" accept="image/*" multiple class="sr-only" data-upload="' + T.days[App.selectedDay()].day + '"></label></div>' +
-        (ph.length ? '<div class="polaroids">' + ph.map(polaroid).join('') + '</div>' : '<div class="empty">還沒有照片。新增的照片會放在目前首頁選取的那一天（Day ' + T.days[App.selectedDay()].day + '），之後可以修改。</div>') + '</section>' +
+        (ph.length ? '<div class="polaroids">' + ph.map(polaroid).join('') + '</div>' : '<div class="empty">還沒有照片。新增的照片會放在目前首頁選取的那一天（Day ' + T.days[App.selectedDay()].day + '），之後可以修改。</div>') +
+        '<p class="tiny muted" style="margin:10px 2px 0;line-height:1.6">' + ic('lock', 12) + ' 照片和日記只存在這支手機，不會自動傳給對方。建議「加到主畫面」使用，每晚到 <a href="#/tools/backup">工具 → 資料備份</a> 匯出一次含照片的備份。</p></section>' +
       '<section class="section"><a class="recap" href="#/memories/recap" style="text-decoration:none"><span><span class="hand" style="color:#E8C9B4">' + T.days.length + ' Days Recap</span><br><b style="font-family:var(--serif);font-size:17px">' + CN[T.days.length] + '日旅程回顧</b><br>' +
         '<span class="tiny" style="opacity:.85">' + (status === 'after' ? '旅程結束了，回顧已完成' : '旅程結束後會自動整理，現在也可以先預覽') + '</span></span>' + ic('right', 26) + '</a></section>';
   }

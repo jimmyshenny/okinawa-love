@@ -32,7 +32,8 @@
         '<div><div class="k">訂位代號</div><div class="v">' + privVal(key + ':ref') + '</div></div>' +
       '</div>' +
       '<div class="card-pad" style="padding-top:0;display:flex;flex-direction:column;gap:8px">' +
-        (has(f.baggageNote) ? '<p class="small" style="margin:0">🧳 ' + esc(f.baggageNote) + '</p>' : '') +
+        // 回程行李規定跟去程一樣時，不重複整段文字
+        (has(f.baggageNote) ? '<p class="small" style="margin:0">🧳 ' + (!out && T.flights.outbound && f.baggageNote === T.flights.outbound.baggageNote ? '行李規定同去程（托運 23kg × 1；手提＋個人物品合計 7kg）' : esc(f.baggageNote)) + '</p>' : '') +
         '<p class="small muted" style="margin:0">' + (has(f.checkinNote) ? esc(f.checkinNote) : '建議起飛前 2 小時抵達機場辦理報到') + '</p>' +
         '<div class="btn-row">' +
           (etk ? '<a class="btn btn-primary" href="' + esc(etk) + '" target="_blank" rel="noopener">電子機票</a>' : '') +

@@ -33,7 +33,7 @@
       '<div class="fx-result"><span class="small">約</span><b id="fx-out">—</b></div>' +
       '<div class="rate-row"><label for="fx-rate">匯率 1 JPY =</label><input id="fx-rate" inputmode="decimal" placeholder="0.0000" value="' + esc(f.rate) + '"> TWD' +
         '<button class="btn btn-sm btn-outline" data-fetchrate>' + ic('refresh', 14) + '取得即時匯率</button></div>' +
-      '<span class="tiny muted" id="fx-note">' + (f.rate ? (f.source === 'auto' ? '即時匯率 · 更新於 ' + App.fmtTime(f.updatedAt) + '（僅供參考，實際以刷卡／換匯為準）' : '使用自己輸入的匯率') : '請按「取得即時匯率」，或自己輸入匯率（離線也能用）') + '</span>' +
+      '<span class="tiny muted" id="fx-note">' + (f.source === 'auto' ? '即時匯率 · 更新於 ' + App.fmtTime(f.updatedAt) + '（僅供參考，實際以刷卡／換匯為準）' : (f.source === 'default' ? '目前是預設參考匯率（約 0.20），有網路時會自動換成即時匯率' : '使用自己輸入的匯率（不會自動更新；清空就會恢復自動）')) + '</span>' +
     '</section>';
   }
   function fxCalc(root) {
@@ -50,8 +50,8 @@
     amt.addEventListener('input', function () { S.update('fx.ui', { dir: 'j2t' }, function (s) { s.amount = amt.value; }); fxCalc(root); });
     rt.addEventListener('input', function () {
       var val = parseFloat(rt.value);
-      S.set('fx', { rate: val > 0 ? val : '', updatedAt: new Date().toISOString(), source: 'manual' });
-      root.querySelector('#fx-note').textContent = val > 0 ? '使用自己輸入的匯率' : '請輸入匯率';
+      S.set('fx', val > 0 ? { rate: val, updatedAt: new Date().toISOString(), source: 'manual' } : { rate: '', updatedAt: '', source: '' });
+      root.querySelector('#fx-note').textContent = val > 0 ? '使用自己輸入的匯率（不會自動更新；清空就會恢復自動）' : '已恢復預設參考匯率（約 0.20），有網路時會自動更新';
       fxCalc(root);
     });
   }
@@ -130,14 +130,15 @@
         '<span style="color:var(--ocean)">' + ic(App.weatherIcon(w), 24) + '</span>' +
         '<span>' + (has(w.status) ? esc(w.status) : '<span class="tbd">待更新</span>') + (has(w.rain) ? '<br><span class="tiny muted">降雨 ' + esc(w.rain) + '</span>' : '') +
           (has(w.outfit) ? '<br><span class="tiny">' + esc(w.outfit) + '</span>' : '') + (has(w.planB) ? '<br><span class="tiny" style="color:#8A5A3C">雨備：' + esc(w.planB) + '</span>' : '') + '</span>' +
-        '<span style="text-align:right"><b>' + (has(w.temp) ? esc(w.temp) : '--°') + '</b><br><span class="tiny muted">' + (w.source === 'auto' ? '預報' : (w.source === 'manual' ? '手動' : '')) + '</span></span></button>';
+        '<span style="text-align:right"><b>' + (has(w.temp) ? esc(w.temp) : '--°') + '</b><br><span class="tiny muted">' + (w.source === 'auto' ? '預報' : (w.source === 'manual' ? '手動' : (w.source === 'climate' ? '往年平均' : ''))) + '</span></span></button>';
     }).join('');
     return '<button class="btn btn-primary btn-block" data-fetchweather>' + ic('refresh', 16) + '更新天氣預報（那霸）</button>' +
-      '<p class="tiny muted" style="margin:8px 0 12px">預報來源 Open-Meteo，只涵蓋未來 16 天，出發前約兩週才會有資料。沒有預報時，點任一天可以自己填。' + (any ? '' : '<br>目前還沒有任何天氣資料。') + '</p>' +
+      '<p class="tiny muted" style="margin:8px 0 12px">預報來源 Open-Meteo，只涵蓋未來 16 天：出發前約兩週起，打開網站就會自動更新（約每 3 小時一次）。還沒有預報時先顯示那霸 3 月往年平均；點任一天可以自己填。' + (any ? '' : '<br>目前還沒有任何天氣資料。') + '</p>' +
       '<div class="card" style="padding:0 14px">' + rows + '</div>';
   }
   function editWeather(dayNum) {
     var d = T.days[dayNum - 1], w = App.weather(d);
+    if (w.source === 'climate') w = { source: '' };
     U.form({
       title: 'Day ' + d.day + ' 天氣（' + U.md(d.date) + '）',
       fields: [

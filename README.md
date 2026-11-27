@@ -7,7 +7,7 @@ Jimmy & Shenny 的沖繩蜜月旅行網站，日期是 2027/03/02–03/10（9 �
 ## 一、資料夾裡有什麼
 
 ```
-okinawa-honeymoon/
+okinawa-love/
 ├─ index.html              網站入口
 ├─ css/style.css           顏色、字體、版面
 ├─ js/data.js              ✏️ 行程、餐廳、住宿、航班、租車資料（最常改這個）
@@ -16,12 +16,13 @@ okinawa-honeymoon/
 ├─ js/app.js               頁面切換、下一站判斷、天氣、匯率
 ├─ js/pages/home.js        行程 Home
 ├─ js/pages/transport.js   交通 Transport
-├─ js/pages/food.js        美食 Food
+├─ js/pages/food.js        清單 Picks（必吃・必買・景點）
 ├─ js/pages/tools.js       工具 Tools
 ├─ js/pages/memories.js    回憶 Memories
 ├─ sw.js                   離線支援
 ├─ manifest.webmanifest    「加到主畫面」的設定
-└─ icons/                  網站圖示
+├─ icons/                  網站圖示
+└─ images/                 住宿（stays）、清單（list）照片
 ```
 
 這個網站不需要安裝任何東西，也不需要 build。把檔案上傳到 GitHub 就能用。
@@ -32,7 +33,7 @@ okinawa-honeymoon/
 
 ### 1. 建立 repository
 1. 登入 GitHub，點右上角 **＋ → New repository**。
-2. **Repository name** 取一個不容易被猜到的名字，例如 `okinawa-love-0302`。
+2. **Repository name** 取一個不容易被猜到的名字，例如 `okinawa-love`。
 3. 選 **Public**。免費帳號的 GitHub Pages 只能用在公開的 repository，所以資料檔裡**不要放訂位代號、電話、證件號碼**（見第四點）。
 4. 按 **Create repository**。
 
@@ -47,7 +48,7 @@ okinawa-honeymoon/
 2. **Source** 選 **Deploy from a branch**。
 3. **Branch** 選 `main`，資料夾選 `/ (root)`，按 **Save**。
 4. 等 1–2 分鐘，重新整理這一頁，上方會出現網址：
-   `https://你的帳號.github.io/okinawa-love-0302/`
+   `https://jimmyshenny.github.io/okinawa-love/`
 
 ### 4. 加到手機主畫面（像 App 一樣打開）
 - **iPhone（Safari）：** 打開網址 → 下方「分享」按鈕 → **加入主畫面**。
@@ -79,7 +80,7 @@ okinawa-honeymoon/
 ### ⚠️ 修改後手機沒更新？
 網站有離線快取。每次改完檔案，順便打開 `sw.js`，把第 3 行的版本號加 1：
 ```js
-var VERSION = 'okinawa-love-v2';
+var VERSION = 'okinawa-love-v83';   // 數字加 1
 ```
 手機重新打開網站兩次，就會拿到新版。
 
@@ -109,6 +110,7 @@ var VERSION = 'okinawa-love-v2';
 - 照片存在瀏覽器的照片資料庫（IndexedDB），上傳時會自動壓縮。
 - **兩支手機的資料不會自動同步。** 想合併的話，用「工具 › 資料備份」匯出檔案，傳給對方匯入。
 - 清除瀏覽器資料、換手機之前，記得先匯出備份。
+- 網站會請瀏覽器把資料標成「要保留」（`navigator.storage.persist()`）。iPhone 建議「加入主畫面」使用，比在 Safari 分頁裡更不容易被清掉。
 
 ### 之後想讓兩人即時同步？
 所有讀寫資料都集中在 `js/store.js` 的 `Store.get / Store.set`。之後要接 Firebase 或 Supabase，只要改這個檔案，其他頁面都不用動。
@@ -123,8 +125,8 @@ var VERSION = 'okinawa-love-v2';
   - 有填 `time` 的話，超過預計時間 90 分鐘會提醒你按「完成」，但不會自動跳過。
   - 看其他天時，顯示「當日第一站」。
 - **印章：** 一天的行程全部按完成，就自動蓋章；也可以手動點印章。
-- **天氣：** 「工具 › 天氣」可以抓 Open-Meteo 的免費預報（不需金鑰）。預報只涵蓋未來 16 天，出發前約兩週才會有資料。沒有預報時，可以點任一天自己填。
-- **匯率：** 「取得即時匯率」使用 open.er-api.com（不需金鑰）。離線時可以自己輸入匯率，會記住。
+- **天氣：** 使用 Open-Meteo 免費預報（不需金鑰），只涵蓋未來 16 天。出發前約兩週起，打開網站就會自動更新（約每 3 小時一次），也可以在「工具 › 天氣」手動更新。還沒有預報時，先顯示那霸 3 月往年平均（17–22°）；也可以點任一天自己填。
+- **匯率：** 使用 open.er-api.com（不需金鑰），有網路時自動更新（約每 6 小時一次）。從來沒抓到過的話，先用預設參考匯率 0.20（`js/app.js` 的 `DEFAULT_RATE`）。自己輸入匯率後就不會自動覆蓋；清空輸入框即恢復自動。
 - **導航：** 全部用 Google Maps 連結開啟。路線圖是示意圖；要看真實路線，請按「Google Maps 開啟全程」。
 
 ---
@@ -138,8 +140,8 @@ var VERSION = 'okinawa-love-v2';
 ## 八、還需要補的資料
 
 - [ ] 每天的預計時間、車程
-- [ ] 四間住宿的名稱、地址、入住／退房時間
-- [ ] 航班：航空公司、航班號碼、時間、航廈
+- [x] 四間住宿的名稱、地址、入住／退房時間
+- [x] 航班：航空公司、航班號碼、時間、航廈
 - [ ] 租車公司、取還車地點與時間
 - [ ] 哲鳴想去的地方
 - [ ] 台北駐日經濟文化代表處那霸分處的電話、旅遊保險資訊

@@ -171,9 +171,14 @@ window.App = (function () {
     51: ['毛毛雨', 'rain'], 53: ['毛毛雨', 'rain'], 55: ['毛毛雨', 'rain'], 61: ['小雨', 'rain'], 63: ['雨', 'rain'], 65: ['大雨', 'rain'],
     80: ['陣雨', 'rain'], 81: ['陣雨', 'rain'], 82: ['大陣雨', 'rain'], 95: ['雷雨', 'rain'], 96: ['雷雨', 'rain'], 99: ['雷雨', 'rain']
   };
+  // 那霸 3 月往年平均（氣象廳 1991–2020 平年值：最高約 21.9°、最低約 17°），還沒有預報時先顯示這個
+  var CLIMATE = { status: '3 月平均', icon: 'partly', temp: '17–22°', rain: '', source: 'climate' };
   function weather(day) {
     var w = S.get('weather', {})[day.date];
-    return w || Object.assign({ source: '' }, day.weather);
+    if (w) return w;
+    var base = day.weather || {};
+    if (base.status || base.temp) return Object.assign({ source: '' }, base);
+    return Object.assign({}, CLIMATE);
   }
   function saveWeather(date, w) { S.update('weather', {}, function (all) { all[date] = w; }); }
   // 免費的 Open-Meteo 預報（不需金鑰）；只會更新「16 天內」的日期
@@ -190,13 +195,26 @@ window.App = (function () {
           rain: d.precipitation_probability_max[i] == null ? '' : d.precipitation_probability_max[i] + '%', source: 'auto', updatedAt: now });
         n++;
       });
+      S.set('weather.fetchedAt', now);
       return n;
     });
+  }
+  // 旅行日期進入 16 天預報範圍時，打開網站就自動更新（最多每 3 小時一次）
+  function inForecastRange() {
+    var t = U.todayISO(), start = new Date(T.startDate + 'T00:00:00');
+    start.setDate(start.getDate() - 15);
+    var s = start.getFullYear() + '-' + String(start.getMonth() + 1).padStart(2, '0') + '-' + String(start.getDate()).padStart(2, '0');
+    return t >= s && t <= T.endDate;
   }
   function weatherIcon(w) { return w && w.icon ? w.icon : 'partly'; }
 
   /* ---------- 匯率 ---------- */
-  function fx() { return S.get('fx', { rate: '', updatedAt: '', source: '' }); }
+  // 還沒取得匯率時的預設參考值（2026 年台銀日圓約 0.20），有網路會自動換成即時匯率
+  var DEFAULT_RATE = 0.2;
+  function fx() {
+    var f = S.get('fx', { rate: '', updatedAt: '', source: '' });
+    return Number(f.rate) > 0 ? f : { rate: DEFAULT_RATE, updatedAt: '', source: 'default' };
+  }
   function fetchRate() {
     return fetch('https://open.er-api.com/v6/latest/JPY').then(function (r) { if (!r.ok) throw new Error('匯率服務暫時無法使用'); return r.json(); })
       .then(function (j) {
@@ -219,10 +237,32 @@ window.App = (function () {
     return (d.getMonth() + 1) + '/' + d.getDate() + ' ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
   }
 
+  /* ---------- 自動更新天氣、匯率（有網路時，背景進行） ---------- */
+  function hoursSince(iso) { return iso ? (Date.now() - new Date(iso).getTime()) / 36e5 : Infinity; }
+  function safeRerender() {
+    // 正在輸入時不重畫，避免打字到一半被清掉
+    var a = document.activeElement;
+    if (a && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName)) return;
+    rerender();
+  }
+  function autoRefresh() {
+    if (navigator.onLine === false) return;
+    var jobs = [];
+    if (inForecastRange() && hoursSince(S.get('weather.fetchedAt', '')) > 3) jobs.push(fetchWeather());
+    var f = S.get('fx', {});
+    if (f.source !== 'manual' && hoursSince(f.updatedAt) > 6) jobs.push(fetchRate());
+    if (!jobs.length) return;
+    Promise.all(jobs.map(function (p) { return p.catch(function () {}); })).then(safeRerender);
+  }
+
   function start() {
     window.addEventListener('hashchange', function () { U.closeSheet(); render(false); });
     if (!location.hash) history.replaceState(null, '', '#/home');
     render(false);
+    autoRefresh();
+    document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') autoRefresh(); });
+    window.addEventListener('online', autoRefresh);
+    if (S.persistPhotos) S.persistPhotos();
     if ('serviceWorker' in navigator && location.protocol === 'https:') {
       // 有新版時自動換上：打開網站、或從背景切回來時都會檢查一次
       var hadController = !!navigator.serviceWorker.controller, reloaded = false;

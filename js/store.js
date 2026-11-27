@@ -54,7 +54,7 @@ window.Store = (function () {
     });
   }
   var urlCache = {};
-  function putPhoto(id, blob) { return tx('readwrite', function (s) { return s.put(blob, id); }); }
+  function putPhoto(id, blob) { persistPhotos(); return tx('readwrite', function (s) { return s.put(blob, id); }); }
   function getPhotoUrl(id) {
     if (urlCache[id]) return Promise.resolve(urlCache[id]);
     return tx('readonly', function (s) { return s.get(id); }).then(function (blob) {
@@ -107,8 +107,18 @@ window.Store = (function () {
     }));
   }
 
+  // 請瀏覽器把資料（尤其是照片）標成「要保留」，降低 iPhone Safari 久沒打開就清掉的機會
+  function persistPhotos() {
+    try {
+      if (navigator.storage && navigator.storage.persist) {
+        return navigator.storage.persisted().then(function (ok) { return ok || navigator.storage.persist(); }).catch(function () { return false; });
+      }
+    } catch (e) {}
+    return Promise.resolve(false);
+  }
+
   return {
-    get: get, set: set, update: update, uid: uid,
+    get: get, set: set, update: update, uid: uid, persistPhotos: persistPhotos,
     putPhoto: putPhoto, getPhotoUrl: getPhotoUrl, deletePhoto: deletePhoto, compressImage: compressImage,
     exportAll: exportAll, importAll: importAll
   };
