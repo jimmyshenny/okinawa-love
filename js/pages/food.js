@@ -128,7 +128,9 @@
         (r.needReservation ? '<span class="pill peach">需訂位</span>' : '') + (r.addedBy ? '<span class="pill sand">' + esc(r.addedBy) + '想去</span>' : '') + (r.source === 'IG' ? '<span class="pill sand">IG 收藏</span>' : '') + '</div>' +
       (has(r.description) ? '<p style="margin:0 0 12px">' + esc(r.description) + '</p>' : '') +
       '<dl class="kv">' + rows.map(function (x) { return '<dt>' + x[0] + '</dt><dd>' + x[1] + '</dd>'; }).join('') + '</dl>' +
-      '<label class="field" style="margin-top:14px"><span>快速修改狀態</span><select id="quick-status">' + statusOptions(k).map(function (o) {
+      '<label class="field" style="margin-top:14px"><span>快速修改狀態</span><select id="quick-status">' +
+        (['wishlist', 'visited'].indexOf(r.status) >= 0 || !STATUS[r.status] ? '<option value="" selected disabled>未設定</option>' : '') +
+        statusOptions(k).filter(function (o) { return o[0] !== 'wishlist' && o[0] !== 'visited'; }).map(function (o) {
         return '<option value="' + o[0] + '"' + (o[0] === r.status ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select></label>' +
       '<div class="btn-row" style="margin-top:14px">' +
         '<a class="btn btn-primary" href="' + esc(navU) + '" target="_blank" rel="noopener">' + ic('nav', 16) + '導航</a>' +
