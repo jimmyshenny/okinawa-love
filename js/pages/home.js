@@ -98,13 +98,13 @@
       ['價格', isFood ? R.price : ''],
       ['推薦', isFood ? R.recommend : ''],
       ['門票', it.ticket],
-      ['停車', park ? park + (has(it.parkingFee) ? '（' + it.parkingFee + '）' : '') : ''],
+      ['停車', park ? park + (has(it.parkingFee) ? '\n費用：' + it.parkingFee : '') : ''],
       [it.needTicket ? '購票' : '預約', pick(it.reservation, R.reservationInfo)],
       ['電話', pick(it.phone, R.phone)],
       ['建議停留', it.duration],
       ['介紹', isFood ? R.description : '']
     ].filter(function (x) { return has(x[1]); }).map(function (x) {
-      return [x[0], x[0] === '地址' ? x[1] : x[0] === '電話' ? '<a href="tel:' + esc(x[1]) + '">' + esc(x[1]) + '</a>' : esc(x[1])];
+      return [x[0], x[0] === '地址' ? x[1] : x[0] === '電話' ? '<a href="tel:' + esc(x[1]) + '">' + esc(x[1]) + '</a>' : /^(停車|預約|購票|門票|營業時間)$/.test(x[0]) ? U.lines(String(x[1]).replace(/\n/g, '；')) : esc(x[1])];
     });
     var BR = it.baggageTips && T.travelGuide && T.travelGuide.baggageRules;
     if (BR) {
@@ -215,7 +215,7 @@
         (cont ? '<p class="small muted" style="margin:0">和昨晚同一間，訂房資訊請見「交通 › 住宿」。</p>' + roomGallery(a) :
         '<div class="stay-times"><div>Check-in <b>' + v(a.checkIn) + '</b></div><div>Check-out <b>' + v(a.checkOut) + '</b></div></div>' +
         '<dl class="kv small"><dt>地址</dt><dd>' + v(a.address) + (has(a.addressEn) ? '<br><span class="muted">' + esc(a.addressEn) + '</span>' : '') + '</dd>' +
-          '<dt>停車</dt><dd>' + v(a.parking) + (a.parkingLinks || []).map(function (l) {
+          '<dt>停車</dt><dd>' + (has(a.parking) ? U.lines(a.parking) : v(a.parking)) + (a.parkingLinks || []).map(function (l) {
             return '<br><a class="small" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + ic('map', 13) + ' ' + esc(l.label) + '</a>';
           }).join('') + '</dd>' +
           '<dt>訂房編號</dt><dd>' + (booking ? esc(booking) : '<span class="tbd">未填</span>') + ' <button class="more-btn" data-priv="stay:' + esc(a.id) + '" data-label="' + esc((a.name || a.area + '住宿') + ' 訂房編號') + '">' + ic('lock', 13) + '編輯</button></dd>' +

@@ -358,3 +358,8 @@ h1, h2, h3 { font-family: var(--serif); margin: 0; line-height: 1.35; }
 .quick-table th, .quick-table td { padding: 8px 10px; text-align: left; border-bottom: 1px dashed #E3DDCE; }
 .quick-table thead th { font-size: 12px; color: #6B7A80; font-weight: 500; }
 .quick-table tbody th { position: sticky; left: 0; background: var(--paper, #FFFDF8); font-weight: 600; }
+
+/* 長文字分行 */
+.lines { display: flex; flex-direction: column; gap: 6px; }
+.lines > div { line-height: 1.55; }
+.lines > div + div { padding-top: 6px; border-top: 1px dashed #E3DDCE; }

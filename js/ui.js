@@ -160,7 +160,32 @@ window.UI = (function () {
     return root;
   }
 
+  // 長文字分行：【標題】變粗體小標、①②③ 和「；」「。」各自一行
+  function lines(t) {
+    if (!has(t)) return '';
+    var str = String(t)
+      .replace(/【([^】]+)】/g, '\n\u0001$1\u0002')
+      .replace(/([①②③④⑤⑥⑦⑧⑨])/g, '\n$1')
+      .replace(/；/g, '\n')
+      .replace(/。(?!）|\)|$)/g, '\n')
+      .replace(/。$/, '');
+    var parts = str.split('\n').map(function (x) { return x.trim(); }).filter(Boolean);
+    if (parts.length < 2) return esc(String(t));
+    // 【標題】後面的句子都歸在同一段，其他每句自成一段
+    var blocks = [], cur = null;
+    parts.forEach(function (x) {
+      var m = x.match(/^\u0001([^\u0002]+)\u0002\s*(.*)$/);
+      if (m) { cur = { head: m[1], body: m[2] ? [m[2]] : [] }; blocks.push(cur); }
+      else if (cur && !/^[①-⑨]/.test(x)) cur.body.push(x);
+      else { cur = null; blocks.push({ body: [x] }); }
+    });
+    return '<div class="lines">' + blocks.map(function (b) {
+      return '<div>' + (b.head ? '<b>' + esc(b.head) + '</b>' + (b.body.length ? '<br>' : '') : '') + b.body.map(esc).join('<br>') + '</div>';
+    }).join('') + '</div>';
+  }
+
   return {
+    lines: lines,
     esc: esc, v: v, has: has, icon: icon, mapsUrl: mapsUrl, dirUrl: dirUrl, routeUrl: routeUrl, money: money,
     todayISO: todayISO, md: md, dotDate: dotDate, nowMinutes: nowMinutes, toMinutes: toMinutes,
     toast: toast, openSheet: openSheet, closeSheet: closeSheet, form: form

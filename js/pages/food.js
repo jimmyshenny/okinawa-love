@@ -88,7 +88,7 @@
     var navU = App.navUrl(r), mapU = App.mapUrl(r);
     var rows = [['日文名稱', v(r.nameJa)], ['分類', v(r.type)], ['區域', v(r.area)], ['價格', v(r.price)], ['推薦餐點', v(r.recommend)],
       ['營業時間', v(r.hours)], ['地址', v(r.address)], ['電話', has(r.phone) ? '<a href="tel:' + esc(r.phone) + '">' + esc(r.phone) + '</a>' : v('')],
-      ['菜單', v(r.menu)], ['預約資訊', v(r.reservationInfo)], ['停車', v(r.parking)], ['注意事項', v(r.notes, '—')]];
+      ['菜單', v(r.menu)], ['預約資訊', has(r.reservationInfo) ? U.lines(r.reservationInfo) : v('')], ['停車', has(r.parking) ? U.lines(r.parking) : v('')], ['注意事項', v(r.notes, '—')]];
     var html = '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px"><span class="pill ' + st[1] + '">' + st[0] + '</span>' +
         (r.day ? '<span class="pill blue">安排在 Day ' + esc(r.day) + '</span>' : '<span class="pill sand">尚未安排日期</span>') +
         (r.needReservation ? '<span class="pill peach">需訂位</span>' : '') + (r.addedBy ? '<span class="pill sand">' + esc(r.addedBy) + '想去</span>' : '') + '</div>' +
