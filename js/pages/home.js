@@ -35,6 +35,15 @@
     }).join('') + '</nav>';
   }
 
+  // 出發前待辦提醒：到了提醒日期、還沒打勾的才會出現
+  function todoBanner() {
+    var today = U.todayISO(), done = S.get('todo.done', {});
+    var due = (T.todos || []).filter(function (t) { return t.date <= today && !done[t.id]; });
+    if (!due.length) return '';
+    return '<a href="#/tools/bookings" class="card card-pad" style="display:flex;gap:10px;align-items:center;margin:0 var(--page-pad) 14px;text-decoration:none;border-left:4px solid #E8A87C">' +
+      ic('info', 20) + '<span style="flex:1"><b>待辦提醒</b><br><span class="small">' + due.map(function (t) { return esc(t.title); }).join('<br>') + '</span></span>' + ic('right', 16) + '</a>';
+  }
+
   function travelInfo() {
     var isOpen = S.get('home.infoOpen', false);
     return '<section class="collapse">' +
@@ -182,7 +191,7 @@
   App.register('home', {
     render: function () {
       var idx = App.selectedDay(), day = T.days[idx], prog = App.dayProgress(day);
-      return header(day) + dateStrip(idx) + travelInfo() +
+      return header(day) + dateStrip(idx) + todoBanner() + travelInfo() +
         '<div class="home-cols"><div class="main-col">' +
         nextStopCard(day) +
         '<section class="section"><div class="section-title"><h2>今日行程</h2><span class="hand">Today\'s Journey · ' + prog.done + '/' + prog.total + '</span></div>' +

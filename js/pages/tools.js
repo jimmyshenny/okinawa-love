@@ -317,7 +317,16 @@
     var today = (function () { var d = new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); })();
     function resDate(iso) { var p = iso.split('-'); var d = new Date(+p[0], p[1] - 1, +p[2]); return (+p[1]) + '/' + (+p[2]) + '（' + '日一二三四五六'[d.getDay()] + '）'; }
     var needRes = App.restaurants().filter(function (r) { return r.needReservation || r.status === 'reserved'; });
-    return '<p class="small muted" style="margin-top:0">' + ic('lock', 14) + ' 這裡的編號只存在這支手機，不會出現在 GitHub 上。兩支手機要各自填寫，或用「資料備份」互傳。</p>' +
+    var todoDone = S.get('todo.done', {});
+    var todoCard = (T.todos || []).length ? '<article class="card card-pad" style="margin-bottom:12px"><h3 style="font-size:16px;margin-bottom:6px">出發前待辦</h3>' + T.todos.map(function (t) {
+      var done = !!todoDone[t.id];
+      return '<div style="display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed #E3DDCE">' +
+        '<button class="btn btn-sm' + (done ? '' : ' btn-primary') + '" data-todo="' + esc(t.id) + '" style="white-space:nowrap" aria-pressed="' + done + '">' + ic('check', 14) + (done ? '已完成' : '完成') + '</button>' +
+        '<span style="flex:1"><b' + (done ? ' style="text-decoration:line-through;opacity:.6"' : '') + '>' + esc(t.title) + '</b> ' +
+        (done ? '' : '<span class="pill ' + (t.date <= today ? 'dark' : 'sand') + '">' + resDate(t.date) + (t.date <= today ? ' 該做了' : ' 提醒') + '</span>') +
+        '<br><span class="small muted">' + esc(t.detail) + '</span></span></div>';
+    }).join('') + '</article>' : '';
+    return todoCard + '<p class="small muted" style="margin-top:0">' + ic('lock', 14) + ' 這裡的編號只存在這支手機，不會出現在 GitHub 上。兩支手機要各自填寫，或用「資料備份」互傳。</p>' +
       '<article class="card card-pad"><h3 style="font-size:16px">航班・租車</h3>' + row('去程訂位代號', 'flight:outbound:ref') + row('回程訂位代號', 'flight:return:ref') + row('租車預約編號', 'car:booking') + '</article>' +
       '<article class="card card-pad" style="margin-top:12px"><h3 style="font-size:16px">住宿</h3>' + stayRows + '</article>' +
       '<article class="card card-pad" style="margin-top:12px"><h3 style="font-size:16px;margin-bottom:6px">餐廳訂位</h3>' + (needRes.length ? needRes.map(function (r) {
@@ -408,6 +417,7 @@
             .catch(function (err) { b.disabled = false; U.toast(navigator.onLine ? err.message : '目前離線，無法更新'); });
         }
         else if (d.wday) editWeather(+d.wday);
+        else if (d.todo) { S.update('todo.done', {}, function (m) { m[d.todo] = !m[d.todo]; }); App.rerender(); }
         else if (d.owner) { S.set('packing.owner', d.owner); App.rerender(); }
         else if (d.pack) { S.update('packing', [], function (l) { l.forEach(function (x) { if (x.id === d.pack) x.done = !x.done; }); }); App.rerender(); }
         else if (d.packedit) editPack(d.packedit);
