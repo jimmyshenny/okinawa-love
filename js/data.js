@@ -232,7 +232,7 @@ window.TRIP = (function () {
     rest('r-jun', '琉球涮涮鍋 純 今歸仁本店', { nameJa: 'Aguu 石垣牛 琉球しゃぶしゃぶ 純 今帰仁本店', type: '涮涮鍋・壽喜燒', area: '今歸仁', source: 'IG', mapQuery: '琉球しゃぶしゃぶ純 今帰仁本店', recommend: '阿古豬、石垣牛', notes: 'IG 收藏推薦的壽喜燒／涮涮鍋' }),
     rest('r-diver', '潛水員牛排', { type: '牛排', source: 'IG', notes: 'IG 網友推薦很好吃，但要等很久；日文店名待確認' }),
     rest('r-711-choco', '7-11 生巧克力冰淇淋', { type: '超商', area: '7-ELEVEN', group: 'store', source: 'IG', price: '約台幣 72 元', recommend: '很濃但不會太甜也不會太苦，大約半糖' }),
-    rest('r-711-ramen', '7-11 大杯泡麵（拉麵）', { type: '超商', area: '7-ELEVEN', group: 'store', source: 'IG', recommend: '一定要買「大杯」，麵體像拉麵店；加一顆溏心蛋更好吃', notes: '產品名稱在影片裡，待補' }),
+    rest('r-711-ramen', '天下一品 京都濃厚雞白湯 杯麵', { nameJa: '名店の味 天下一品 京都濃厚鶏白湯（サッポロ一番）', type: '超商', area: '7-ELEVEN', group: 'store', source: 'IG', recommend: '一定要買「大杯」，麵體像拉麵店；加一顆溏心蛋更好吃', notes: '黑色杯身、紅色圓形「天下一品」標誌；熱水 200ml、泡 3 分鐘。含雞肉成分，在日本當宵夜吃掉就好，別帶回台灣' }),
     rest('r-711-matcha', '7-11 抹茶奶昔', { type: '超商', area: '7-ELEVEN', group: 'store', source: 'IG', recommend: '抹茶奶昔＋明治牛奶（約 1/3 杯）＋冰塊杯', notes: '很難買到，看到就先拿' }),
     rest('r-pudding', '超商焦糖布丁（感動布丁）', { type: '超商', area: '超商', group: 'store', source: 'IG', recommend: '網友說是全日本最好吃的超商布丁', notes: '在哪家超商買在影片裡，待補' }),
     rest('r-lawson-tea', 'LAWSON 無糖鮮奶茶', { type: '超商', area: 'LAWSON', group: 'store', source: 'IG', recommend: '無糖，可以自己加糖球', notes: '只有部分分店有賣，看到就買' }),
