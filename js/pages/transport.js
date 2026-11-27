@@ -138,6 +138,7 @@
     return '<div style="display:flex;flex-direction:column;gap:12px">' + taxNote + list.map(function (x) {
       var a = x.a, q = App.navUrl(a), m = App.mapUrl(a);
       return '<article class="card card-pad" style="display:flex;flex-direction:column;gap:8px">' +
+        (has(a.photo) ? '<img src="' + esc(a.photo) + '" alt="' + esc(a.name) + '" loading="lazy" style="width:calc(100% + 32px);max-width:none;margin:-16px -16px 4px;height:150px;object-fit:cover;border-radius:var(--r) var(--r) 0 0">' : '') +
         '<div style="display:flex;justify-content:space-between;gap:8px"><h3 style="font-size:17px">' + (has(a.name) ? esc(a.name) : esc(a.area) + '住宿 <span class="tbd small">名稱待補</span>') + '</h3>' +
         '<span class="pill blue">' + x.dates.length + ' 晚</span></div>' +
         '<span class="small muted">' + U.md(x.dates[0]) + ' 入住 · ' + x.dates.map(U.md).join('、') + '</span>' +

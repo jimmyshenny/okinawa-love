@@ -1,11 +1,11 @@
 /* 離線支援：打開過一次網站後，沒網路也能看行程。
    修改網站檔案後，把 VERSION 數字加 1，手機才會拿到新版。 */
-var VERSION = 'okinawa-love-v33';
+var VERSION = 'okinawa-love-v34';
 var SHELL = [
   './', 'index.html', 'css/style.css', 'manifest.webmanifest',
   'js/data.js', 'js/store.js', 'js/ui.js', 'js/app.js',
   'js/pages/home.js', 'js/pages/transport.js', 'js/pages/food.js', 'js/pages/tools.js', 'js/pages/memories.js',
-  'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png'
+  'icons/icon.svg', 'images/stays/azat.jpg', 'images/stays/blisstia.jpg', 'images/stays/yukurina.jpg', 'images/stays/torifito.jpg', 'icons/icon-192.png', 'icons/icon-512.png'
 ];
 
 self.addEventListener('install', function (e) {
