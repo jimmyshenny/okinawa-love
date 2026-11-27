@@ -30,29 +30,19 @@
 
   function todayNum() { return T.days[App.selectedDay()].day; }
   function filters() {
-    var d = todayNum(), k = curKind(), K = KINDS[k];
+    var d = todayNum(), k = curKind();
     if (k !== 'eat') return [
       ['all', '全部', function () { return true; }],
       ['today', '今日 Day ' + d, function (r) { return Number(r.day) === d; }],
-      ['planned', '已排進行程', function (r) { return !!r.day; }],
-      ['must', K.must, function (r) { return r.status === 'mustEat'; }],
-      ['wish', K.wish, function (r) { return r.status === 'wishlist'; }],
-      ['ig', 'IG 收藏', function (r) { return r.source === 'IG'; }],
-      ['fav', '已收藏', function (r) { return App.isFav(r.id); }],
-      ['visited', K.done, function (r) { return r.status === 'visited'; }]
+      ['planned', '已排進行程', function (r) { return !!r.day; }]
     ];
     return [
       ['all', '全部', function () { return true; }],
       ['today', '今日 Day ' + d, function (r) { return Number(r.day) === d; }],
-      ['reserved', '已預約', function (r) { return r.status === 'reserved'; }],
-      ['needres', '需訂位', function (r) { return r.needReservation && r.status !== 'reserved'; }],
-      ['must', '必吃', function (r) { return r.status === 'mustEat'; }],
-      ['wish', '想去清單', function (r) { return r.status === 'wishlist'; }],
-      ['cafe', '咖啡甜點', function (r) { return r.group === 'cafe'; }],
       ['store', '超商', function (r) { return r.group === 'store'; }],
-      ['ig', 'IG 收藏', function (r) { return r.source === 'IG'; }],
-      ['fav', '已收藏', function (r) { return App.isFav(r.id); }],
-      ['visited', '已造訪', function (r) { return r.status === 'visited'; }]
+      ['needres', '需訂位', function (r) { return r.needReservation && r.status !== 'reserved'; }],
+      ['reserved', '已預約', function (r) { return r.status === 'reserved'; }],
+      ['cafe', '咖啡甜點', function (r) { return r.group === 'cafe'; }]
     ];
   }
   function matches(r, q) {
@@ -70,10 +60,9 @@
         (has(r.nameJa) ? '<span class="tiny muted">' + esc(r.nameJa) + '</span>' : '') +
         '<span class="tiny muted">' + esc([r.type, r.area, r.price].filter(has).join(' · ') || '—') + '</span>' +
         (has(r.recommend) ? '<span class="tiny">' + (kindOf(r) === 'sight' ? '重點' : '推薦') + '：' + esc(r.recommend) + '</span>' : '') +
-        '<div class="food-tags"><span class="pill ' + st[1] + '">' + st[0] + '</span>' +
+        '<div class="food-tags">' +
           (r.day ? '<span class="pill blue">Day ' + esc(r.day) + '</span>' : '') +
-          (r.needReservation && r.status !== 'reserved' ? '<span class="pill peach">需訂位</span>' : '') +
-          (r.source === 'IG' ? '<span class="pill sand">IG</span>' : '') + '</div>' +
+          (r.needReservation && r.status !== 'reserved' ? '<span class="pill peach">需訂位</span>' : '') + '</div>' +
       '</div>' +
       '<button class="food-open" data-detail="' + esc(r.id) + '" aria-label="查看 ' + esc(r.name) + ' 詳細資訊"></button>' +
       '<button class="fav-btn" data-fav="' + esc(r.id) + '" aria-pressed="' + fav + '" aria-label="' + (fav ? '取消收藏' : '收藏') + ' ' + esc(r.name) + '">' + ic('heart', 18) + '</button>' +
