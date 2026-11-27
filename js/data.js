@@ -188,7 +188,8 @@ window.TRIP = (function () {
   ];
 
   // status：reserved 已預約 | planned 已安排 | mustEat 必吃 | wishlist 想去 | visited 已造訪
-  // group：meal 正餐 | cafe 咖啡甜點
+  // group：meal 正餐 | cafe 咖啡甜點 | store 超商（只用在必吃）
+  // kind：eat 必吃 | buy 必買 | sight 景點（「清單」頁上方三個分頁）
   // reserveOn：開放訂位、要去訂的日期（YYYY-MM-DD），顯示在「工具 → 重要預約」
   function rest(id, name, opts) {
     return Object.assign({
@@ -196,7 +197,9 @@ window.TRIP = (function () {
       status: 'wishlist', needReservation: false, hours: '', day: null, group: 'meal',
       description: '', address: '', phone: '', menu: '', reservationInfo: '', reserveOn: '', parking: '',
       notes: '', website: '', photo: '', mapQuery: '', addedBy: '',
-      mapUrl: '', placeId: '', parkingPlaceId: '', parkingName: ''
+      mapUrl: '', placeId: '', parkingPlaceId: '', parkingName: '',
+      kind: 'eat',         // eat 必吃 | buy 必買 | sight 景點
+      source: ''           // 'IG'：從 IG 收藏整理來的
     }, opts || {});
   }
 
@@ -212,7 +215,7 @@ window.TRIP = (function () {
     rest('r-applepie', '蘋果派', { type: '甜點', area: '機場', group: 'cafe', addedBy: '心萱' }),
     rest('r-aw', 'A&W 牧港店', { type: '漢堡', area: '浦添 牧港', status: 'planned', day: 3, addedBy: '心萱', mapQuery: 'A&W 牧港店', placeId: 'ChIJk5jkbZxs5TQR9YajcZ3aWXw', price: '¥1,000–2,000', recommend: '麥根沙士漂浮（沙士可免費續杯）、捲捲薯條、洋蔥圈', hours: '6:00–凌晨 2:00', address: '浦添市牧港 4-9-1', phone: '098-876-6081', description: '1969 年開的復古得來速，超好拍', notes: '觀光客多，點餐可能要排 30 分鐘；只想吃 A&W 可去其他分店（國際通也有）' }),
     rest('r-hama', 'HAMA 壽司 古島店', { type: '壽司', area: '那霸 古島', status: 'planned', day: 8, addedBy: '心萱', mapQuery: 'はま寿司 那覇古島店', placeId: 'ChIJ0bDIk-hr5TQRtvrRQOAyur0', price: '¥1,000–2,000', recommend: '沖繩限定握壽司、多種醬油可選', hours: '10:00–凌晨 5:00', address: '那霸市古島 1-25-3', phone: '0570-001-689', description: '平價迴轉壽司連鎖', notes: '入口機台抽號碼；平板點餐可切換中文', reservationInfo: '不用訂位，到店在入口機台抽號碼牌。晚餐尖峰（18:00–20:00）可能要等，想少排隊可以用 Hama 壽司官方 App 先線上取號／預約時段' }),
-    rest('r-kokuto', '黑糖飲料店', { type: '飲料', area: '沖繩北部', group: 'cafe', addedBy: '心萱' }),
+    rest('r-kokuto', '黑糖飲料店', { type: '飲料', area: '沖繩北部', group: 'cafe', addedBy: '心萱', source: 'IG', recommend: '現刨黑糖咖啡，黑糖香很濃、咖啡不會太重；可以加珍珠', notes: 'IG 收藏的北部人氣黑糖飲料店，店名在影片裡，待補' }),
     rest('r-pork', 'Pork Tamago 飯糰', { type: '飯糰', area: '那霸 牧志', addedBy: '心萱', mapQuery: 'ポークたまごおにぎり 牧志市場本店', placeId: 'ChIJRX9edXpp5TQRRGYawVc2Jmk', price: '約 ¥400–800／個', recommend: '炸蝦塔塔醬飯糰、苦瓜天婦羅、油味噌', hours: '7:00–20:00', address: '那霸市松尾 2-8-35', phone: '098-867-9550', description: '現點現做的沖繩國民飯糰', notes: '早上常大排長龍；內用座位在隔壁另一間；那霸機場國內線、國際線也有分店' }),
     rest('r-rise', 'Grill&Pancake RISE', { type: '早午餐・鬆餅', area: '那霸 鏡原', status: 'planned', day: 9, group: 'cafe', mapQuery: 'Grill&Pancake RISE', placeId: 'ChIJ9_PYOABp5TQRlynY01fe_6k', price: '¥1,000–2,000', recommend: '香草風味鬆餅、厚切培根和香腸、阿古豬墨西哥餅配太陽蛋', hours: '8:00–15:00（週一、週二公休）', address: '那霸市鏡原町 3-7 101', phone: '080-2573-0322', description: '叢林風小店的美式早餐，份量大，評分 4.9', notes: '3/10 是星期三，有營業；在往機場的方向，吃完去還車很順', reservationInfo: '不用預約' }),
     rest('r-tsubaki', '居酒屋 つばき', { nameJa: '居酒屋 つばき', type: '沖繩料理・海鮮', area: '恩納村 前兼久', status: 'planned', needReservation: true, reserveOn: '2026-12-30', day: 3, mapQuery: '居酒屋 つばき 恩納村', placeId: 'ChIJC2Idccoa5TQRJ67HaZITSQI', price: '約 ¥3,000–3,500／人（含飲料）', recommend: '招牌炸豬腳（テビチ唐揚げ）、生魚片、海葡萄、ラフテー、苦瓜炒、泡盛', hours: '12:00–16:00、17:00–23:00', address: '恩納村前兼久 858-1', phone: '098-965-7705', description: '恩納村很熱門的沖繩料理居酒屋，平價又好吃，常常訂不到位', notes: '從 BLISSTIA 走路約 2 分；跟 3/5 的 Yanbaru Meat 同一棟；可刷卡、PayPay；3/3 うりずん已吃沖繩家常菜、3/5 中午濱之家會吃整條魚，這天可以多點炸豬腳和生魚片', reservationInfo: '【何時訂】目前（11/27）可以訂到 1/31，大約開放到兩個月後，3/4 預計 12/30 左右就能訂；如果還沒開放，隔幾天再看一次，一開放就訂（很熱門）。【怎麼訂】Tabelog 中文頁網路訂位（點「官網」按鈕），選 3/4、18:30、2 位；或打電話 098-965-7705：「3月4日、木曜日、夜6時半から、2名で予約をお願いします。名前は〇〇です。」【時段】訂 18:30。', website: 'https://tabelog.com/tw/okinawa/A4703/A470303/47002391/' }),
@@ -223,6 +226,34 @@ window.TRIP = (function () {
     rest('r-yukuruba', 'ゆくるば', { nameJa: 'ゆくるば｜カフェ & あぐー豚しゃぶしゃぶ', type: '阿古豬涮涮鍋・咖啡', area: '本部 備瀬', status: 'planned', needReservation: true, reserveOn: '2027-01-06', day: 5, mapQuery: 'ゆくるば 備瀬', placeId: 'ChIJiSmQpjv65DQR_4gb3c97PIc', price: '約 ¥2,000–4,000', recommend: '阿古豬涮涮鍋、芒果汁', hours: '11:00–16:00、17:00–22:00', address: '本部町備瀬 403', phone: '0980-43-1271', parking: '店門口有停車位', description: '福木林道旁被綠樹包圍的小店，白天是咖啡廳、晚上吃涮涮鍋', notes: '離 Yukurina 開車約 5 分', reservationInfo: '【何時訂】2 個月前開放訂位，3/6 大約 1/6 就能訂，開放後就先訂，訂 19:30（先在心型岩看完夕陽，開車約 30 分過來）；沒有 19:30 就選最接近的時段。【怎麼訂】食べログ（Tabelog）中文訂位頁（點「官網」按鈕），或打電話 0980-43-1271。', website: 'https://s.tabelog.com/tw/okinawa/A4702/A470202/47031589/?tb_from_lang_modal=1' }),
     rest('r-fukugiya', 'ふくぎ屋', { nameJa: 'ふくぎ屋', type: '沖繩麵・定食', area: '本部 備瀬', status: 'planned', day: 6, mapQuery: 'ふくぎ屋 備瀬', placeId: 'ChIJbYkXrjv65DQRMcI12696IAY', price: '約 ¥1,000–1,500', recommend: '限定的海藻（アーサ）沖繩麵、排骨沖繩麵、苦瓜炒、塔可飯、芒果汁', hours: '11:30–14:30（週四公休）', address: '本部町備瀬 388-3', phone: '0980-43-5001', description: '就在福木林道裡，往翡翠海灘的路上，在地人也常來', notes: '14:30 就關門，逛完海灘先來吃再散步林道', reservationInfo: '不用預約' }),
     rest('r-topu', '沖縄そばと島どうふ TOPU', { nameJa: '沖縄そばと島どうふ【TOPU】', type: '沖繩麵・島豆腐', area: '本部 濱元', status: 'planned', day: 6, mapQuery: '沖縄そばと島どうふ TOPU', placeId: 'ChIJBwhDebv75DQRcEJjtmWX6I4', price: '約 ¥1,000–1,500', recommend: '島豆腐沖繩麵、三種豆腐套餐、花生豆腐、炸雞、薑燒豬肉、炸麵團甜點', hours: '11:00–15:00、17:00–21:00（週二公休，週一只有中午）', address: '本部町濱元 233', phone: '0980-43-4390', description: '自己做島豆腐的老派小店，評分 4.6，豆腐又輕又綿', notes: '只收現金；招牌在路邊不明顯，看到機車行就要減速；對向車道不能右轉進去', reservationInfo: '不用預約' }),
+    // ───── 以下從 IG 收藏整理（2026/11）─────
+    // 必吃
+    rest('r-morningbowls', 'MORNING BOWLS 波之上店', { nameJa: 'MORNING BOWLS NAMINOUE CAFE', type: '早午餐・Poke 碗', area: '那霸 若狹', group: 'cafe', source: 'IG', mapQuery: 'MORNING BOWLS NAMINOUE CAFE', address: '那霸市若狹 1-21-1（KAINOA 1F）', recommend: '沖繩縣產生鮪魚 Poke 碗＋巴西莓果碗；也有現煎鬆餅', description: '北谷人氣夏威夷早午餐店的那霸分店，就在波之上沙灘旁，白色裝潢很有度假感', notes: '從波上宮、波之上沙灘走路約 3–5 分，可以參拜完過來吃' }),
+    rest('r-jun', '琉球涮涮鍋 純 今歸仁本店', { nameJa: 'Aguu 石垣牛 琉球しゃぶしゃぶ 純 今帰仁本店', type: '涮涮鍋・壽喜燒', area: '今歸仁', source: 'IG', mapQuery: '琉球しゃぶしゃぶ純 今帰仁本店', recommend: '阿古豬、石垣牛', notes: 'IG 收藏推薦的壽喜燒／涮涮鍋' }),
+    rest('r-diver', '潛水員牛排', { type: '牛排', source: 'IG', notes: 'IG 網友推薦很好吃，但要等很久；日文店名待確認' }),
+    rest('r-711-choco', '7-11 生巧克力冰淇淋', { type: '超商', area: '7-ELEVEN', group: 'store', source: 'IG', price: '約台幣 72 元', recommend: '很濃但不會太甜也不會太苦，大約半糖' }),
+    rest('r-711-ramen', '7-11 大杯泡麵（拉麵）', { type: '超商', area: '7-ELEVEN', group: 'store', source: 'IG', recommend: '一定要買「大杯」，麵體像拉麵店；加一顆溏心蛋更好吃', notes: '產品名稱在影片裡，待補' }),
+    rest('r-711-matcha', '7-11 抹茶奶昔', { type: '超商', area: '7-ELEVEN', group: 'store', source: 'IG', recommend: '抹茶奶昔＋明治牛奶（約 1/3 杯）＋冰塊杯', notes: '很難買到，看到就先拿' }),
+    rest('r-pudding', '超商焦糖布丁（感動布丁）', { type: '超商', area: '超商', group: 'store', source: 'IG', recommend: '網友說是全日本最好吃的超商布丁', notes: '在哪家超商買在影片裡，待補' }),
+    rest('r-lawson-tea', 'LAWSON 無糖鮮奶茶', { type: '超商', area: 'LAWSON', group: 'store', source: 'IG', recommend: '無糖，可以自己加糖球', notes: '只有部分分店有賣，看到就買' }),
+    rest('r-lawson-list', 'LAWSON 必買清單', { type: '超商', area: 'LAWSON', group: 'store', source: 'IG', recommend: '香草優格、麻糬生乳捲、火腿起司、鹽味雞湯泡麵、巧克力麻糬麵包、洋蔥餅乾、季節水果冰棒' }),
+
+    // 必買
+    rest('b-donki', '唐吉訶德', { kind: 'buy', type: '藥妝・雜貨', area: '國際通', status: 'planned', day: 1, source: 'IG', mapQuery: 'ドン・キホーテ 国際通り店', recommend: '結帳前先用 Google 搜尋「唐吉訶德 Coupon」領折價券', description: '除了免稅，滿 ¥10,000 再折 5%、滿 ¥30,000 再折 7%，可以疊在一起用', notes: '結帳時店員會提醒出示 Coupon；也要給護照辦免稅。Day 1 國際通行程有寫壺川店（營業到凌晨 3:00）' }),
+    rest('b-botanist', 'BOTANIST 護髮油', { kind: 'buy', type: '藥妝', area: '藥妝店', source: 'IG', recommend: '吹頭髮前擦，乾燥受損髮吹完變順又亮', notes: 'IG 上說回台灣最後悔沒多買' }),
+    rest('b-parco', 'PARCO CITY', { kind: 'buy', type: '購物中心', area: '浦添', status: 'planned', day: 7, source: 'IG', mapQuery: 'サンエー浦添西海岸 PARCO CITY', placeId: 'ChIJxZQf9gpr5TQRwLWyT5Osigc', address: '浦添市西洲 3-1-1', hours: '10:00–22:00（1F サンエー食品館 9:00–23:00）', recommend: '1F 超市買伴手禮比機場便宜；有沖繩唯一的吉伊卡哇餐廳', description: '海邊的大型購物中心，約 250 間店，日系服飾、藥妝、3COINS、家電都有', notes: '記得到免稅櫃台辦一站式退稅' }),
+    rest('b-omiyage', '沖繩 6 項必買伴手禮', { kind: 'buy', type: '伴手禮', source: 'IG', notes: '品項在 IG 影片裡，待補' }),
+
+    // 景點
+    rest('s-churaumi', '美麗海水族館', { kind: 'sight', type: '水族館', area: '本部', status: 'planned', day: 6, source: 'IG', mapQuery: '沖縄美ら海水族館', placeId: 'ChIJPZ5hUjH65DQR_p_dD3CmCOo', address: '本部町石川 424', recommend: '早上鬼蝠魟餵食秀、下午 15:00 鯨鯊餵食秀，兩場畫面不一樣', description: '一早進場先到 Ocean Blue 咖啡廳預約指定席（¥1,000＋低消，約 40 分鐘），坐著看黑潮之海的鬼蝠魟餵食秀；再去黑潮探險（鯨鯊展區旁的專用電梯）、看海豚表演；下午提早 10–20 分鐘回黑潮之海卡位看鯨鯊', notes: '離館前記得蓋手章，下午可以再進場；表演時間以官網當天公告為準' }),
+    rest('s-sesoko', '瀨底島', { kind: 'sight', type: '海島・海灘', area: '本部', source: 'IG', mapQuery: '瀬底島', address: '本部町瀬底 2631-1' }),
+    rest('s-genki', '本部元氣村', { kind: 'sight', type: '海洋體驗', area: '本部', source: 'IG', mapQuery: '本部元気村', address: '本部町字浜元 410' }),
+    rest('s-ryukyubeach', 'RYUKYU BEACH CLUB', { kind: 'sight', type: '海灘', area: '恩納村', source: 'IG', mapQuery: 'RYUKYU BEACH CLUB 恩納村', address: '恩納村字瀬良垣 1521-1' }),
+    rest('s-minatogawa', '港川外人住宅街', { kind: 'sight', type: '街區散步', area: '浦添', source: 'IG', mapQuery: '港川外人住宅街', address: '浦添市港川 2 丁目 17 番周邊' }),
+    rest('s-daruma', '達摩寺', { kind: 'sight', type: '寺廟', area: '那霸 首里', source: 'IG', mapQuery: '達磨寺 首里', address: '那霸市首里赤田町 1-5-1' }),
+    rest('s-senaga', '瀨長島', { kind: 'sight', type: '海邊小鎮', area: '豐見城', status: 'planned', day: 2, source: 'IG', mapQuery: '瀬長島ウミカジテラス', address: '豐見城市瀬長 174-6' }),
+    rest('s-americanvillage', '美國村', { kind: 'sight', type: '街區散步', area: '北谷', status: 'planned', day: 3, source: 'IG', mapQuery: '美浜アメリカンビレッジ', address: '北谷町字美浜 9-1' }),
+    rest('s-naminoue', '波上宮', { kind: 'sight', type: '神社', area: '那霸', source: 'IG', mapQuery: '波上宮', recommend: '參拜完走到旁邊的 MORNING BOWLS 吃早午餐', notes: '旁邊就是波之上沙灘' })
   ];
 
   // 航班：bookingRef、ticketUrl 屬於私人資訊，請在網站內填寫
@@ -247,12 +278,37 @@ window.TRIP = (function () {
     insurance: { company: '', policyNote: '', phone: '' }
   };
 
-  // 日本自駕提醒（一般常識，可自行增修）
+  // 日本自駕提醒（一般常識＋IG 收藏整理，可自行增修）
+  // 每一組：{ title: 標題, items: [...] }
   var drivingTips = [
-    '日本靠左行駛，駕駛座在右邊',
-    '看到「止まれ」標誌必須完全停車',
-    '加油時告訴店員「レギュラー、満タン」＝一般汽油加滿（以租車公司規定為準）',
-    '發生事故：先確認安全 → 報警 110 → 聯絡租車公司'
+    { title: '要帶的證件', items: [
+      '台灣護照＋台灣駕照正本＋日文譯本，三樣缺一不可（國際駕照不能用）',
+      '日文譯本到監理所申請，當場就拿得到'
+    ] },
+    { title: '開車基本', items: [
+      '日本靠左行駛，駕駛座在右邊',
+      '轉彎口訣「左小圈、右大圈」，隨時提醒自己靠左',
+      '方向燈和雨刷跟台灣相反：右手打方向燈、左手是雨刷',
+      '看到倒三角「止まれ」要完全停下約 3 秒，確認左右沒車再走；沒停好很容易被開單',
+      '一定要禮讓行人；開車全程不能滑手機',
+      '導航用 CarPlay 接手機開 Google Maps，有中文語音'
+    ] },
+    { title: '高速公路・ETC', items: [
+      '高速公路限速 80，右側是超車道；不熟路就開左側',
+      '有租 ETC 卡才走紫色「ETC 專用」車道；沒租的話走綠色「一般」車道，抽票付現'
+    ] },
+    { title: '停車・加油', items: [
+      '超商停車位只給當下買東西的人用，不能停著去逛街',
+      '加油時告訴店員「レギュラー、満タン」＝一般汽油加滿；千萬別加錯油（以租車公司規定為準）'
+    ] },
+    { title: '發生事故怎麼辦', items: [
+      '出發前先把台灣門號的「Wi-Fi 通話」打開，用 eSIM 上網時才打得出去（找手機設定裡顯示你台灣電話號碼的那張卡）',
+      '先確認人車安全，再打給租車公司或保險公司，請他們幫忙報警（警察 110）',
+      '警察大約 15 分鐘到，準備台灣駕照、日文譯本、副駕駛座前方置物箱的車檢證給警察看',
+      '拍照：自己的車況，還有撞到的東西（例如護欄）',
+      '輕微擦撞不影響開車的話可以繼續玩；嚴重的話請租車公司處理',
+      '還車當天提早 10 分鐘到，現場填事故單'
+    ] }
   ];
 
   // 入境・退稅（2026/11 起日本免稅改為「先付含稅價、出境退稅」）

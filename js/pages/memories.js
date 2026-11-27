@@ -105,7 +105,7 @@
       '<section class="section"><article class="card card-pad">' + T.days.map(function (d) {
         var dp = ph.filter(function (p) { return p.day === d.day; }).slice(0, 3);
         var places = d.itinerary.filter(function (it) { return it.category === 'sight' || it.category === 'shopping'; }).map(function (it) { return it.name; });
-        var foods = App.restaurants().filter(function (rr) { return Number(rr.day) === d.day; }).map(function (rr) { return rr.name; });
+        var foods = App.restaurants().filter(function (rr) { return Number(rr.day) === d.day && (!rr.kind || rr.kind === 'eat'); }).map(function (rr) { return rr.name; });
         var on = App.stampOn(d.day - 1), j = journal(d.day);
         return '<div class="recap-day"><div class="stamp' + (on ? ' on' : '') + '" aria-hidden="true" style="width:52px"><span class="t">DAY ' + d.day + '</span><span class="n" style="font-size:10px">' + esc(T.stamps[d.day - 1]) + '</span></div>' +
           '<div><b>' + esc(d.theme) + '</b> <span class="tiny muted">' + U.md(d.date) + '</span>' +

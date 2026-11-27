@@ -83,8 +83,12 @@
       '</article>' +
       (has(c.pickupFlow) || has(c.returnFlow) ? '<article class="card card-pad small"><b>取車流程</b><p style="margin:4px 0 10px">' + v(c.pickupFlow) + '</p><b>還車流程</b><p style="margin:4px 0 0">' + v(c.returnFlow) + '</p></article>' : '') +
       '<article class="card card-pad">' + checklist('p', PICK, '取車檢查清單') + '<div style="height:14px"></div>' + checklist('r', RET, '還車檢查清單') + '</article>' +
-      '<article class="card card-pad" style="background:var(--mist-soft);border:0"><h3 style="font-size:16px;margin-bottom:6px">日本自駕提醒</h3><ul style="margin:0;padding-left:18px;font-size:14px;line-height:1.8">' +
-        T.drivingTips.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>' +
+      '<article class="card card-pad" style="background:var(--mist-soft);border:0"><h3 style="font-size:16px;margin-bottom:6px">日本自駕提醒</h3>' +
+        T.drivingTips.map(function (g) {
+          if (typeof g === 'string') g = { title: '', items: [g] };
+          return (g.title ? '<b style="display:block;font-size:14px;margin-top:10px">' + esc(g.title) + '</b>' : '') +
+            '<ul style="margin:2px 0 0;padding-left:18px;font-size:14px;line-height:1.8">' + g.items.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>';
+        }).join('') +
         '<a class="btn btn-sm btn-outline" style="margin-top:10px" href="#/tools/emergency">' + ic('sos', 14) + '事故・緊急聯絡</a></article>' +
     '</div>';
   }
