@@ -61,8 +61,8 @@ window.TRIP = (function () {
         item('d1-3', '上飛機', 'transport', '星宇 JX870 桃園 T1 → 那霸，14:15 抵達（當地時間）', { time: '11:40', navigable: false, notes: '登機時間以登機證上印的為準。一般起飛前 30–40 分鐘開始登機、約 15–20 分鐘前關閉登機門，建議 11:00 前到登機門。機上全程不能用行動電源，手機先充飽' }),
         item('d1-4', '抵達沖繩', 'transport', '那霸機場國際線入境', { time: '14:15',  mapQuery: '那覇空港', placeId: 'ChIJjSyLjsRp5TQRkP5WN6rOTFA', addressEn: '150 Kagamizu, Naha, Okinawa 901-0142', notes: '租車公司多在機場外，入境後到租車櫃台／接駁巴士站搭車去取車；入境大廳就有 Pork Tamago 飯糰' }),
         item('d1-5', '租車', 'transport', '取車並確認保險、ETC、油種', { mapQuery: '' , notes: '取車檢查清單在「交通 › 租車」', driveTime: '約 25 分' }),
-        item('d1-6', '旅館 Check in', 'stay', '入住那霸歌町大和 Roynet 飯店 PREMIER', { stayId: 'stay-naha-1', driveTime: '約 10 分（也可搭單軌）' }),
-        item('d1-7', '國際通 逛街', 'shopping', '第一晚散步、逛唐吉訶德、買伴手禮', { mapQuery: '国際通り 那覇', placeId: 'ChIJMS9BUXdp5TQRAl6RXvY5aY0', hours: '店家多 10:00–22:00 左右，唐吉訶德營業到深夜', duration: '2–3 小時', parking: '沿路多為收費停車場；也可搭單軌電車到「牧志」或「縣廳前」站', notes: '約 1.6 km 長的購物大街，旁邊巷子通往第一牧志公設市場與 Pork Tamago 飯糰本店', driveTime: '步行約 5 分', nearby: [{ name: '唐吉訶德 那霸壺川店', q: 'ドン・キホーテ 那覇壺川店', placeId: 'ChIJ34qmQV5p5TQR8a3NXd0fmR0', note: '營業到凌晨 3:00，比國際通店大、人比較少；從國際通開車約 10 分' }] }),
+        item('d1-6', '旅館 Check in', 'stay', '入住 HOTEL AZAT 那霸', { stayId: 'stay-naha-1', driveTime: '約 10 分（也可搭單軌）' }),
+        item('d1-7', '國際通 逛街', 'shopping', '第一晚散步、逛唐吉訶德、買伴手禮', { mapQuery: '国際通り 那覇', placeId: 'ChIJMS9BUXdp5TQRAl6RXvY5aY0', hours: '店家多 10:00–22:00 左右，唐吉訶德營業到深夜', duration: '2–3 小時', parking: '沿路多為收費停車場；也可搭單軌電車到「牧志」或「縣廳前」站', notes: '約 1.6 km 長的購物大街，旁邊巷子通往第一牧志公設市場與 Pork Tamago 飯糰本店', driveTime: '步行約 3 分', nearby: [{ name: '唐吉訶德 那霸壺川店', q: 'ドン・キホーテ 那覇壺川店', placeId: 'ChIJ34qmQV5p5TQR8a3NXd0fmR0', note: '營業到凌晨 3:00，比國際通店大、人比較少；從國際通開車約 10 分' }] }),
         item('d1-8', '晚餐：Buchi 燒肉', 'food', '燒肉晚餐（2/1 開放訂位，18:40 場，保留 10 分鐘）', { restaurantId: 'r-buchi', time: '18:40' })
       ]
     },
@@ -75,7 +75,7 @@ window.TRIP = (function () {
         item('d2-2', '瀨長島', 'sight', '海邊白色小鎮，看飛機起降', { mapQuery: '瀬長島ウミカジテラス', parkingPlaceId: 'ChIJ-TqfJ8Rp5TQRgox-4OQ8hwA', parkingName: '瀬長島 サンセットパーキング', parking: '瀨長島展望台附近停車（免費，車位不多）', addressEn: 'Senaga, Tomigusuku, Okinawa 901-0233', parkingFee: '免費', duration: '1.5–2 小時', notes: '白色小鎮「Umikaji Terrace」有很多餐廳甜點；島西邊展望台可近距離看飛機起降、看夕陽。停車場常滿，上坡處還有更多免費車位', driveTime: '約 15 分' }),
         item('d2-1', '午餐：系滿魚市場', 'food', '海鮮午餐', { restaurantId: 'r-itoman', driveTime: '約 25 分' }),
         item('d2-3', '玉泉洞', 'sight', '沖繩世界・鐘乳石洞', { mapQuery: '玉泉洞 おきなわワールド', placeId: 'ChIJa3ifUYVp5TQR3QZD1tyLml4', address: '沖縄県南城市玉城前川1336（おきなわワールド內）', hours: '9:00–17:30（最後入園 16:00）', ticket: '大人 ¥2,000（含玉泉洞與園區）', parking: '免費停車場約 400 台', parkingFee: '免費', duration: '2–3 小時', notes: '洞內開放約 890 m，潮濕地滑請穿好走的鞋；Super Eisa 太鼓表演約 10:30、12:30、14:30', driveTime: '約 35 分', needTicket: true, reservation: '【何時買】出發前 1–2 週網路買就好（不會賣完，主要省排隊、還有小折扣）。【怎麼買】KKday、Klook、HIS 等平台買「おきなわワールド 入園券」，網路價大人約 ¥1,900（現場 ¥2,000）；依平台指示出示 QR 碼或憑證換票。買了通常不能退。' }),
-        item('d2-3b', '回旅館', 'stay', '回那霸歌町 Roynet 休息一下，再出門吃晚餐', { stayId: 'stay-naha-1', driveTime: '約 10 分' }),
+        item('d2-3b', '回旅館', 'stay', '回 HOTEL AZAT 休息一下，再出門吃晚餐', { stayId: 'stay-naha-1', driveTime: '約 10 分' }),
         item('d2-4', '晚餐：Shima Shabushabu Nakama 島', 'food', '涮涮鍋晚餐（約 1/3 開放訂位，訂 19:30）', { restaurantId: 'r-nakama', time: '19:30' })
       ]
     },
@@ -178,7 +178,7 @@ window.TRIP = (function () {
   ];
 
   var accommodations = [
-    { id: 'stay-naha-1', name: '那霸歌町大和 Roynet 飯店 PREMIER', area: '那霸', checkIn: '15:00', checkOut: '11:00', address: '沖縄県那覇市おもろまち4-2-14', addressEn: '4-2-14 Omoromachi, Naha, Okinawa 900-0006', parking: '飯店內 D-Parking 機械式 40 台，每晚 ¥1,100，先到先停，在停車場直接付款；23:00–7:00 不能進出', notes: '訂的是官網「沖繩暢享」方案：15:00 入住、不含早餐，免費取消到 2027/2/28 23:59（日本時間）。單軌電車「おもろまち」站走路約 6 分；1F 有 7-11，對面是 DFS 免稅店和大型購物中心', phone: '098-862-5055', website: '', photo: '', mapQuery: '', placeId: 'ChIJ__Ak3T5r5TQR5GJXTBtBiNE' },
+    { id: 'stay-naha-1', name: 'HOTEL AZAT 那霸（那霸阿扎特飯店）', area: '那霸', checkIn: '15:00', checkOut: '11:00', address: '沖縄県那覇市安里2-8-8', addressEn: '2-8-8 Asato, Naha, Okinawa 902-0067', parking: '飯店 1F 的「D-Parking 安里2丁目第2」（不是飯店直營），每天 ¥1,500，有空位才能停；買票後只要開出去就算用完，滿了要停附近收費停車場', notes: '單軌電車「安里」站走路 30 秒，國際通走路約 3 分；櫃台在 3F，24 小時有人。早餐自助餐 7:00–10:00（另外付費，3F Cafe Victoria），大廳有免費咖啡，對面有 24 小時超市。訂房方案、取消期限請以訂房確認信為準', phone: '098-863-0888', website: '', photo: '', mapQuery: 'ホテルアザット那覇', placeId: '' },
     { id: 'stay-onna', name: 'BLISSTIA SUITES & RESORT 沖繩恩納村', area: '恩納村', checkIn: '15:00', checkOut: '11:00', address: '沖縄県国頭郡恩納村前兼久497-6', addressEn: '497-6 Maeganeku, Onna, Kunigami District, Okinawa 904-0414', parking: '戶外停車場 124 台，每天 ¥1,000（最多 ¥2,000）', notes: '全房 50㎡ 以上附廚房與陽台；無邊際泳池、室內泳池、大浴場（6:00–10:00、16:00–23:00）；泳池旁 Lounge 12:00–22:00 有飲料暢飲', phone: '098-979-5177', website: '', photo: '', mapQuery: '', placeId: 'ChIJFepf2EIb5TQR6qfIYlX5wKw' },
     { id: 'stay-north', name: 'Yukurina Resort Okinawa Lemon House', area: '北部（本部町）', checkIn: '', checkOut: '', address: '', addressEn: '75-5 Yamakawa, Motobu, Kunigami District, Okinawa 905-0205', parking: '', notes: 'Google Maps 上有兩個同名地點，入住前請跟訂房資料確認地址；Yukurina 部分房型沒有櫃台、要到別處辦入住，請先看訂房確認信', phone: '0980-48-3903', website: '', photo: '', mapQuery: '', placeId: 'ChIJvaDVIdL75DQRBUVjMK-K_0s' },
     { id: 'stay-naha-2', name: 'Hotel Torifito 那霸旭橋（托麗芙特酒店）', area: '那霸', checkIn: '14:00', checkOut: '11:00', address: '沖縄県那覇市西1-11-19', addressEn: '1-11-19 Nishi, Naha, Okinawa 900-0036', parking: '飯店室內立體停車場約 28 台，每晚約 ¥1,500–1,800，不能預約；滿了要停附近的收費停車場', notes: '訂的是 Booking.com「舒適雙人房」（17㎡、一張大床），2027/2/22 前可免費取消、2/20 前不用付款。單軌電車「旭橋」站走路約 8 分，國際通、波之上海灘走路可到；早餐自助餐 6:30–10:00（另外付費）', phone: '098-860-6430', website: '', photo: '', mapQuery: 'ホテル・トリフィート那覇旭橋', placeId: '' },
@@ -284,7 +284,7 @@ window.TRIP = (function () {
     },
     visitJapanWeb: [
       '出發前 1–2 週到 Visit Japan Web 官網註冊（網址認明 vjw.digital.go.jp），兩人都要各自登錄',
-      '登錄護照、航班（JX870 3/2 那霸）、第一晚住宿（那霸歌町大和 Roynet）',
+      '登錄護照、航班（JX870 3/2 那霸）、第一晚住宿（HOTEL AZAT 那霸）',
       '填完「入境審查」和「海關申報」，會拿到一組合併的 QR Code',
       '把 QR Code 截圖存在手機，落地後入境審查和海關都出示這組 QR Code'
     ],
