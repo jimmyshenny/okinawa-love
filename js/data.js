@@ -279,6 +279,37 @@ window.TRIP = (function () {
     insurance: { company: '', policyNote: '', phone: '' }
   };
 
+  // 行程裡的景點，自動放進「口袋清單 › 景點」（改行程就會跟著變）
+  // 已經在清單裡的同一個地點（Google 地點或搜尋字相同）只補空白欄位，不重複新增
+  (function addItinerarySights() {
+    var TYPE = { 'd2-3': '鐘乳石洞', 'd6-1': '跨海大橋', 'd6-3': '海邊洞窟', 'd6-1b': '觀景塔', 'd6-5': '海灘', 'd6-a': '海灘', 'd6-b': '散步' };
+    var AREA = { 'd2-2': '豐見城', 'd2-3': '南城', 'd3-2': '北谷', 'd6-1': '古宇利島', 'd6-3': '古宇利島', 'd6-1b': '古宇利島', 'd6-5': '古宇利島', 'd5-3': '本部', 'd6-a': '本部', 'd6-b': '本部 備瀬' };
+    days.forEach(function (d) {
+      d.itinerary.forEach(function (it) {
+        if (it.category !== 'sight') return;
+        var info = {
+          kind: 'sight', type: TYPE[it.id] || '景點', status: 'planned', day: d.day, area: AREA[it.id] || d.area || '',
+          address: it.address || it.addressEn || '', hours: it.hours || '', price: it.ticket || '',
+          parking: [it.parking, it.parkingFee ? '停車費：' + it.parkingFee : ''].filter(Boolean).join('；'),
+          description: [it.description, it.duration ? '建議停留 ' + it.duration : ''].filter(Boolean).join('，'),
+          notes: it.notes || '', reservationInfo: it.reservation || '', needReservation: false,
+          mapQuery: it.mapQuery || '', placeId: it.placeId || '', parkingPlaceId: it.parkingPlaceId || '', parkingName: it.parkingName || '',
+          photo: (it.photos && it.photos[0]) || ''
+        };
+        var same = restaurants.filter(function (r) {
+          return r.kind === 'sight' && ((info.placeId && r.placeId === info.placeId) || (info.mapQuery && r.mapQuery === info.mapQuery));
+        })[0];
+        if (same) {
+          Object.keys(info).forEach(function (k) { if (same[k] === '' || same[k] == null) same[k] = info[k]; });
+          if (!same.day) same.day = d.day;
+          if (same.status === 'wishlist') same.status = 'planned';
+        } else {
+          restaurants.push(rest('it-' + it.id, it.name, info));
+        }
+      });
+    });
+  })();
+
   // 日本自駕提醒（一般常識＋IG 收藏整理，可自行增修）
   // 每一組：{ title: 標題, items: [...] }
   var drivingTips = [
