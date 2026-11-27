@@ -120,7 +120,7 @@
           '<button style="flex:1;min-width:0;border:0;background:none;text-align:left;padding:6px 0" data-stop="' + esc(s.id) + '"><b style="font-size:15px">' + esc(s.name) + '</b><br><span class="tiny muted">' + (has(s.parking) ? '停車：' + esc(s.parking) : '停車資訊待補') + '</span></button>' +
           (u ? '<a class="icon-btn" href="' + esc(u) + '" target="_blank" rel="noopener" aria-label="導航到 ' + esc(s.name) + '" style="border:1px solid var(--mist);color:var(--ocean)">' + ic('nav', 18) + '</a>' : '<span class="tiny tbd" style="padding-right:8px">地址待補</span>') +
           '</div>' +
-          (i < stops.length - 1 ? '<div class="route-gap">' + (has(s.driveTime) || has(s.driveDistance) ? '車程 ' + esc([s.driveTime, s.driveDistance].filter(has).join(' · ')) : '車程・距離待補') + '</div>' : '') +
+          (i < stops.length - 1 ? '<div class="route-gap">' + (has(s.driveTime) || has(s.driveDistance) ? (/^(園區內)?步行/.test(s.driveTime) ? '' : '車程 ') + esc([s.driveTime, s.driveDistance].filter(has).join(' · ')) : '車程・距離待補') + '</div>' : '') +
           '</li>';
       }).join('') + '</ol>' +
       (a ? '<p class="small" style="margin-top:14px">今晚住宿：<b>' + (has(a.name) ? esc(a.name) : esc(a.area) + '住宿') + '</b></p>' : '');

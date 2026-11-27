@@ -65,6 +65,12 @@
     '</section>';
   }
 
+  // 車程標示：「步行…」開頭用走路小人，其他用車子
+  function isWalk(t) { return /^(園區內)?步行/.test(String(t)); }
+  function driveLine(t, label) {
+    return '<div class="tl-drive' + (label ? ' tl-depart' : '') + '" aria-label="' + (label ? label + ' ' : '到下一站') + esc(t) + '">' + ic(isWalk(t) ? 'walk' : 'car', 11) + '<span>' + (label ? esc(label) + ' · ' : '') + esc(t) + '</span></div>';
+  }
+
   function nextStopCard(day) {
     var ns = App.nextStop(day);
     if (!ns) return '';
@@ -74,7 +80,9 @@
     var it = ns.item, url = it.navigable ? App.navUrl(it) : '';
     var sub = [];
     if (has(it.time)) sub.push('預計 ' + esc(it.time));
-    if (ns.index > 0 && has(day.itinerary[ns.index - 1].driveTime)) sub.push('車程 ' + esc(day.itinerary[ns.index - 1].driveTime));
+    var prevT = ns.index > 0 ? day.itinerary[ns.index - 1].driveTime : '';
+    if (has(it.departDrive)) sub.push('從飯店出發 ' + esc(it.departDrive));
+    else if (has(prevT)) sub.push((isWalk(prevT) ? '' : '車程 ') + esc(prevT));
     if (ns.late) sub.push('已超過預計時間，到了記得按「完成」');
     if (!sub.length) sub.push(ns.label === '當日第一站' ? '這天的第一個行程' : '完成目前這站後會自動更新');
     return '<section class="next-stop" aria-live="polite">' +
@@ -141,6 +149,7 @@
       return '<li class="tl-item' + (done ? ' is-done' : '') + (i === nextIdx ? ' is-next' : '') + '">' +
         '<div class="tl-rail"><span class="tl-dot">' + (done ? ic('check', 14) : (i + 1)) + '</span><span class="tl-line"></span></div>' +
         '<div style="flex:1;min-width:0">' +
+        (has(it.departDrive) ? driveLine(it.departDrive, '從飯店出發') : '') +
         '<article class="tl-card">' +
           '<button class="tl-toggle" data-open="' + esc(it.id) + '" aria-expanded="' + isOpen + '">' +
             '<span class="tl-meta"><span class="tl-time">' + (has(it.time) ? esc(it.time) : '') + '</span>' +
@@ -161,7 +170,7 @@
               (url ? '<a class="round-btn primary" href="' + esc(url) + '" target="_blank" rel="noopener" aria-label="導航到 ' + esc(it.name) + '">' + ic('nav', 18) + '<span>導航</span></a>' : '') + '</div>' : '') +
           '</div>' +
         '</article>' +
-        (i < day.itinerary.length - 1 && has(it.driveTime) ? '<div class="tl-drive" aria-label="到下一站車程 ' + esc(it.driveTime) + '">' + ic('car', 11) + '<span>' + esc(it.driveTime) + '</span></div>' : '') +
+        (i < day.itinerary.length - 1 && has(it.driveTime) && !has(day.itinerary[i + 1].departDrive) ? driveLine(it.driveTime) : '') +
         '</div></li>';
     }).join('') + '</ol>';
   }

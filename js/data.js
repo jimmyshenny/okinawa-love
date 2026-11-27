@@ -42,6 +42,7 @@ window.TRIP = (function () {
       stayId: '',          // 旅館 Check in：對應下方 accommodations 的 id
       photos: [],          // 圖片路徑，例如 'images/sesoko.jpg'
       restaurantId: '',    // 對應下方 restaurants 的 id
+      departDrive: '',     // 連住日：從飯店出發到這一站的車程（顯示在這站上方）
       driveTime: '',       // 到下一站的車程，例如 '約 25 分'（留空就不顯示）
       driveDistance: '',   // 到下一站的距離，例如 '12 km'
       navigable: true      // false = 不需要導航（例如：上飛機）
@@ -72,7 +73,7 @@ window.TRIP = (function () {
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-naha-1',
       itinerary: [
-        item('d2-2', '瀨長島', 'sight', '海邊白色小鎮，看飛機起降', { mapQuery: '瀬長島ウミカジテラス', parkingPlaceId: 'ChIJ-TqfJ8Rp5TQRgox-4OQ8hwA', parkingName: '瀬長島 サンセットパーキング', parking: '瀨長島展望台附近停車（免費，車位不多）', addressEn: 'Senaga, Tomigusuku, Okinawa 901-0233', parkingFee: '免費', duration: '1.5–2 小時', notes: '白色小鎮「Umikaji Terrace」有很多餐廳甜點；島西邊展望台可近距離看飛機起降、看夕陽。停車場常滿，上坡處還有更多免費車位', driveTime: '約 15 分' }),
+        item('d2-2', '瀨長島', 'sight', '海邊白色小鎮，看飛機起降', { mapQuery: '瀬長島ウミカジテラス', parkingPlaceId: 'ChIJ-TqfJ8Rp5TQRgox-4OQ8hwA', parkingName: '瀬長島 サンセットパーキング', departDrive: '約 25 分', parking: '瀨長島展望台附近停車（免費，車位不多）', addressEn: 'Senaga, Tomigusuku, Okinawa 901-0233', parkingFee: '免費', duration: '1.5–2 小時', notes: '白色小鎮「Umikaji Terrace」有很多餐廳甜點；島西邊展望台可近距離看飛機起降、看夕陽。停車場常滿，上坡處還有更多免費車位', driveTime: '約 15 分' }),
         item('d2-1', '午餐：系滿魚市場', 'food', '海鮮午餐', { restaurantId: 'r-itoman', driveTime: '約 25 分' }),
         item('d2-3', '玉泉洞', 'sight', '沖繩世界・鐘乳石洞', { mapQuery: '玉泉洞 おきなわワールド', placeId: 'ChIJa3ifUYVp5TQR3QZD1tyLml4', address: '沖縄県南城市玉城前川1336（おきなわワールド內）', hours: '9:00–17:30（最後入園 16:00）', ticket: '大人 ¥2,000（含玉泉洞與園區）', parking: '免費停車場約 400 台', parkingFee: '免費', duration: '2–3 小時', notes: '洞內開放約 890 m，潮濕地滑請穿好走的鞋；Super Eisa 太鼓表演約 10:30、12:30、14:30', driveTime: '約 35 分', needTicket: true, reservation: '【何時買】出發前 1–2 週網路買就好（不會賣完，主要省排隊、還有小折扣）。【怎麼買】KKday、Klook、HIS 等平台買「おきなわワールド 入園券」，網路價大人約 ¥1,900（現場 ¥2,000）；依平台指示出示 QR 碼或憑證換票。買了通常不能退。' }),
         item('d2-3b', '回旅館', 'stay', '回 HOTEL AZAT 休息一下，再出門吃晚餐', { stayId: 'stay-naha-1', driveTime: '步行約 3 分' }),
@@ -99,7 +100,7 @@ window.TRIP = (function () {
       accommodationId: 'stay-onna',
       itinerary: [
         item('d4-1', '耍廢日', 'rest', '在飯店好好休息，享受海景', { navigable: false, nearby: [{ name: '青之洞窟', q: '青の洞窟 真栄田岬', placeId: 'ChIJFSBnObgb5TQRQA1ByAocZog', note: '離飯店開車約 10 分；要浮潛或潛水需參加付費行程，不下水的話可以在真榮田岬步道看海' }, { name: '永旺夢樂城沖繩來客夢', q: 'イオンモール沖縄ライカム', placeId: 'ChIJJ_TSFGIS5TQRa_HkdjGALss', note: '離飯店開車約 35 分；有寶可夢中心、LOFT、大水族箱，10:00–22:00' }] }),
-        item('d4-l', '午餐：濱之家 Hamanoya', 'food', '整條魚料理，奶油香煎最有名', { restaurantId: 'r-hamanoya', time: '11:00' }),
+        item('d4-l', '午餐：濱之家 Hamanoya', 'food', '整條魚料理，奶油香煎最有名', { restaurantId: 'r-hamanoya', time: '11:00', departDrive: '約 10 分' }),
         item('d4-2', '晚餐：Yanbaru Meat', 'food', '牛排和西式小菜，飯店附近', { restaurantId: 'r-yanbaru', time: '18:30' })
       ]
     },
@@ -127,7 +128,8 @@ window.TRIP = (function () {
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-north',
       itinerary: [
-        item('d5-3', '美麗海水族館', 'sight', '9:30 進場，早上人比較少', { mapQuery: '沖縄美ら海水族館', placeId: 'ChIJPZ5hUjH65DQR_p_dD3CmCOo', address: '沖縄県国頭郡本部町石川424（海洋博公園內）', hours: '8:30–18:30（最後入館 17:30）', ticket: '大人 ¥2,180；網路買電子票可掃 QR 直接入館', parking: '海洋博公園停車場', parkingFee: '免費', duration: '2–3 小時', notes: '重點是「黑潮之海」鯨鯊與鬼蝠魟；園區內海豚表演、海牛館、海龜館免費；人多時建議一開門就進場', needTicket: true, reservation: '【何時買】出發前 1–2 週網路買就好（不會賣完，主要省排隊）。【怎麼買】KKday、Klook、VELTRA 買「電子入館票」，入口直接掃 QR 碼進場，不用排售票口；大人 ¥2,180。也可以在當天經過的許田休息站買優惠票。買了不能退票。', time: '09:30', driveTime: '園區內步行約 10 分' }),
+        item('d6-0', '早餐：Yukurina 飯店早餐', 'food', '訂房含早餐，吃完再出發去水族館', { navigable: false }),
+        item('d5-3', '美麗海水族館', 'sight', '9:30 進場，早上人比較少', { mapQuery: '沖縄美ら海水族館', placeId: 'ChIJPZ5hUjH65DQR_p_dD3CmCOo', address: '沖縄県国頭郡本部町石川424（海洋博公園內）', hours: '8:30–18:30（最後入館 17:30）', ticket: '大人 ¥2,180；網路買電子票可掃 QR 直接入館', parking: '海洋博公園停車場', parkingFee: '免費', duration: '2–3 小時', notes: '重點是「黑潮之海」鯨鯊與鬼蝠魟；園區內海豚表演、海牛館、海龜館免費；人多時建議一開門就進場', needTicket: true, reservation: '【何時買】出發前 1–2 週網路買就好（不會賣完，主要省排隊）。【怎麼買】KKday、Klook、VELTRA 買「電子入館票」，入口直接掃 QR 碼進場，不用排售票口；大人 ¥2,180。也可以在當天經過的許田休息站買優惠票。買了不能退票。', time: '09:30', departDrive: '約 3 分', driveTime: '園區內步行約 10 分' }),
         item('d6-a', '翡翠海灘', 'sight', '水族館旁的白沙灘，散步拍照', { mapQuery: 'エメラルドビーチ 海洋博公園', placeId: 'ChIJk4Fw-Dn65DQRkdNLoaBpJLI', duration: '30–40 分鐘', parking: '在海洋博公園內，車可以繼續停水族館的停車場走過去', parkingFee: '免費', notes: '11 月到 3 月不開放游泳，散步拍照就好；海水很清、沙子很細，沒有遮蔭記得防曬。海牛館旁邊的樓梯往下還有一個小沙灘', driveTime: '約 5 分' }),
         item('d6-l', '午餐：ふくぎ屋', 'food', '福木林道裡的沖繩麵', { restaurantId: 'r-fukugiya', driveTime: '步行即到' }),
         item('d6-b', '備瀬福木林道', 'sight', '福木樹蔭下的老村落散步', { mapQuery: '備瀬のフクギ並木', placeId: 'ChIJ6z_osjv65DQRNpoSOgG1iqM', hours: '24 小時', duration: '1–1.5 小時', parking: '村子入口有幾個小停車場，免費的不好找，收費的約 ¥500', notes: '整條走完來回約 1 小時，可以租腳踏車或電動滑板車；路上有小咖啡店和紅豆冰（ぜんざい）；走到底是海邊，很適合看夕陽；蚊子多，記得防蚊', driveTime: '約 15 分' }),
@@ -154,7 +156,7 @@ window.TRIP = (function () {
       weather: { icon: '', status: '', temp: '', rain: '' },
       accommodationId: 'stay-naha-2',
       itinerary: [
-        item('d8-1', '午餐：POCO CAFE', 'food', '沖繩家常菜午餐（塔可飯、沖繩麵）', { restaurantId: 'r-poco', driveTime: '約 30 分' }),
+        item('d8-1', '午餐：POCO CAFE', 'food', '沖繩家常菜午餐（塔可飯、沖繩麵）', { restaurantId: 'r-poco', departDrive: '約 13 分（步行約 25 分）', driveTime: '約 30 分' }),
         item('d8-2', '豐崎百貨', 'shopping', 'iias 沖繩豐崎', { mapQuery: 'iias沖縄豊崎', placeId: 'ChIJj-bxt39p5TQRVVi5ETcWlRM', addressEn: '3-35 Toyosaki, Tomigusuku, Okinawa 901-0225', hours: '10:00–21:00', duration: '2–3 小時', parking: '室內停車場', parkingFee: '免費', notes: '豐崎 LOFT 在 3F；有 UNIQLO、GU、超市可買伴手禮；旁邊就是 Ashibinaa Outlet', driveTime: '步行約 5 分', nearby: [{ name: '豐崎 LOFT', q: '豊崎ロフト', placeId: 'ChIJH8VZ7Ilp5TQRVKVM97AdiUA', note: '就在 iias 3F，文具、雜貨、美妝' }] }),
         item('d8-3', 'Ashibinaa Outlet', 'shopping', '沖繩 Outlet 購物', { mapQuery: '沖縄アウトレットモール あしびなー', placeId: 'ChIJ98yehgto5TQRJj4hYbNQH9U', addressEn: '1-188 Toyosaki, Tomigusuku, Okinawa 901-0225', hours: '10:00–20:00', duration: '2–3 小時', parking: '大型停車場', parkingFee: '免費', notes: '開放式 Outlet，離機場約 15 分鐘；有投幣置物櫃；逛完可走去隔壁 iias', driveTime: '約 40 分（傍晚可能塞車）' }),
         item('d8-4', '晚餐：HAMA 壽司', 'food', '迴轉壽司晚餐，平板點餐可切中文', { restaurantId: 'r-hama' })
