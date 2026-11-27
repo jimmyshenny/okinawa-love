@@ -141,7 +141,7 @@ window.TRIP = (function () {
       accommodationId: 'stay-naha-2',
       itinerary: [
         item('d7-1', '早餐：Yukurina 飯店早餐', 'food', '訂房含早餐，吃完再回房間整理、退房', { navigable: false }),
-        item('d7-2', '旅館 Check out', 'stay', '北部住宿退房', { navigable: false, driveTime: '約 1 小時 20 分（走高速）' }),
+        item('d7-2', '旅館 Check out', 'stay', '北部住宿退房', { navigable: false, driveTime: '約 1 小時 50 分（走高速，已多抓 30 分）', notes: '⚠️ 沖繩自動車道宜野座 IC–許田 IC 在 2027/1/6–3/31 整天施工管制，可能塞車，車程已多抓 30 分鐘（平常約 1 小時 20 分）。許田 IC 上、西原 IC 下，ETC 約 ¥1,000' }),
         item('d7-3', '逛街：PARCO CITY', 'shopping', '浦添的購物中心', { mapQuery: 'サンエー浦添西海岸 PARCO CITY', placeId: 'ChIJxZQf9gpr5TQRwLWyT5Osigc', addressEn: '3-1-1 Irijima, Urasoe, Okinawa 901-2123', hours: '10:00–22:00', duration: '3 小時以上', parking: '大型停車場（假日找車位要等一下）', notes: '三層樓，有 UNIQLO、GU、無印、Daiso、ABC-Mart、LEGO 等；美食街看得到海景；退稅櫃台在 1F', driveTime: '約 20 分' }),
         item('d7-4', '旅館 Check in', 'stay', '入住 Hotel Torifito 那霸旭橋', { stayId: 'stay-naha-2', driveTime: '步行約 15 分（開車約 5 分）' }),
         item('d7-5', '晚餐：Shima Shabushabu Nakama 島', 'food', '涮涮鍋晚餐（約 1/8 開放訂位，訂 19:30）', { restaurantId: 'r-nakama', time: '19:30' })
