@@ -156,6 +156,17 @@
     }).join('') + '</ol>';
   }
 
+  // 房間照片：左右滑動
+  function roomGallery(a) {
+    var ph = a.roomPhotos || [];
+    if (!ph.length) return '';
+    return '<div class="room-gallery-wrap"><div class="tiny muted" style="margin-bottom:6px">房間照片 · 左右滑動看 ' + ph.length + ' 張</div>' +
+      '<div class="room-gallery">' + ph.map(function (p, i) {
+        return '<figure><img src="' + esc(p.src) + '" alt="' + esc(p.caption || '房間照片') + '" loading="lazy">' +
+          '<figcaption>' + (i + 1) + '/' + ph.length + (p.caption ? ' · ' + esc(p.caption) : '') + '</figcaption></figure>';
+      }).join('') + '</div></div>';
+  }
+
   function staySection(day, idx) {
     var a = App.accommodation(day.accommodationId);
     if (!a) return day.itinerary.length ? '<div class="empty">今晚不需要住宿，一路順風回家</div>' : '';
@@ -173,12 +184,12 @@
         '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span class="tiny muted">今日住宿 · ' + esc(a.area) + '</span>' +
           (day.stayAction ? '<a class="btn btn-sm btn-primary" style="min-height:36px;padding:0 12px;white-space:nowrap" href="' + esc(day.stayAction.url) + '" target="_blank" rel="noopener">' + ic('plane', 14) + esc(day.stayAction.label) + '</a>' : '') + '</div>' +
         '<h3 style="font-size:18px">' + name + '</h3>' +
-        (cont ? '<p class="small muted" style="margin:0">和昨晚同一間，訂房資訊請見「交通 › 住宿」。</p>' :
+        (cont ? '<p class="small muted" style="margin:0">和昨晚同一間，訂房資訊請見「交通 › 住宿」。</p>' + roomGallery(a) :
         '<div class="stay-times"><div>Check-in <b>' + v(a.checkIn) + '</b></div><div>Check-out <b>' + v(a.checkOut) + '</b></div></div>' +
         '<dl class="kv small"><dt>地址</dt><dd>' + v(a.address) + (has(a.addressEn) ? '<br><span class="muted">' + esc(a.addressEn) + '</span>' : '') + '</dd>' +
           '<dt>停車</dt><dd>' + v(a.parking) + '</dd>' +
           '<dt>訂房編號</dt><dd>' + (booking ? esc(booking) : '<span class="tbd">未填</span>') + ' <button class="more-btn" data-priv="stay:' + esc(a.id) + '" data-label="' + esc((a.name || a.area + '住宿') + ' 訂房編號') + '">' + ic('lock', 13) + '編輯</button></dd>' +
-          (has(a.notes) ? '<dt>注意事項</dt><dd>' + esc(a.notes) + '</dd>' : '') + '</dl>') +
+          (has(a.notes) ? '<dt>注意事項</dt><dd>' + esc(a.notes) + '</dd>' : '') + '</dl>' + roomGallery(a)) +
         '<div class="btn-row">' +
           (navU ? '<a class="btn btn-primary" href="' + esc(navU) + '" target="_blank" rel="noopener">' + ic('nav', 16) + '導航</a>' : '<span class="btn disabled">' + ic('nav', 16) + '導航</span>') +
           (mapU ? '<a class="btn" href="' + esc(mapU) + '" target="_blank" rel="noopener">' + ic('map', 16) + '地圖</a>' : '') +

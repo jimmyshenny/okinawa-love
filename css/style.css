@@ -335,3 +335,11 @@ h1, h2, h3 { font-family: var(--serif); margin: 0; line-height: 1.35; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* 房間照片：左右滑動 */
+.room-gallery-wrap { margin: 4px 0 2px; }
+.room-gallery { display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 6px; scrollbar-width: none; }
+.room-gallery::-webkit-scrollbar { display: none; }
+.room-gallery figure { flex: 0 0 86%; margin: 0; scroll-snap-align: start; }
+.room-gallery img { width: 100%; aspect-ratio: 840 / 460; object-fit: cover; border-radius: 10px; display: block; background: #E7EEF1; }
+.room-gallery figcaption { font-size: 12px; color: #6B7A80; margin-top: 4px; }
