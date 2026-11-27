@@ -150,7 +150,7 @@
         '<span class="pill blue">' + x.dates.length + ' 晚</span></div>' +
         '<span class="small muted">' + U.md(x.dates[0]) + ' 入住 · ' + x.dates.map(U.md).join('、') + '</span>' +
         '<dl class="kv small"><dt>Check-in</dt><dd>' + v(a.checkIn) + '</dd><dt>Check-out</dt><dd>' + v(a.checkOut) + '</dd><dt>地址</dt><dd>' + v(a.address) + '</dd>' +
-        '<dt>訂房編號</dt><dd>' + privVal('stay:' + a.id) + ' ' + privBtn('stay:' + a.id, (a.name || a.area + '住宿') + ' 訂房編號') + '</dd></dl>' +
+        '<dt>訂房編號</dt><dd>' + privVal('stay:' + a.id) + ' ' + privBtn('stay:' + a.id, (a.name || a.area + '住宿') + ' 訂房編號') + '</dd></dl>' + U.shopsHtml(a) +
         '<div class="btn-row">' +
           (q ? '<a class="btn btn-sm btn-outline" href="' + esc(q) + '" target="_blank" rel="noopener">' + ic('nav', 14) + '導航</a>' : '') +
           (m ? '<a class="btn btn-sm btn-outline" href="' + esc(m) + '" target="_blank" rel="noopener">' + ic('map', 14) + '地圖</a>' : '') +

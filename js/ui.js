@@ -60,6 +60,18 @@ window.UI = (function () {
 
   // placeId（Google 地點 ID）：有的話 Google Maps 會直接打開那一家，不會跳出搜尋清單
   function pid(name, id) { return id ? '&' + name + '=' + encodeURIComponent(id) : ''; }
+  // 住宿附近的超商、藥妝
+  function shopsHtml(a) {
+    var list = (a && a.shops) || [];
+    if (!list.length) return '';
+    return '<div class="stay-shops"><div class="tiny muted" style="margin-bottom:6px">附近超商・藥妝</div>' + list.map(function (x) {
+      var cls = x.type === '藥妝' ? 'peach' : (x.type === '超市' ? 'green' : 'blue');
+      return '<a class="shop-row" href="' + esc(mapsUrl(x.q || x.name, x.placeId)) + '" target="_blank" rel="noopener">' +
+        '<span class="pill ' + cls + '">' + esc(x.type) + '</span><span class="grow"><b>' + esc(x.name) + '</b>' +
+        (x.note ? '<br><span class="tiny muted">' + esc(x.note) + '</span>' : '') + '</span></a>';
+    }).join('') + '</div>';
+  }
+
   function mapsUrl(query, placeId) { return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query) + pid('query_place_id', placeId); }
   function dirUrl(dest, placeId) { return 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(dest) + pid('destination_place_id', placeId) + '&travelmode=driving'; }
   // points：字串，或 { q: 搜尋字, id: placeId }
@@ -187,6 +199,7 @@ window.UI = (function () {
 
   return {
     lines: lines,
+    shopsHtml: shopsHtml,
     esc: esc, v: v, has: has, icon: icon, mapsUrl: mapsUrl, dirUrl: dirUrl, routeUrl: routeUrl, money: money,
     todayISO: todayISO, md: md, dotDate: dotDate, nowMinutes: nowMinutes, toMinutes: toMinutes,
     toast: toast, openSheet: openSheet, closeSheet: closeSheet, form: form

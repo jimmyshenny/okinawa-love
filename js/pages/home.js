@@ -221,14 +221,14 @@
         '<div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><span class="tiny muted">今日住宿 · ' + esc(a.area) + '</span>' +
           (day.stayAction ? '<a class="btn btn-sm btn-primary" style="min-height:36px;padding:0 12px;white-space:nowrap" href="' + esc(day.stayAction.url) + '" target="_blank" rel="noopener">' + ic('plane', 14) + esc(day.stayAction.label) + '</a>' : '') + '</div>' +
         '<h3 style="font-size:18px">' + name + '</h3>' +
-        (cont ? '<p class="small muted" style="margin:0">和昨晚同一間，訂房資訊請見「交通 › 住宿」。</p>' + roomGallery(a) :
+        (cont ? '<p class="small muted" style="margin:0">和昨晚同一間，訂房資訊請見「交通 › 住宿」。</p>' + U.shopsHtml(a) + roomGallery(a) :
         '<div class="stay-times"><div>Check-in <b>' + v(a.checkIn) + '</b></div><div>Check-out <b>' + v(a.checkOut) + '</b></div></div>' +
         '<dl class="kv small"><dt>地址</dt><dd>' + v(a.address) + (has(a.addressEn) ? '<br><span class="muted">' + esc(a.addressEn) + '</span>' : '') + '</dd>' +
           '<dt>停車</dt><dd>' + (has(a.parking) ? U.lines(a.parking) : v(a.parking)) + (a.parkingLinks || []).map(function (l) {
             return '<br><a class="small" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + ic('map', 13) + ' ' + esc(l.label) + '</a>';
           }).join('') + '</dd>' +
           '<dt>訂房編號</dt><dd>' + (booking ? esc(booking) : '<span class="tbd">未填</span>') + ' <button class="more-btn" data-priv="stay:' + esc(a.id) + '" data-label="' + esc((a.name || a.area + '住宿') + ' 訂房編號') + '">' + ic('lock', 13) + '編輯</button></dd>' +
-          '</dl>' + stayNotes(a.notes) + roomGallery(a)) +
+          '</dl>' + U.shopsHtml(a) + stayNotes(a.notes) + roomGallery(a)) +
         '<div class="btn-row">' +
           (navU ? '<a class="btn btn-primary" href="' + esc(navU) + '" target="_blank" rel="noopener">' + ic('nav', 16) + '導航</a>' : '<span class="btn disabled">' + ic('nav', 16) + '導航</span>') +
           (mapU ? '<a class="btn" href="' + esc(mapU) + '" target="_blank" rel="noopener">' + ic('map', 16) + '地圖</a>' : '') +
