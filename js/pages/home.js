@@ -112,7 +112,12 @@
       return '<div style="margin-bottom:8px"><a href="' + esc(U.mapsUrl(n.q || n.name, n.placeId)) + '" target="_blank" rel="noopener"><b>' + esc(n.name) + '</b></a>' + (has(n.note) ? '<br><span class="muted small">' + esc(n.note) + '</span>' : '') + '</div>';
     }).join('')]);
     var notes = [it.notes, R.notes].filter(has);
-    if (notes.length) rows.push(['注意事項', notes.map(esc).join('<br>')]);
+    var fmt = function (t) {
+      var ls = String(t).split('\n').filter(function (x) { return x.trim(); });
+      if (ls.length < 2) return esc(t);
+      return ls.map(function (x) { return x.charAt(0) === '#' ? '<b>' + esc(x.replace(/^#+\s*/, '')) + '</b>' : '• ' + esc(x); }).join('<br>');
+    };
+    if (notes.length) rows.push(['注意事項', notes.map(fmt).join('<br>')]);
     return (rows.length ? '<dl class="kv">' + rows.map(function (x) { return '<dt>' + x[0] + '</dt><dd>' + x[1] + '</dd>'; }).join('') + '</dl>'
         : '<p class="small muted" style="margin:0">這一站還沒有詳細資料。</p>') +
       (it.photos && it.photos.length ? '<div class="tl-photos">' + it.photos.map(function (p) { return '<img src="' + esc(p) + '" alt="' + esc(it.name) + '" loading="lazy">'; }).join('') + '</div>' : '') +
@@ -156,6 +161,24 @@
     }).join('') + '</ol>';
   }
 
+  // 住宿注意事項：「# 標題」換成小標，其他每行一點
+  function stayNotes(txt) {
+    if (!has(txt)) return '';
+    var html = '', open = false;
+    String(txt).split('\n').forEach(function (line) {
+      line = line.trim(); if (!line) return;
+      if (line.charAt(0) === '#') {
+        if (open) html += '</ul>';
+        html += '<h4>' + esc(line.replace(/^#+\s*/, '')) + '</h4><ul>'; open = true;
+      } else {
+        if (!open) { html += '<ul>'; open = true; }
+        html += '<li>' + esc(line) + '</li>';
+      }
+    });
+    if (open) html += '</ul>';
+    return '<div class="stay-notes"><div class="stay-notes-title">注意事項</div>' + html + '</div>';
+  }
+
   // 房間照片：左右滑動
   function roomGallery(a) {
     var ph = a.roomPhotos || [];
@@ -189,7 +212,7 @@
         '<dl class="kv small"><dt>地址</dt><dd>' + v(a.address) + (has(a.addressEn) ? '<br><span class="muted">' + esc(a.addressEn) + '</span>' : '') + '</dd>' +
           '<dt>停車</dt><dd>' + v(a.parking) + '</dd>' +
           '<dt>訂房編號</dt><dd>' + (booking ? esc(booking) : '<span class="tbd">未填</span>') + ' <button class="more-btn" data-priv="stay:' + esc(a.id) + '" data-label="' + esc((a.name || a.area + '住宿') + ' 訂房編號') + '">' + ic('lock', 13) + '編輯</button></dd>' +
-          (has(a.notes) ? '<dt>注意事項</dt><dd>' + esc(a.notes) + '</dd>' : '') + '</dl>' + roomGallery(a)) +
+          '</dl>' + stayNotes(a.notes) + roomGallery(a)) +
         '<div class="btn-row">' +
           (navU ? '<a class="btn btn-primary" href="' + esc(navU) + '" target="_blank" rel="noopener">' + ic('nav', 16) + '導航</a>' : '<span class="btn disabled">' + ic('nav', 16) + '導航</span>') +
           (mapU ? '<a class="btn" href="' + esc(mapU) + '" target="_blank" rel="noopener">' + ic('map', 16) + '地圖</a>' : '') +

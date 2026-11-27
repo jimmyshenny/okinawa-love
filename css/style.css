@@ -343,3 +343,11 @@ h1, h2, h3 { font-family: var(--serif); margin: 0; line-height: 1.35; }
 .room-gallery figure { flex: 0 0 86%; margin: 0; scroll-snap-align: start; }
 .room-gallery img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 10px; display: block; background: #E7EEF1; }
 .room-gallery figcaption { font-size: 12px; color: #6B7A80; margin-top: 4px; }
+
+/* 住宿注意事項：分段小標＋條列 */
+.stay-notes { background: #F6F2E8; border-radius: 10px; padding: 12px 14px; margin: 2px 0 4px; }
+.stay-notes-title { font-size: 13px; color: #6B7A80; margin-bottom: 2px; }
+.stay-notes h4 { font-size: 14px; font-weight: 600; margin: 10px 0 4px; color: var(--ink, #2E3A3F); }
+.stay-notes h4:first-of-type { margin-top: 4px; }
+.stay-notes ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
+.stay-notes li { font-size: 13.5px; line-height: 1.55; }
