@@ -232,10 +232,10 @@ window.TRIP = (function () {
     rest('r-morningbowls', 'MORNING BOWLS 波之上店', { nameJa: 'MORNING BOWLS NAMINOUE CAFE', type: '早午餐・Poke 碗', area: '那霸 若狹', group: 'cafe', source: 'IG', mapQuery: 'MORNING BOWLS NAMINOUE CAFE', address: '那霸市若狹 1-21-1（KAINOA 1F）', recommend: '沖繩縣產生鮪魚 Poke 碗＋巴西莓果碗；也有現煎鬆餅', description: '北谷人氣夏威夷早午餐店的那霸分店，就在波之上沙灘旁，白色裝潢很有度假感', notes: '從波上宮、波之上沙灘走路約 3–5 分，可以參拜完過來吃' }),
     rest('r-jun', '琉球涮涮鍋 純 今歸仁本店', { nameJa: 'Aguu 石垣牛 琉球しゃぶしゃぶ 純 今帰仁本店', type: '涮涮鍋・壽喜燒', area: '今歸仁', source: 'IG', mapQuery: '琉球しゃぶしゃぶ純 今帰仁本店', recommend: '阿古豬、石垣牛', notes: 'IG 收藏推薦的壽喜燒／涮涮鍋' }),
     rest('r-diver', '潛水員牛排 Restaurant Flipper', { nameJa: 'レストランふりっぱー（STEAK & LOBSTER RESTAURANT FLIPPER）', type: '牛排・龍蝦', area: '名護 宇茂佐', source: 'IG', mapQuery: 'レストランふりっぱー 名護', placeId: 'ChIJ_0BzD23_5DQRTV5MKs3_1p0', address: '名護市宇茂佐 162', phone: '0980-52-5678', hours: '10:30 開門，只做白天（Google Maps 寫到 14:00）；週三公休', recommend: '菲力牛排（評論最推）、龍蝦；店裡的手工餅乾也很受歡迎', description: '1971 年開的老牌牛排龍蝦店，IG 網友推薦很好吃', notes: '只收現金；不能訂位；評論說 10:00 前到比較不用等，停車位不多；人多時會提早停止入店', website: 'http://flipper1971.com/', reservationInfo: '不能訂位，現場排隊' }),
-    rest('r-711-choco', '7-11 生巧克力冰淇淋', { type: '超商', area: '7-ELEVEN', group: 'store', source: 'IG', price: '約台幣 72 元', recommend: '很濃但不會太甜也不會太苦，大約半糖' }),
+    rest('r-711-choco', '7-11 生巧克力冰淇淋', { nameJa: 'たっぷり生チョコ 生チョコアイス', type: '超商', area: '7-ELEVEN', group: 'store', source: 'IG', price: '約台幣 72 元', recommend: '很濃但不會太甜也不會太苦，大約半糖' }),
     rest('r-711-ramen', '天下一品 京都濃厚雞白湯 杯麵', { nameJa: '名店の味 天下一品 京都濃厚鶏白湯（サッポロ一番）', type: '超商', area: '7-ELEVEN', group: 'store', source: 'IG', recommend: '一定要買「大杯」，麵體像拉麵店；加一顆溏心蛋更好吃', notes: '黑色杯身、紅色圓形「天下一品」標誌；熱水 200ml、泡 3 分鐘。含雞肉成分，在日本當宵夜吃掉就好，別帶回台灣' }),
-    rest('r-711-matcha', '7-11 抹茶奶昔', { type: '超商', area: '7-ELEVEN', group: 'store', source: 'IG', recommend: '抹茶奶昔＋明治牛奶（約 1/3 杯）＋冰塊杯', notes: '很難買到，看到就先拿' }),
-    rest('r-pudding', '超商焦糖布丁（感動布丁）', { type: '超商', area: '超商', group: 'store', source: 'IG', recommend: '網友說是全日本最好吃的超商布丁', notes: '在哪家超商買在影片裡，待補' }),
+    rest('r-711-matcha', '7-11 宇治抹茶冰沙', { nameJa: 'SEVEN CAFÉ SMOOTHIE 宇治抹茶スムージー', type: '超商', area: '7-ELEVEN', group: 'store', source: 'IG', price: '¥389（含稅約 ¥420）', recommend: '抹茶冰沙＋明治牛奶（約 1/3 杯）＋冰塊杯', notes: '在冷凍櫃拿，結帳後用店內的機器打成冰沙；很難買到，看到就先拿' }),
+    rest('r-pudding', '7-11 感動布丁', { nameJa: '神戸シェフクラブ ロイヤルカスタードプリン', type: '超商', area: '7-ELEVEN', group: 'store', source: 'IG', recommend: '網友說是全日本最好吃的超商布丁；滑嫩，附微苦焦糖醬另外淋', notes: '包裝是透明圓盒、紅色標籤寫「とろ〜り感動」' }),
     rest('r-lawson-tea', 'LAWSON 無糖鮮奶茶', { type: '超商', area: 'LAWSON', group: 'store', source: 'IG', recommend: '無糖，可以自己加糖球', notes: '只有部分分店有賣，看到就買' }),
     rest('r-lawson-list', 'LAWSON 必買清單', { type: '超商', area: 'LAWSON', group: 'store', source: 'IG', recommend: '香草優格、麻糬生乳捲、火腿起司、鹽味雞湯泡麵、巧克力麻糬麵包、洋蔥餅乾、季節水果冰棒' }),
 
@@ -313,6 +313,13 @@ window.TRIP = (function () {
 
   // 口袋清單的圖片：餐廳／商店連到 Google Maps 店家照片，景點用維基共享資源的免費授權圖（附作者與授權）
   var listPhotos = {
+    'r-711-choco': ['images/list/711-nama-choco.jpg', ''],
+    'r-711-ramen': ['images/list/tenkaippin-cup.jpg', ''],
+    'r-711-matcha': ['images/list/711-matcha.jpg', ''],
+    'r-pudding': ['images/list/711-pudding.jpg', ''],
+    'r-lawson-tea': ['images/list/lawson-milk-tea.jpg', ''],
+    'b-botanist': ['images/list/botanist.jpg', ''],
+    's-ryukyubeach': ['images/list/ryukyu-beach-club.jpg', ''],
     'r-kokuto-choco': ['images/list/kokuto-chocolat.jpg', ''],
     'r-diver': ['images/list/flipper.jpg', ''],
     'r-applepie': ['images/list/mille-mele.jpg', ''],
