@@ -38,10 +38,15 @@
   // 出發前待辦提醒：到了提醒日期、還沒打勾的才會出現
   function todoBanner() {
     var today = U.todayISO(), done = S.get('todo.done', {});
-    var due = (T.todos || []).filter(function (t) { return t.date <= today && !done[t.id]; });
+    var due = (T.todos || []).filter(function (t) { return t.date <= today && !done[t.id]; })
+      .sort(function (a, b) { return a.date < b.date ? -1 : 1; })
+      .map(function (t) { return t.title; });
+    App.restaurants().forEach(function (r) {
+      if (r.needReservation && r.reserveOn && r.reserveOn <= today && r.status !== 'reserved' && r.status !== 'visited') due.push('訂位：' + r.name + '（開放訂位了）');
+    });
     if (!due.length) return '';
     return '<a href="#/tools/bookings" class="card card-pad" style="display:flex;gap:10px;align-items:center;margin:0 var(--page-pad) 14px;text-decoration:none;border-left:4px solid #E8A87C">' +
-      ic('info', 20) + '<span style="flex:1"><b>待辦提醒</b><br><span class="small">' + due.map(function (t) { return esc(t.title); }).join('<br>') + '</span></span>' + ic('right', 16) + '</a>';
+      ic('info', 20) + '<span style="flex:1"><b>待辦提醒</b><br><span class="small">' + due.map(esc).join('<br>') + '</span></span>' + ic('right', 16) + '</a>';
   }
 
   function travelInfo() {

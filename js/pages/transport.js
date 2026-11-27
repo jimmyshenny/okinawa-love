@@ -135,7 +135,14 @@
       seen[d.accommodationId].dates.push(d.date);
     });
     var taxNote = T.stayTaxNote ? '<article class="card card-pad" style="border-left:4px solid #E8A87C"><h3 style="font-size:16px;margin-bottom:6px">住宿稅（每間都要現場付）</h3><p class="small" style="margin:0">' + esc(T.stayTaxNote) + '</p></article>' : '';
-    return '<div style="display:flex;flex-direction:column;gap:12px">' + taxNote + list.map(function (x) {
+    var md = function (iso) { var p = iso.split('-'); return (+p[1]) + '/' + (+p[2]); };
+    var nextDay = function (iso) { var p = iso.split('-'); var d = new Date(+p[0], p[1] - 1, +p[2] + 1); return (d.getMonth() + 1) + '/' + d.getDate(); };
+    var quick = '<article class="card card-pad"><h3 style="font-size:16px;margin-bottom:8px">四間住宿速查</h3><div class="quick-wrap"><table class="quick-table"><thead><tr><th>住宿</th><th>日期</th><th>入住</th><th>早餐</th><th>停車</th><th>免費取消</th></tr></thead><tbody>' +
+      list.map(function (x) {
+        var a = x.a, q = a.quick || {};
+        return '<tr><th>' + esc(q.short || a.name) + '</th><td>' + md(x.dates[0]) + '–' + nextDay(x.dates[x.dates.length - 1]) + '</td><td>' + v(q.checkIn || a.checkIn) + '</td><td>' + v(q.breakfast) + '</td><td>' + v(q.parking) + '</td><td>' + v(q.cancelBy) + '</td></tr>';
+      }).join('') + '</tbody></table></div><p class="tiny muted" style="margin:6px 0 0">表格可以左右滑動；取消日期是沖繩時間，以訂房確認信為準。</p></article>';
+    return '<div style="display:flex;flex-direction:column;gap:12px">' + quick + taxNote + list.map(function (x) {
       var a = x.a, q = App.navUrl(a), m = App.mapUrl(a);
       return '<article class="card card-pad" style="display:flex;flex-direction:column;gap:8px">' +
         (has(a.photo) ? '<img src="' + esc(a.photo) + '" alt="' + esc(a.name) + '" loading="lazy" style="width:calc(100% + 32px);max-width:none;margin:-16px -16px 4px;height:150px;object-fit:cover;border-radius:var(--r) var(--r) 0 0">' : '') +

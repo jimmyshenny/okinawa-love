@@ -351,3 +351,10 @@ h1, h2, h3 { font-family: var(--serif); margin: 0; line-height: 1.35; }
 .stay-notes h4:first-of-type { margin-top: 4px; }
 .stay-notes ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; }
 .stay-notes li { font-size: 13.5px; line-height: 1.55; }
+
+/* 住宿速查表 */
+.quick-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 0 -4px; }
+.quick-table { border-collapse: collapse; font-size: 13px; white-space: nowrap; min-width: 100%; }
+.quick-table th, .quick-table td { padding: 8px 10px; text-align: left; border-bottom: 1px dashed #E3DDCE; }
+.quick-table thead th { font-size: 12px; color: #6B7A80; font-weight: 500; }
+.quick-table tbody th { position: sticky; left: 0; background: var(--paper, #FFFDF8); font-weight: 600; }

@@ -318,13 +318,13 @@
     function resDate(iso) { var p = iso.split('-'); var d = new Date(+p[0], p[1] - 1, +p[2]); return (+p[1]) + '/' + (+p[2]) + '（' + '日一二三四五六'[d.getDay()] + '）'; }
     var needRes = App.restaurants().filter(function (r) { return r.needReservation || r.status === 'reserved'; });
     var todoDone = S.get('todo.done', {});
-    var todoCard = (T.todos || []).length ? '<article class="card card-pad" style="margin-bottom:12px"><h3 style="font-size:16px;margin-bottom:6px">出發前待辦</h3>' + T.todos.map(function (t) {
+    var todoCard = (T.todos || []).length ? '<article class="card card-pad" style="margin-bottom:12px"><h3 style="font-size:16px;margin-bottom:6px">出發前待辦</h3>' + T.todos.slice().sort(function (a, b) { return a.date < b.date ? -1 : 1; }).map(function (t) {
       var done = !!todoDone[t.id];
       return '<div style="display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed #E3DDCE">' +
         '<button class="btn btn-sm' + (done ? '' : ' btn-primary') + '" data-todo="' + esc(t.id) + '" style="white-space:nowrap" aria-pressed="' + done + '">' + ic('check', 14) + (done ? '已完成' : '完成') + '</button>' +
         '<span style="flex:1"><b' + (done ? ' style="text-decoration:line-through;opacity:.6"' : '') + '>' + esc(t.title) + '</b> ' +
         (done ? '' : '<span class="pill ' + (t.date <= today ? 'dark' : 'sand') + '">' + resDate(t.date) + (t.date <= today ? ' 該做了' : ' 提醒') + '</span>') +
-        '<br><span class="small muted">' + esc(t.detail) + '</span></span></div>';
+        '<br><span class="small muted">' + esc(t.detail) + '</span>' + (t.link ? '<br><a class="small" href="' + esc(t.link) + '"' + (/^http/.test(t.link) ? ' target="_blank" rel="noopener"' : '') + '>' + esc(t.linkLabel || '前往') + ' →</a>' : '') + '</span></div>';
     }).join('') + '</article>' : '';
     return todoCard + '<p class="small muted" style="margin-top:0">' + ic('lock', 14) + ' 這裡的編號只存在這支手機，不會出現在 GitHub 上。兩支手機要各自填寫，或用「資料備份」互傳。</p>' +
       '<article class="card card-pad"><h3 style="font-size:16px">航班・租車</h3>' + row('去程訂位代號', 'flight:outbound:ref') + row('回程訂位代號', 'flight:return:ref') + row('租車預約編號', 'car:booking') + '</article>' +
