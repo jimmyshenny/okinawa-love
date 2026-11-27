@@ -1,6 +1,6 @@
 /* 離線支援：打開過一次網站後，沒網路也能看行程。
    修改網站檔案後，把 VERSION 數字加 1，手機才會拿到新版。 */
-var VERSION = 'okinawa-love-v34';
+var VERSION = 'okinawa-love-v35';
 var SHELL = [
   './', 'index.html', 'css/style.css', 'manifest.webmanifest',
   'js/data.js', 'js/store.js', 'js/ui.js', 'js/app.js',
