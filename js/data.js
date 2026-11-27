@@ -241,7 +241,7 @@ window.TRIP = (function () {
 
     // 必買
     rest('b-donki', '唐吉訶德', { kind: 'buy', type: '藥妝・雜貨', area: '那霸 國際通', status: 'planned', day: 1, source: 'IG', mapQuery: 'ドン・キホーテ 国際通り店', recommend: '結帳前先用 Google 搜尋「唐吉訶德 Coupon」領折價券', description: '除了免稅，滿 ¥10,000 再折 5%、滿 ¥30,000 再折 7%，可以疊在一起用', notes: '結帳時店員會提醒出示 Coupon；也要給護照辦免稅。Day 1 國際通行程有寫壺川店（營業到凌晨 3:00）' }),
-    rest('b-botanist', 'BOTANIST 護髮油', { kind: 'buy', type: '藥妝', area: '藥妝店', source: 'IG', recommend: '吹頭髮前擦，乾燥受損髮吹完變順又亮', notes: 'IG 上說回台灣最後悔沒多買' }),
+    rest('b-botanist', 'BOTANIST 護髮油', { kind: 'buy', type: '藥妝', area: '藥妝店', source: 'IG', recommend: '吹頭髮前擦，乾燥受損髮吹完變順又亮；有 01、02、03 三種香味', notes: 'IG 上說回台灣最後悔沒多買' }),
     rest('b-parco', 'PARCO CITY', { kind: 'buy', type: '購物中心', area: '浦添', status: 'planned', day: 7, source: 'IG', mapQuery: 'サンエー浦添西海岸 PARCO CITY', placeId: 'ChIJxZQf9gpr5TQRwLWyT5Osigc', address: '浦添市西洲 3-1-1', hours: '10:00–22:00（1F サンエー食品館 9:00–23:00）', recommend: '1F 超市買伴手禮比機場便宜；有沖繩唯一的吉伊卡哇餐廳', description: '海邊的大型購物中心，約 250 間店，日系服飾、藥妝、3COINS、家電都有', notes: '記得到免稅櫃台辦一站式退稅' }),
     rest('b-omiyage', '沖繩 6 項必買伴手禮', { kind: 'buy', type: '伴手禮', source: 'IG', recommend: '①沖繩麵泡麵（マルちゃん 沖縄そば，かつおとソーキ味）②加料海帶芽湯包（あーさ汁，沖繩限定）③雪鹽金楚糕（雪塩ちんすこう）④沖繩縣產海蘊（美ら島もずく）⑤塔可飯口味薯條餅乾（Calbee じゃがりこ タコライス味，沖繩限定，有小包裝）⑥雪鹽夾心餅乾（雪塩さんど、雪塩ぱりん）', description: '去過四次沖繩的 IG 作者整理的必買清單，超市、伴手禮店大多買得到', notes: '⚠️ 帶回台灣：沖繩麵泡麵是ソーキ（豬排骨）口味，塔可飯口味也可能含肉，含豬肉的食品不能帶回台灣（違規罰 20 萬）。買之前看包裝背面原材料，有「豚肉」「ポーク」「ポークエキス」就別買' }),
     rest('r-kokuto-choco', 'KOKUTO CHOCOLAT 黑糖巧克力甜點', { type: '甜點', area: '名護 許田休息站', group: 'cafe', status: 'planned', day: 5, source: 'IG', mapQuery: '道の駅 許田', placeId: 'ChIJFfz3q_H_5DQRttsFg7-7wLE', hours: '8:30–19:00（許田休息站）', recommend: '沖繩限定的黑糖巧克力甜點，IG 說是必吃等級、市面上很少見', notes: '在許田休息站的冷藏櫃找；買了要冷藏，當天吃掉最好' }),
@@ -318,7 +318,7 @@ window.TRIP = (function () {
     'r-711-matcha': ['images/list/711-matcha.jpg', ''],
     'r-pudding': ['images/list/711-pudding.jpg', ''],
     'r-lawson-tea': ['images/list/lawson-milk-tea.jpg', ''],
-    'b-botanist': ['images/list/botanist.jpg', ''],
+    'b-botanist': ['images/list/botanist.jpg?v=2', ''],
     's-ryukyubeach': ['images/list/ryukyu-beach-club.jpg', ''],
     'r-kokuto-choco': ['images/list/kokuto-chocolat.jpg', ''],
     'r-diver': ['images/list/flipper.jpg', ''],
