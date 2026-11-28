@@ -258,6 +258,17 @@ window.App = (function () {
   function start() {
     window.addEventListener('hashchange', function () { U.closeSheet(); render(false); });
     if (!location.hash) history.replaceState(null, '', '#/home');
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    // 點工具列圖示：一律回到該頁最上面（點目前所在的頁面也會滑回頂端）
+    document.querySelectorAll('[data-nav]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        if (a.getAttribute('href') !== location.hash) return;  // 換頁：交給 hashchange，會自動回到頂端
+        e.preventDefault();
+        U.closeSheet();
+        var smooth = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+        window.scrollTo({ top: 0, behavior: smooth ? 'smooth' : 'auto' });
+      });
+    });
     render(false);
     autoRefresh();
     document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') autoRefresh(); });
